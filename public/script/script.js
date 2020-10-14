@@ -8,7 +8,7 @@ function enterPesquisa(e){
             document.getElementById("result-pesquisa").innerHTML = "Pesquisa Vazia";
         }
         else {
-            document.getElementById("result-pesquisa").innerHTML = "Você pesquisou por: " + pesquisa.value;    
+            document.getElementById("result-pesquisa").innerHTML = "Você pesquisou por: " + pesquisa.value;
         }        
         return false;
     }
