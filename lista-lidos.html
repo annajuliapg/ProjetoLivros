@@ -1,128 +1,137 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Lidos - Livros</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/estilo.css">
-  </head>
-  <body>    
-    <nav class="navbar navbar-expand-lg" style="background-color: royalblue;">
-          
-      <a class="navbar-brand" href="index.html"><img id="logo-header" src="public\imagens\logo.png" alt="logo" height="30px"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" onkeypress="return enterPesquisa(event)" id="pesquisa-header" size="40px">
-      </form>
-        
-      <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-              <a class="nav-link" href="index.html" style="color: black;">Home <span class="sr-only">(página atual)</span></a>
-              </li>
-              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
-                      Opções
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Adiocinar Livro</a>
-                      <a class="dropdown-item" href="#">Atualizar Status</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Avaliar Livro</a>
-                  </div>
-              </li>
-          </ul>
-      </div>
+<head>
+  <title>Lidos - Livros</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="public/css/bootstrap.min.css">
+  <link rel="stylesheet" href="public/css/estilo.css">
+</head>
 
-      <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
-              <img id="perfil-header" src="public\imagens\perfil.png" alt="perfil" height="30px">
+<body>
+  <nav class="navbar navbar-expand-lg" style="background-color: royalblue;">
+
+    <a class="navbar-brand" href="index.html"><img id="logo-header" src="public\imagens\logo.png" alt="logo"
+        height="30px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
+      aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar"
+        onkeypress="return enterPesquisa(event)" id="pesquisa-header" size="40px">
+    </form>
+
+    <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html" style="color: black;">Home <span class="sr-only">(página
+              atual)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" style="color: black;">
+            Opções
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Meus Livros</a>
-            <a class="dropdown-item" href="#">Minhas Avaliações</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Adiocinar Livro</a>
+            <a class="dropdown-item" href="#">Atualizar Status</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Perfil</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Sair</a>
+            <a class="dropdown-item" href="#">Avaliar Livro</a>
           </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" style="color: black;">
+        <img id="perfil-header" src="public\imagens\perfil.png" alt="perfil" height="30px">
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Meus Livros</a>
+        <a class="dropdown-item" href="#">Minhas Avaliações</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Perfil</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Sair</a>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <div class="container" style="margin: 0; height: 100%; max-width: 100%;">
-      <div class="row">
+  <div class="container" style="margin: 0; height: 100%; max-width: 100%;">
+    <div class="row">
 
-        <div class="col-2" style="background-color: cadetblue; padding-top: 30px;">
-          <nav class="nav flex-column menu-vertical">
-            <h3>Listas</h3>
-            <a class="nav-link" href="lista-lendo-agora.html">Lendo Agora</a>
-            <a class="nav-link" href="lista-lidos.html">Lidos</a>
-            <a class="nav-link" href="lista-para-ler.html">Para Ler</a>
+      <div class="col-2" style="background-color: cadetblue; padding-top: 30px;">
+        <nav class="nav flex-column menu-vertical">
+          <h3>Listas</h3>
+          <a class="nav-link" href="lista-lendo-agora.html">Lendo Agora</a>
+          <a class="nav-link" href="lista-lidos.html">Lidos</a>
+          <a class="nav-link" href="lista-para-ler.html">Para Ler</a>
 
-            <h3>Opções</h3>
-            <a class="nav-link" href="#">Adiocinar Livro</a>
-            <a class="nav-link" href="#">Atualizar Status</a>
-            <a class="nav-link" href="#">Avaliar Livro</a>
-          </nav>
-        </div>
+          <h3>Opções</h3>
+          <a class="nav-link" href="#">Adiocinar Livro</a>
+          <a class="nav-link" href="#">Atualizar Status</a>
+          <a class="nav-link" href="#">Avaliar Livro</a>
+        </nav>
+      </div>
 
-        <div class="col-10">
-          <span id="result-pesquisa"></span>
+      <div class="col-10">
+        <span id="result-pesquisa"></span>
 
-          <div class="lista-livros" style="margin: 5px;">
-            <h2>Lidos</h2>
-            <table class="table" style="font-size: large;">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col" style="width: 20%">Nome</th>
-                  <th scope="col">Capa</th>
-                  <th scope="col" style="width: 20%">Tempo De Leitura</th>
-                  <th scope="col" style="width: 15%">Páginas</th>
-                  <th scope="col" style="width: 15%">Avaliação</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Livro</td>
-                  <td><img src="public\imagens\capa.png" alt="logo" height="15%"></td>
-                  <td>10 dias</td>
-                  <td>400</td>
-                  <td>5 estrelas <br> <a href="#">Editar</a></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Livro</td>
-                  <td><img src="public\imagens\capa.png" alt="logo" height="15%"></td>
-                  <td>20 dias</td>
-                  <td>500</td>
-                  <td>4 estrelas <br> <a href="#">Editar</a></td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Livro</td>
-                  <td><img src="public\imagens\capa.png" alt="logo" height="15%"></td>
-                  <td>30 dias</td>
-                  <td>500</td>
-                  <td>Sem avaliação <br> <a href="#">Editar</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="lista-livros" style="margin: 5px;">
+          <h2>Lidos</h2>
+          <table class="table" style="font-size: large;">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col" style="width: 20%">Nome</th>
+                <th scope="col">Capa</th>
+                <th scope="col" style="width: 20%">Tempo De Leitura</th>
+                <th scope="col" style="width: 15%">Páginas</th>
+                <th scope="col" style="width: 15%">Avaliação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Livro</td>
+                <td><img src="public\imagens\capa.png" alt="logo" height="15%"></td>
+                <td>10 dias</td>
+                <td>400</td>
+                <td>5 estrelas <br> <a href="#">Editar</a></td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Livro</td>
+                <td><img src="public\imagens\capa.png" alt="logo" height="15%"></td>
+                <td>20 dias</td>
+                <td>500</td>
+                <td>4 estrelas <br> <a href="#">Editar</a></td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Livro</td>
+                <td><img src="public\imagens\capa.png" alt="logo" height="15%"></td>
+                <td>30 dias</td>
+                <td>500</td>
+                <td>Sem avaliação <br> <a href="#">Editar</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+  </div>
 
-    <footer>
-        <!-- JS -->
-        <script src="public/script/jquery.js"></script>
-        <script src="public/script/bootstrap.bundle.min.js"></script>
-        <script src="public/script/script.js"></script>
-      </footer>
+  <footer>
+    <!-- JS -->
+    <script src="public/script/jquery.js"></script>
+    <script src="public/script/bootstrap.bundle.min.js"></script>
+    <script src="public/script/script.js"></script>
+  </footer>
 
-  </body>
+</body>
+
 </html>
