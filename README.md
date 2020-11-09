@@ -4,7 +4,7 @@
 Funcionalidades
 
 
-1) Adicionar livros
+Adicionar livros
 
     a) Descrição:
         O usuário seleciona algum livro específico de uma lista de livros predefinidos, esse livro é adicionado na sua lista de livros lidos.
@@ -16,7 +16,7 @@ Funcionalidades
         ˗ Livro adicionado: O livro que foi adicionado anteriormente pelo usuário.
 
 
-2) Atualizar status dos livros
+Atualizar status dos livros
 
     a) Descrição:
         Com essa ação o usuário iria atualizar o status em específico do livro e irá informar caso tenha terminado ou esteja lendo algum livro.
@@ -32,7 +32,7 @@ Funcionalidades
         ˗ Data de término: Mostrar ao usuário a data que ele terminou de ler determinado livro.
 
 
-3) Avaliar livros
+Avaliar livros
 
     a) Descrição:
         O usuário dá uma nota em estrelas para um livro que já terminou de ler,  assim ele e outros usuários podem ver as avaliações e saber o gosto de outras pessoas.
