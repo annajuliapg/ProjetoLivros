@@ -1,6 +1,8 @@
 # ProjetoLivros
 
+
 Funcionalidades
+
 
 1) Adicionar livros
 
@@ -12,6 +14,7 @@ Funcionalidades
 
     c)	Saídas:
         ˗ Livro adicionado: O livro que foi adicionado anteriormente pelo usuário.
+
 
 2) Atualizar status dos livros
 
@@ -27,6 +30,7 @@ Funcionalidades
         ˗ Status do livro: Informa se o usuário já terminou determinado livro ou está lendo.
         ˗ Data de início: Mostra pro usuário a data que ele começou a ler determinado livro.
         ˗ Data de término: Mostrar ao usuário a data que ele terminou de ler determinado livro.
+
 
 3) Avaliar livros
 
