@@ -1,54 +1,7 @@
 const express  = require('express');
 const app      = express();
-
-const livros = [
-    {
-        "codLivro": "1",
-        "nomeLivro": "Harry Potter",
-        "totalDePaginas": "300",
-        "ano": "1997",
-        "fkGenero-codGenero": "Magia"
-    },
-    {
-        "codLivro": "2",
-        "nomeLivro": "Jogos Vorazes",
-        "totalDePaginas": "340",
-        "ano": "2009",
-        "fkGenero-codGenero": "Ficção"
-    },
-];
-
-const usuario = [
-    {
-        "codUsuario": "1",
-        "nomeDeUsuario": "anna",
-        "nomeDeExibicao": "Anna Julia",
-        "biografiaUsuario": "Amo livros",
-        "senhaUsuario": "1234",
-        "emailUsuario": "anna@gmail.com",
-        "livrosUsuario":
-        [
-            {
-                "codItem": "1",
-                "fkLivro-codLivro": "1",
-                "tempoDeLeitura": "30 dias",
-                "dataInicioLeitura": "19/04/2020",
-                "dataTerminoLeitura": "19/05/2020",
-                "avaliacao": "",
-                "status": "LIDO"
-            },
-            {
-                "codItem": "2",
-                "fkLivro-codLivro": "1",
-                "tempoDeLeitura": "",
-                "dataInicioLeitura": "19/10/2020",
-                "dataTerminoLeitura": "",
-                "avaliacao": "",
-                "status": "LENDO"
-            }
-        ]
-    }
-];
+const livros = []; // As informações ficarão armazenadas dentro deste vetor
+const usuario = [];
 const usuario_livros = [];
 
 app.use(express.json()); // faz com que o express consiga processar JSON
@@ -67,7 +20,7 @@ function middleWareGlobal (req, res, next)
 app.use(middleWareGlobal);     // app.use cria o middleware global
 
 
-function kdLivro (codigo) // busca a posição do livro no vetor de acordo com o codigo passado
+function kd (codigo) // busca a posição do livro no vetor de acordo com o codigo passado
 {
     let inicio=0, fim=livros.length-1;
     
@@ -87,92 +40,16 @@ function kdLivro (codigo) // busca a posição do livro no vetor de acordo com o
     return -(inicio+1);
 }
 
-function kdUsuario (codigo) // busca a posição do livro no vetor de acordo com o codigo passado
-{
-    let inicio=0, fim=usuario.length-1;
-    
-    while (inicio<=fim)
-    {
-        let meio = parseInt((inicio+fim)/2);
-        
-        if (codigo==usuario[meio].codigo)
-            return meio+1;
-            
-        if (codigo<usuarios[meio].codigo)
-            fim = meio-1;
-        else
-            inicio = meio+1;
-    }
-    
-    return -(inicio+1);
-}
-
-function kdLista (codigo) // busca a posição do livro no vetor de acordo com o codigo passado
-{
-    let inicio=0, fim=usuario_livros.length-1;
-    
-    while (inicio<=fim)
-    {
-        let meio = parseInt((inicio+fim)/2);
-        
-        if (codigo==usuario_livros[meio].codigo)
-            return meio+1;
-            
-        if (codigo<usuario_livros[meio].codigo)
-            fim = meio-1;
-        else
-            inicio = meio+1;
-    }
-    
-    return -(inicio+1);
-}
-
 function confirmaExistenciaDoLivro (req, res, next)
 {
-    const codigo  = req.params.codigoLivro;
-    const posicao = kdLivro(codigo);
+    const codigo  = req.params.codigo;
+    const posicao = kd(codigo);
         
     if (posicao<0)
     {
         erro = {codigo   :'LNE',
                 mensagem :'Livro inexistente',
                 descricao:'Não há livro cadastrado com o código informado'};
-
-        return res.status(404).json(erro);
-    }
-
-    req.posicao = posicao-1;
-    return next();
-}
-
-function confirmaExistenciaDoUsuario (req, res, next)
-{
-    const codigo  = req.params.codigoUsuario;
-    const posicao = kdUsuario(codigo);
-        
-    if (posicao<0)
-    {
-        erro = {codigo   :'UNE',
-                mensagem :'Usuario inexistente',
-                descricao:'Não há usuario cadastrado com o código informado'};
-
-        return res.status(404).json(erro);
-    }
-
-    req.posicao = posicao-1;
-    return next();
-}
-
-function confirmaExistenciaDoUsuario (req, res, next)
-{
-    const codigo  = req.params.codigoUsuario;
-    const posicao = kdLista(codigo);
-        
-    if (posicao<0)
-    {
-        erro = {codigo   :'LNE',
-                mensagem :'Lista inexistente',
-                descricao:'Não há lista com os códigos informados'};
 
         return res.status(404).json(erro);
     }
@@ -193,7 +70,7 @@ function confirmaOKParaIncluir (req, res, next)
     }
     
     const codigo  = req.body.codigo;
-    const posicao = kdLivro(codigo);
+    const posicao = kd(codigo);
 
     if (posicao>0)
     {
@@ -233,29 +110,6 @@ app.post('/livros', confirmaOKParaIncluir, inclusao);
 
 
 // primeira rota de READ
-
-//usuario
-function recuperacaoDeTodosUsuarios (req, res)
-{
-    return res.json(usuario);
-} 
-app.get('/usuario', recuperacaoDeTodosUsuarios);
-
-function recuperacaoDeUmUsuario (req, res)
-{
-    return res.json(usuario[req.posicao]);
-}
-app.get('/:usuario', confirmaExistenciaDoUsuario, recuperacaoDeUmUsuario);
-
-function recuperacaoDeListaLivrosUsuario (req, res)
-{
-    return res.json(usuario_livros[req.posicao]);
-}
-app.get('/:usuario/livros', confirmaExistenciaDaLista, recuperacaoDeListaLivrosUsuario);
-
-
-
-//------------------ ORIGINAL ------------------//
 function recuperacaoDeTodos (req, res)
 {
     return res.json(livros);
