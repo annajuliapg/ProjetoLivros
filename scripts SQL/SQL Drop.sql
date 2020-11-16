@@ -6,6 +6,4 @@ drop table genero;
 drop table autor;
 
 drop procedure LivrosSendoLidos;
-
-
-
+drop procedure PessoasLendoGenero;

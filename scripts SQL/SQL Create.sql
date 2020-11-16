@@ -46,10 +46,8 @@ CREATE TABLE Usuario_Livro (
     FOREIGN KEY(fk_Usuario_idUsuario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(fk_Livro_idLivro) REFERENCES Livro(idLivro)
 );
- 
 
---PROCEDURE
-
+-- PROCEDURE
 DELIMITER $$
 CREATE PROCEDURE LivrosSendoLidos (IN idLivro INT)
 BEGIN
@@ -59,6 +57,15 @@ BEGIN
 END $$
 DELIMITER ;
 
-
-
-
+DELIMITER $$
+CREATE PROCEDURE PessoasLendoGenero (IN idGenero INT)
+BEGIN
+	SELECT count(*) 'Qtd usuarios lendo livros do genero'
+    FROM usuario_livro ul
+    INNER JOIN livro l
+    ON ul.fk_Livro_idLivro = l.idLivro
+    WHERE 
+    l.fk_Genero_idGenero = idGenero AND 
+    ul.Status_Lista = 2;
+END $$
+DELIMITER ;
