@@ -1,0 +1,73 @@
+/*
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.menu-vertical a:link, .menu-vertical a:visited {
+    color: #FFF;
+    padding: 15px 12px;
+    text-decoration: none;
+}
+
+.menu-vertical a:hover {
+    color: cadetblue;
+    background: #FFF;
+    text-decoration: none;
+}
+
+.lista-livros li {
+    padding: 5px;
+}
+
+*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+  }
+  body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    height:100%;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+  }
+
+  main {
+    height: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* Ensure that the height of the element includes the  box border, not just the content */
+    border: 0;
+    /* Leave some space for the header and footer to  overlay. */
+    border-bottom: 20px solid green;            
+}
+  
+  
+  /* Custom page CSS
+  -------------------------------------------------- */
+  /* Not required for template or sticky footer method. 
+  
+  body > .container {
+    padding: 60px 15px 0;
+  }
+  
+  .footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  
+  code {
+    font-size: 80%;
+  }*/
