@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header id="menu-home">
+    <header id="menu-login">
 
         <nav class="navbar navbar-light bg-light navbar-fixed-top navbar-expand-lg">
             <div class="container">
@@ -24,53 +24,35 @@
                     </span>
                 </div>
 
-                <div class="nav navbar-right" style="font-size: 1.5em;">
-                    <a class="nav-link link text-primary mr-2" href="index.html#features-home">
-                        Saiba mais
-                    </a>
-                    <div class="navbar-buttons">
-                        <a class="btn btn-primary ml-2 btn-lg" href="#">
-                            Cadastrar
-                        </a>
-                        <a class="btn btn-primary ml-2 btn-lg" href="login.html">
-                            Entrar
-                        </a>
-                    </div>
-                </div>
             </div>                
         </nav>
 
     </header>
 
-    <main class="row justify-content-center">
+    <main class="container-fluid">
 
-        <section class="col-md-8 p-0" id="img-login">
-            
-            <img class="float-left" src="../assets/images/img-login.jpg" alt="" width="100%">
-                
-        </section>
-
-        <section class="col-md-4 py-5 text-center" id="form-login" style="background-color: lightblue;">
-
-            <h4>Login</h4>
-            <br>
-            <br>
-            
-            <form action="">
-                <div class="col-lg-8">
-                    <input type="text" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form-login">
-                </div>
-                <div class="col-lg-8">
-                    <input type="senha" name="senha" placeholder="Senha" data-form-field="senha"
-                        class="form-control" value="" id="senha-form-login">
-                </div>
-                <div class="">
-                    <!-- <button type="submit" class="btn btn-black display-4">Entrar</button> -->
-                    <a class="btn btn-black display-4" href="pagina-inicial.html">Entrar</a>
-                </div>
-            </form>
-            
-
+        <section class="row">
+            <section class="col-md-7 p-0" id="img-login">
+                <img class="float-left" src="../assets/images/img-login.jpg" alt="" width="100%">
+            </section>
+            <section class="col-md-5 p-5 text-center" id="form-login" style="background-color: lightblue;">
+                <h2>Login</h2>
+                <br><br>
+                <form class="form-signin">
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                    <br>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                </form>
+                <br><br>
+                <button type="button" class="btn btn-lg btn-dark" onclick="window.location.href='../portal/index.html';">
+                    Entrar
+                </button>
+                <br><br><br>
+                <p>Não tem conta?</p>
+                <button type="button" class="btn btn-secondary">
+                    Cadastre-se
+                </button>
+            </section>
         </section>
 
     </main>
@@ -86,9 +68,9 @@
     </footer>
 
     <!-- JS -->
-    <script src="../../assets/script/jquery.js"></script>
-    <script src="../../assets/script/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/script/script.js"></script>
+    <script src="../assets/script/jquery.js"></script>
+    <script src="../assets/script/bootstrap.bundle.min.js"></script>
+    <script src="../assets/script/script.js"></script>
 
 </body>
 </html>
