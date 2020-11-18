@@ -42,54 +42,35 @@
 
     </header>
 
-    <main>
+    <main class="row justify-content-center">
 
-        <section class="d-flex py-5" style="background-color: lightgray;">
-
-                <div class="container">
-                    <h1 class="display-2">Registre suas leituras</h1>
-                    <br>
-                    <p class="lead">Adicione livros que já leu, está lendo ou pretende ler.</p>
-                    <br>
-                    <p><a class="btn btn-primary btn-lg" href="index.html#features-home" role="button">Saiba mais &raquo;</a></p>
-                </div>
+        <section class="col-md-8 p-0" id="img-login">
+            
+            <img class="float-left" src="../assets/images/img-login.jpg" alt="" width="100%">
                 
         </section>
 
-        <br>
+        <section class="col-md-4 py-5 text-center" id="form-login" style="background-color: lightblue;">
 
-        <section class="d-flex py-5 mb-5" id="features-home" id="capa-home">
-
-            <div class="container">
-                <h1 class="text-center">
-                  Funcionalidades
-                </h1>
-                <br><br>
-                <div class="row justify-content-center">
-                  <div class="col-md-4 text-center">
-                    <h2>Adicione livros</h2>
-                    <br>
-                    <img src="../assets/images/adicionar.png" alt="adicione livros" height="80px">
-                    <br><br>
-                    <p>Registre os livros que já leu.</p>
-                  </div>
-                  <div class="col-md-4 text-center">
-                    <h2>Atualize leituras</h2>
-                    <br>
-                    <img src="../assets/images/atualizar.png" alt="adicione livros" height="80px">
-                    <br><br>
-                    <p>Atualize os livros que está lendo.</p>
-                  </div>
-                  <div class="col-md-4 text-center">
-                    <h2>Avalie</h2>
-                    <br>
-                    <img src="../assets/images/estrela.png" alt="adicione livros" height="80px">
-                    <br><br>
-                    <p>Avalie os livros que já leu.</p>
-                  </div>
-                </div>
-            </div>
+            <h4>Login</h4>
+            <br>
+            <br>
             
+            <form action="">
+                <div class="col-lg-8">
+                    <input type="text" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form-login">
+                </div>
+                <div class="col-lg-8">
+                    <input type="senha" name="senha" placeholder="Senha" data-form-field="senha"
+                        class="form-control" value="" id="senha-form-login">
+                </div>
+                <div class="">
+                    <!-- <button type="submit" class="btn btn-black display-4">Entrar</button> -->
+                    <a class="btn btn-black display-4" href="pagina-inicial.html">Entrar</a>
+                </div>
+            </form>
+            
+
         </section>
 
     </main>
