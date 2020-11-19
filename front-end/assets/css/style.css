@@ -19,7 +19,6 @@ body {
 }
 
 .inicio-home{
-    
     background-image: url("../../assets/images/fundo-home.jpg");
-    /*background-color: blue;*/
+    background-size: cover;
 }

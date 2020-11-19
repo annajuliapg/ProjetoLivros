@@ -85,13 +85,13 @@ IF NEW.Status_Lista = 3 THEN
     
     SET x = (
 		SELECT Total_Paginas
-		FROM livro 
-		WHERE idlivro = NEW.idlivro
+		FROM livro l
+		WHERE l.idlivro = NEW.idlivro
     );
 
-    UPDATE usuario
-    SET Paginas_Lidas = Paginas_Lidas + x
-    WHERE idUsuario = NEW.idUsuario;
+    UPDATE usuario u
+    SET u.Paginas_Lidas = u.Paginas_Lidas + x
+    WHERE u.idUsuario = NEW.idUsuario;
 
 END IF;
 END$;
@@ -108,43 +108,55 @@ IF NEW.Status_Lista = 3 THEN
     
     SET x = (
 		SELECT Total_Paginas
-		FROM livro 
-		WHERE idlivro = NEW.idlivro
+		FROM livro l
+		WHERE l.idlivro = NEW.idlivro
     );
 
-    UPDATE usuario
-    SET Paginas_Lidas = Paginas_Lidas + x
-    WHERE idUsuario = NEW.idUsuario;
+    UPDATE usuario u
+    SET u.Paginas_Lidas = u.Paginas_Lidas + x
+    WHERE u.idUsuario = NEW.idUsuario;
 
 END IF;
 END$;
 DELIMITER ;
 
 
-DELIMITER $$
-CREATE TRIGGER QuantidadeListas
+DELIMITER $
+CREATE TRIGGER QuantidadeEmListas
 AFTER INSERT
 ON usuario_livro
 FOR EACH ROW
 BEGIN
-  UPDATE livro SET livro.QTD_Em_Listas = livro.QTD_Em_Listas + 1
-  WHERE usuario_livro.fk_Livro_idLivro = livro.idLivro;
-END $$
+
+  UPDATE livro l
+  SET l.QTD_Em_Listas = l.Qtd_Em_Listas + 1
+  WHERE NEW.idLivro = l.idLivro;
+
+END $
 DELIMITER ;
 
 -- FUNCTIONS
 
 DELIMITER $$
  
- CREATE FUNCTION TopLivros() RETURNS INT
- BEGIN
-	select count(*), usuario_livro.fk_Livro_idLivro
-	from usuario_livro
-	group by usuario_livro.fk_Livro_idLivro
-	order by count(*) desc
-	limit 1;
-    RETURN;
- END $$
+ CREATE FUNCTION LivroMaisLido() RETURNS INT
+BEGIN
+
+   DECLARE IdLivroMaisLido INT;
+
+    SET IdLivroMaisLido = (
+        SELECT ul.idLivro
+        FROM usuario_livro ul
+        GROUP BY ul.idLivro
+        ORDER BY count(*) desc
+        LIMIT 1;
+    );
+
+   RETURN IdLivroMaisLido;
+
+END $
+
+DELIMITER ;
 
 
 
