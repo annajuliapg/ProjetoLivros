@@ -1,39 +1,13 @@
-/*
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-}
-
-.menu-vertical a:link, .menu-vertical a:visited {
-    color: #FFF;
-    padding: 15px 12px;
-    text-decoration: none;
-}
-
-.menu-vertical a:hover {
-    color: cadetblue;
-    background: #FFF;
-    text-decoration: none;
-}
-
-.lista-livros li {
-    padding: 5px;
-}
-
-*/
-
-/* Sticky footer styles
--------------------------------------------------- */
 html {
     position: relative;
     min-height: 100%;
-  }
-  body {
-    height:100%;
-  }
+}
 
-  .footer {
+body {
+    height:100%;
+}
+
+.footer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -42,4 +16,10 @@ html {
     text-align: center;
     color: white;
     background-color: #232323;
-  }
+}
+
+.inicio-home{
+    
+    background-image: url("../../assets/images/fundo-home.jpg");
+    /*background-color: blue;*/
+}

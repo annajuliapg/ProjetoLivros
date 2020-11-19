@@ -7,3 +7,6 @@ drop table autor;
 
 drop procedure LivrosSendoLidos;
 drop procedure PessoasLendoGenero;
+
+drop trigger PaginasLidas;
+drop trigger QuantidadeListas;
