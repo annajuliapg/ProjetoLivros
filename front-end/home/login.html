@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="../assets/images/logo.png" type="image/x-icon">
@@ -7,18 +8,20 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
-    <header id="menu-login">
+
+<body class="body-overflow">
+
+    <header class="menu" id="menu-login">
 
         <nav class="navbar navbar-light bg-light navbar-fixed-top navbar-expand-lg">
             <div class="container">
 
                 <div class="navbar-brand">
                     <span class="navbar-logo">
-                        <a href="index.html"><img src="../assets/images/logo.png" alt="logo" style="height: 3.4rem;"></a>
+                        <a href="index.html"><img src="../assets/images/logo.png" alt="logo"></a>
                     </span>
                     <span>
-                        <a class="navbar-brand ml-2" href="index.html" style="font-size: 1.5rem;">
+                        <a class="navbar-brand ml-2" href="index.html">
                             Shelf
                         </a>
                     </span>
@@ -29,35 +32,27 @@
 
     </header>
 
-    <main class="container-fluid">
-
-        <section class="row">
-            <section class="col-md-7 p-0" id="img-login">
-                <img class="float-left" src="../assets/images/img-login.jpg" alt="" width="100%">
-            </section>
-            <section class="col-md-5 p-5 text-center" id="form-login" style="background-color: lightblue;">
-                <h2>Login</h2>
-                <br><br>
+    <main>        
+        
+        <section class="text-center h-100" id="main-login">
+            <h2>Login</h2>
+            <div class="login-form">
                 <form class="form-signin">
-                    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                    <input id="inputEmail" class="form-control" placeholder="Email" required autofocus>
                     <br>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                    <input id="inputPassword" class="form-control" placeholder="Senha" required>
                 </form>
-                <br><br>
-                <button type="button" class="btn btn-lg btn-dark btn-block" onclick="window.location.href='../portal/index.html';">
+                <button type="button" class="btn btn-lg btn-info btn-block" onclick="window.location.href='../portal/index.html';">
                     Entrar
                 </button>
-                <br><br><br>
-                <p>Não tem conta?</p>
-                <button type="button" class="btn btn-secondary">
-                    Cadastre-se
-                </button>
-            </section>
+            </div>
+            <p>Não tem conta?</p>
+            <button type="button" class="btn btn-secondary">
+                Cadastre-se
+            </button>
         </section>
 
     </main>
-
-    <br><br>
 
     <footer class="footer">
 

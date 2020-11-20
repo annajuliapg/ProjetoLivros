@@ -1,24 +1,149 @@
 html {
-    position: relative;
-    min-height: 100%;
+    height: 100%;
 }
 
 body {
     height:100%;
 }
 
+.body-overflow{
+    overflow: hidden;
+}
+
 .footer {
-    position: absolute;
+    position: sticky;
     bottom: 0;
     width: 100%;
-    height: 60px;
-    line-height: 60px; /* Vertically center the text there */
+    height: 40px;
+    line-height: 40px;
     text-align: center;
     color: white;
     background-color: #232323;
 }
 
-.inicio-home{
+
+.table > tbody > tr > td, 
+.table > tbody > tr > th  {
+    vertical-align: middle;
+}
+
+/* Home Index */
+
+.menu img {
+    height: 3.4rem;
+}
+
+.menu a.navbar-brand{
+    height: 1.5rem;
+}
+
+#inicio-header {
     background-image: url("../../assets/images/fundo-home.jpg");
+    background-size: cover;
+    padding: 9em 0;
+}
+
+#features-home {
+    margin: 3em;
+    padding: 3em 0;
+}
+
+#features-home h2 {
+    font-size: 2.5em;
+    margin-bottom: 1.2em;
+}
+
+#features-home p {
+    font-size: 1.5em;
+    margin-top: 1.2em;
+}
+
+/* Home Login */
+
+#body-login {
+    overflow: hidden;
+}
+
+#main-login {
+    background-image: url('../../assets/images/img-login.jpg');
+    background-size: cover;
+    padding: 2em 3em 15em 3em;
+}
+
+#main-login h2 {
+    padding-bottom: 1.5em;
+}
+
+#main-login .login-form {
+    margin: 0 25em 4em 25em;
+}
+
+#main-login .login-form button {
+    margin-top: 1.5em;
+}
+
+/* Portal Index */
+
+#resumo-header {
+    background-image: url("../../assets/images/fundo-resumo.jpg");
+    background-size: cover;
+}
+
+#resumo-header h1 {
+    padding-bottom: 1em;
+}
+
+#resumo-header .row {
+    padding-bottom: 12em;
+}
+
+/* Portal Para Ler */
+
+#lista-para-ler-header {
+    background-image: url("../../assets/images/fundo-para-ler.jpg");
+    background-size: cover;
+}
+
+/* Portal Lendo Agora */
+
+#lista-lendo-agora-header {
+    background-image: url("../../assets/images/fundo-lendo-agora.jpg");
+    background-size: cover;
+}
+
+/* Portal Lidos */
+
+#lista-lidos-header {
+    background-image: url("../../assets/images/fundo-lidos.jpg");
+    background-size: cover;
+}
+
+/* Portal Perfil */
+
+#header-perfil {
+    background-image: url("../../assets/images/capa-perfil.jpg");
+    background-size: cover;
+    padding: 4em;
+}
+
+#foto-perfil{
+    height: 16em;
+    margin-right: 0;
+}
+
+#dados-perfil {
+    min-height: 16em;
+    padding: 2em 1em;
+    margin-left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+#resumo-perfil {
+    background-image: url("../../assets/images/fundo-resumo.jpg");
+    background-size: cover;
+}
+
+#lista-avaliacoes {
+    background-image: url("../../assets/images/fundo-lidos.jpg");
     background-size: cover;
 }

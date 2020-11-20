@@ -8,31 +8,29 @@
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header id="menu-home">
+    <header class="menu" id="menu-home">
 
         <nav class="navbar navbar-light bg-light navbar-fixed-top navbar-expand-lg">
             <div class="container">
 
                 <div class="navbar-brand">
                     <span class="navbar-logo">
-                        <a href="index.html"><img src="../assets/images/logo.png" alt="logo" style="height: 3.4rem;"></a>
+                        <a href="index.html">
+                            <img src="../assets/images/logo.png" alt="logo">
+                        </a>
                     </span>
                     <span>
-                        <a class="navbar-brand ml-2" href="index.html" style="font-size: 1.5rem;">
+                        <a class="navbar-brand ml-2" href="index.html">
                             Shelf
                         </a>
                     </span>
                 </div>
-
-                <div class="nav navbar-right" style="font-size: 1.5em;">
-                    <a class="nav-link link text-primary mr-2" href="index.html#features-home">
-                        Saiba mais
-                    </a>
+                <div class="nav navbar-right">
                     <div class="navbar-buttons">
-                        <a class="btn btn-primary ml-2 btn-lg" href="#">
+                        <a class="btn btn-info ml-2 btn-lg" href="#">
                             Cadastrar
                         </a>
-                        <a class="btn btn-primary ml-2 btn-lg" href="login.html">
+                        <a class="btn btn-info ml-2 btn-lg" href="login.html">
                             Entrar
                         </a>
                     </div>
@@ -44,48 +42,41 @@
 
     <main>
 
-        <section class="d-flex py-5 inicio-home">
+        <section class="d-flex" id="inicio-header">
 
                 <div class="container">
                     <h1 class="display-2">Registre suas leituras</h1>
-                    <br>
-                    <p class="lead">Adicione livros que já leu, está lendo ou pretende ler.</p>
-                    <br>
-                    <p><a class="btn btn-primary btn-lg" href="index.html#features-home" role="button">Saiba mais &raquo;</a></p>
+                    <p class="lead pt-4">Adicione livros que já leu, está lendo ou pretende ler.</p>
+                    <p class="pt-4"><a class="btn btn-info btn-lg" href="index.html#features-home" role="button">Saiba mais &raquo;</a></p>
                 </div>
                 
         </section>
 
-        <br>
-
-        <section class="d-flex py-5 mb-5" id="features-home" id="capa-home">
+        <section class="d-flex" id="features-home">
 
             <div class="container">
-                <h1 class="text-center">
-                  Funcionalidades
+                <h1 class="text-center display-4">
+                    <strong>Funcionalidades</strong>
                 </h1>
-                <br><br>
+                <br><br><br>
                 <div class="row justify-content-center">
                   <div class="col-md-4 text-center">
-                    <h2>Adicione livros</h2>
-                    <br>
+                    <h2 class="display-4">Adicione</h2>
                     <img src="../assets/images/adicionar.png" alt="adicione livros" height="80px">
                     <br><br>
-                    <p>Registre os livros que já leu.</p>
+                    <p class="lead">Registre os livros que já leu.</p>
                   </div>
                   <div class="col-md-4 text-center">
-                    <h2>Atualize leituras</h2>
-                    <br>
+                    <h2 class="display-4">Atualize</h2>
                     <img src="../assets/images/atualizar.png" alt="adicione livros" height="80px">
                     <br><br>
-                    <p>Atualize os livros que está lendo.</p>
+                    <p class="lead">Atualize os livros que está lendo.</p>
                   </div>
                   <div class="col-md-4 text-center">
-                    <h2>Avalie</h2>
-                    <br>
+                    <h2 class="display-4">Avalie</h2>
                     <img src="../assets/images/estrela.png" alt="adicione livros" height="80px">
                     <br><br>
-                    <p>Avalie os livros que já leu.</p>
+                    <p class="lead">Avalie os livros que já leu.</p>
                   </div>
                 </div>
             </div>
@@ -93,8 +84,6 @@
         </section>
 
     </main>
-
-    <br><br>
 
     <footer class="footer">
 
@@ -104,7 +93,7 @@
 
     </footer>
 
-    <!-- JS -->
+    <!-- JavaScript -->
     <script src="../assets/script/jquery.js"></script>
     <script src="../assets/script/bootstrap.bundle.min.js"></script>
     <script src="../assets/script/script.js"></script>
