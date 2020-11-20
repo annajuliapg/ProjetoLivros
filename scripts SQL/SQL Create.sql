@@ -1,3 +1,5 @@
+-- TABELAS
+
 -- CREATE SCHEMA `shelf` DEFAULT CHARACTER SET utf8 ;
 USE Shelf;
 
@@ -138,25 +140,20 @@ DELIMITER ;
 -- FUNCTIONS
 
 DELIMITER $$
- 
- CREATE FUNCTION LivroMaisLido() RETURNS INT
+CREATE FUNCTION LivroMaisLido ()
+RETURNS INTEGER
 BEGIN
-
-   DECLARE IdLivroMaisLido INT;
+	DECLARE IdLivroMaisLido INT;
 
     SET IdLivroMaisLido = (
         SELECT ul.idLivro
         FROM usuario_livro ul
         GROUP BY ul.idLivro
         ORDER BY count(*) desc
-        LIMIT 1;
+        LIMIT 1
     );
 
-   RETURN IdLivroMaisLido;
-
-END $
-
-DELIMITER ;
-
+RETURN IdLivroMaisLido;
+END$$
 
 

@@ -8,5 +8,9 @@ drop table autor;
 drop procedure LivrosSendoLidos;
 drop procedure PessoasLendoGenero;
 
-drop trigger PaginasLidas;
+drop trigger PaginasLidasINSERT;
+drop trigger PaginasLidasUPDATE;
 drop trigger QuantidadeListas;
+
+drop function LivroMaisLido;
+drop function QTDLivroComsAvaliacoesBoas;
