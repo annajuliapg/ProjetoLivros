@@ -58,3 +58,16 @@ async function updateUsuarioLivro(usuario_livro){
 
 
 module.exports = {selectLivros , insertLivro, insertAutor, insertLivroAutor, updateUsuarioLivro};
+
+/*
+
+usuario - select
+
+livro - select
+autor - join
+genero - join
+livro_autor - join
+
+usuario_livro - insert, update, select, delete
+
+*/

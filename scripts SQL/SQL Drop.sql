@@ -10,7 +10,9 @@ drop procedure PessoasLendoGenero;
 
 drop trigger PaginasLidasINSERT;
 drop trigger PaginasLidasUPDATE;
-drop trigger QuantidadeListas;
+drop trigger PaginasLidasDELETE;
+drop trigger QuantidadeEmListasINSERT;
+drop trigger QuantidadeEmListasDELETE;
 
 drop function LivroMaisLido;
 drop function QTDLivroComsAvaliacoesBoas;

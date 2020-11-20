@@ -10,7 +10,7 @@ CREATE TABLE Usuario (
     Biografia_Usuario VARCHAR(60),
     Senha_Usuario VARCHAR(30),
     Email_Usuario VARCHAR(40),
-    Paginas_Lidas INT
+    Paginas_Lidas INT DEFAULT 0
 );
 
 CREATE TABLE Genero (
@@ -24,7 +24,7 @@ CREATE TABLE Livro (
     Total_Paginas INT,
     Ano_Lancamento INT,
     idGenero INT,
-    Qtd_Em_Listas INT,
+    Qtd_Em_Listas INT DEFAULT 0,
     CONSTRAINT fk_Genero_idGenero FOREIGN KEY(idGenero) REFERENCES Genero(idGenero)
 );
 

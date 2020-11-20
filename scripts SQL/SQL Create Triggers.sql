@@ -16,12 +16,8 @@ IF NEW.Status_Lista = 3 THEN
     );
     
     UPDATE usuario u
-	SET u.Paginas_Lidas =
-		(CASE
-				WHEN u.Paginas_Lidas IS NULL THEN paginasNovasLidas
-				ELSE u.Paginas_Lidas + paginasNovasLidas
-		END)
-	WHERE u.idUsuario = NEW.idUsuario;   
+	SET u.Paginas_Lidas = u.Paginas_Lidas + paginasNovasLidas
+	WHERE u.idUsuario = NEW.idUsuario;
 
 END IF;
 END$;
@@ -43,32 +39,56 @@ IF NEW.Status_Lista = 3 THEN
     );
 
 	UPDATE usuario u
-	SET u.Paginas_Lidas =
-		(CASE
-				WHEN u.Paginas_Lidas IS NULL THEN paginasNovasLidas
-				ELSE u.Paginas_Lidas + paginasNovasLidas
-		END)
+	SET u.Paginas_Lidas = u.Paginas_Lidas + paginasNovasLidas
 	WHERE u.idUsuario = NEW.idUsuario;
 
 END IF;
 END$;
 DELIMITER ;
 
+DELIMITER $
+CREATE TRIGGER PaginasLidasDELETE
+AFTER DELETE
+ON usuario_livro
+FOR EACH ROW
+BEGIN
+DECLARE paginasDeletadas INT;
+IF OLD.Status_Lista = 3 THEN
+    
+    SET paginasDeletadas = (
+		SELECT Total_Paginas
+		FROM livro l
+		WHERE l.idlivro = OLD.idlivro
+    );
+
+	UPDATE usuario u
+	SET u.Paginas_Lidas = u.Paginas_Lidas - paginasDeletadas
+	WHERE u.idUsuario = OLD.idUsuario;
+
+END IF;
+END$;
+DELIMITER ;
 
 DELIMITER $
-CREATE TRIGGER QuantidadeEmListas
+CREATE TRIGGER QuantidadeEmListasINSERT
 AFTER INSERT
 ON usuario_livro
 FOR EACH ROW
 BEGIN
+	UPDATE livro l
+	SET l.QTD_Em_Listas =  l.QTD_Em_Listas + 1
+	WHERE NEW.idLivro = l.idLivro;
+END $
+DELIMITER ;
 
-  UPDATE livro l
-  SET l.QTD_Em_Listas = 
-  (CASE
-		WHEN l.QTD_Em_Listas IS NULL THEN 1
-        ELSE l.QTD_Em_Listas + 1
-  END)
-  WHERE NEW.idLivro = l.idLivro;
-
+DELIMITER $
+CREATE TRIGGER QuantidadeEmListasDELETE
+AFTER DELETE
+ON usuario_livro
+FOR EACH ROW
+BEGIN
+	UPDATE livro l
+	SET l.QTD_Em_Listas =  l.QTD_Em_Listas - 1
+	WHERE OLD.idLivro = l.idLivro;
 END $
 DELIMITER ;

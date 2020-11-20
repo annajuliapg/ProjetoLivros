@@ -29,9 +29,9 @@ BEGIN
 	DECLARE qtdLivros INT;
 
 	SET qtdLivros = (
-        select count(*)
-        from usuario_livro
-        where Avaliacao >= 8
+        SELECT count(*)
+        FROM usuario_livro
+        WHERE Avaliacao >= 8
 	);
     
     IF qtdLivros = 0 THEN
