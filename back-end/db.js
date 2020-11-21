@@ -11,53 +11,54 @@ async function connect() {
     return connection;
 }
 
+/* USUARIO */
+
 //SELECT
-async function selectLivros(){
+async function selectUsuario(idUsuario){
     const conn = await connect();
-    const [rows] = await conn.query("SELECT * FROM livro;");
+    const [rows] = await conn.query("SELECT * FROM usuario WHERE idUsuario = ?;", idUsuario);
     return rows;
 }
 
+/* LIVROS */
+
+//SELECT
+async function selectLivros(){
+    const conn = await connect();
+    const [rows] = await conn.query("SELECT l.idLivro, l.Nome_Livro, a.Nome_Autor, l.Total_Paginas, l.Ano_Lancamento, g.Nome_Genero FROM livro l INNER JOIN genero g ON l.idGenero = g.idGenero INNER JOIN livro_autor la ON l.idLivro = la.idLivro INNER JOIN autor a ON la.idAutor = a.idAutor;");
+    return rows;
+}
+
+/* USUARIO LIVRO */
+
 //INSERT
-async function insertLivro(livro){
+//STATUS 1
+async function insertLivroS1(lista){
     const conn = await connect();
-    const sql = "INSERT INTO livro (Nome_Livro, Total_Paginas, Ano_Lancamento, idGenero) VALUES (?, ?, ?, ?);"
-    const values = [livro.nome, livro.paginas, livro.ano, livro.idGenero];
+    const sql = "INSERT INTO usuario_livro (idUsuario, idLivro, Status_Lista) VALUES (?, ?, 1);";
+    const values = [lista.idUsuario, lista.idLivro];
     await conn.query(sql, values);
 }
 
-async function insertAutor(autor){
+//STATUS 2
+async function insertLivroS2(lista){
     const conn = await connect();
-    const sql = "INSERT INTO autor (Nome_Autor) VALUES (?);"
-    const values = [autor.nome];
+    const sql = "INSERT INTO usuario_livro (idUsuario, idLivro, Data_Inicio_Leitura, Status_Lista) VALUES (?, ?, ?, 2);";
+    const values = [lista.idUsuario, lista.idLivro, lista.Data_Inicio_Leitura];
     await conn.query(sql, values);
 }
 
-async function insertLivroAutor(livro_autor){
+//STATUS 3
+async function insertLivroS3(lista){
     const conn = await connect();
-    const sql = "INSERT INTO livro_autor (Livro_idLivro, Autor_idAutor) VALUES (?, ?);"
-    const values = [livro_autor.idLivro, livro_autor.idAutor];
+    const sql = "INSERT INTO usuario_livro (idUsuario, idLivro, Data_Inicio_Leitura, Data_Termino_Leitura, Tempo_Leitura, Avaliacao, Status_Lista)VALUES ( ?, ?, ?, ?, ?, ?, 3);";
+    const values = [lista.idUsuario, lista.idLivro, lista.Data_Inicio_Leitura, lista.Data_Termino_Leitura, lista.Tempo_Leitura, lista.Avaliacao];
     await conn.query(sql, values);
 }
 
-//UPDATE
-async function updateUsuarioLivro(usuario_livro){
-    const conn = await connect();
-
-    const sql = 'UPDATE usuario_livro SET Status_Lista=?, Data_Termino_Leitura=?, Tempo_Leitura=? WHERE Usuario_idUsuario=? AND Livro_idLivro=?';
-
-    const values = [
-                    usuario_livro.statusLista, 
-                    usuario_livro.dataTerminoLeitura,
-                    usuario_livro.tempoLeitura,
-                    usuario_livro.idUsuario, 
-                    usuario_livro.idLivro];
-
-    return await conn.query(sql, values);
-}
 
 
-module.exports = {selectLivros , insertLivro, insertAutor, insertLivroAutor, updateUsuarioLivro};
+module.exports = {selectUsuario, selectLivros, insertLivroS1, insertLivroS2, insertLivroS3};
 
 /*
 

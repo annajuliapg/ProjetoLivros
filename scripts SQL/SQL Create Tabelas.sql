@@ -48,6 +48,7 @@ CREATE TABLE Usuario_Livro (
     Data_Termino_Leitura DATE,
     Avaliacao INT,
     Status_Lista INT,
+    CONSTRAINT pk_Usuario_Livro PRIMARY KEY (idUsuario , idLivro),
     CONSTRAINT fk_Usuario_idUsuario FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario),
     CONSTRAINT fk_Livro_idLivro_ul FOREIGN KEY(idLivro) REFERENCES Livro(idLivro)
 );
