@@ -17,7 +17,8 @@ async function connect() {
 async function selectUsuario(idUsuario){
     const conn = await connect();
     const [rows] = await conn.query("SELECT * FROM usuario WHERE idUsuario = ?;", idUsuario);
-    return rows;
+    if (!rows.length) return "Não há usuario com esse id"
+    else return rows;
 }
 
 /* LIVROS */
@@ -26,7 +27,8 @@ async function selectUsuario(idUsuario){
 async function selectLivros(){
     const conn = await connect();
     const [rows] = await conn.query("SELECT l.idLivro, l.Nome_Livro, a.Nome_Autor, l.Total_Paginas, l.Ano_Lancamento, g.Nome_Genero FROM livro l INNER JOIN genero g ON l.idGenero = g.idGenero INNER JOIN livro_autor la ON l.idLivro = la.idLivro INNER JOIN autor a ON la.idAutor = a.idAutor;");
-    return rows;
+    if (!rows.length) return "Não há livros registardos"
+    else return rows;
 }
 
 /* USUARIO LIVRO */
@@ -56,9 +58,32 @@ async function insertLivroS3(lista){
     await conn.query(sql, values);
 }
 
+//UPDATE
+//STATUS 1 PARA 2
+async function updateLivroS1S2(lista){
+    const conn = await connect();
+
+    const sql = "UPDATE usuario_livro SET Status_Lista = 2, Data_Inicio_Leitura = ? WHERE idUsuario = ? AND idLivro = ?;";
+
+    const values = [lista.Data_Inicio_Leitura, lista.idUsuario, lista.idLivro];
+
+    await conn.query(sql, values);
+}
+
+//STATUS 2 PARA 3
+async function updateLivroS2S3(lista){
+    const conn = await connect();
+
+    const sql = "UPDATE usuario_livro SET Status_Lista = 3, Data_Termino_Leitura = ?, Tempo_Leitura = ? AND Avaliacao = ? WHERE idUsuario = ? AND idLivro = ?;";
+
+    const values = [lista.Data_Termino_Leitura, lista.Tempo_Leitura, lista.avaliacao, lista.idUsuario, lista.idLivro];
+
+    await conn.query(sql, values);
+}
 
 
-module.exports = {selectUsuario, selectLivros, insertLivroS1, insertLivroS2, insertLivroS3};
+
+module.exports = {selectUsuario, selectLivros, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3};
 
 /*
 

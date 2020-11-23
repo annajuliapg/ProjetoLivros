@@ -1,7 +1,7 @@
 -- TRIGGERS --
 
 DELIMITER $
-CREATE TRIGGER PaginasLidasINSERT
+CREATE TRIGGER ResumoUsuarioINSERT
 AFTER INSERT
 ON usuario_livro
 FOR EACH ROW
@@ -16,7 +16,9 @@ IF NEW.Status_Lista = 3 THEN
     );
     
     UPDATE usuario u
-	SET u.Paginas_Lidas = u.Paginas_Lidas + paginasNovasLidas
+	SET u.Paginas_Lidas = u.Paginas_Lidas + paginasNovasLidas,
+    u.Tempo_Total_Leitura = u.Tempo_Total_Leitura + NEW.Tempo_Leitura,
+    u.Livros_Lidos = u.Livros_Lidos + 1
 	WHERE u.idUsuario = NEW.idUsuario;
 
 END IF;
@@ -24,7 +26,7 @@ END$;
 DELIMITER ;
 
 DELIMITER $
-CREATE TRIGGER PaginasLidasUPDATE
+CREATE TRIGGER ResumoUsuarioUPDATE
 AFTER UPDATE
 ON usuario_livro
 FOR EACH ROW
@@ -37,9 +39,11 @@ IF NEW.Status_Lista = 3 THEN
 		FROM livro l
 		WHERE l.idlivro = NEW.idlivro
     );
-
-	UPDATE usuario u
-	SET u.Paginas_Lidas = u.Paginas_Lidas + paginasNovasLidas
+    
+    UPDATE usuario u
+	SET u.Paginas_Lidas = u.Paginas_Lidas + paginasNovasLidas,
+    u.Tempo_Total_Leitura = u.Tempo_Total_Leitura + NEW.Tempo_Leitura,
+    u.Livros_Lidos = u.Livros_Lidos + 1
 	WHERE u.idUsuario = NEW.idUsuario;
 
 END IF;
@@ -47,7 +51,7 @@ END$;
 DELIMITER ;
 
 DELIMITER $
-CREATE TRIGGER PaginasLidasDELETE
+CREATE TRIGGER ResumoUsuarioDELETE
 AFTER DELETE
 ON usuario_livro
 FOR EACH ROW
@@ -62,7 +66,9 @@ IF OLD.Status_Lista = 3 THEN
     );
 
 	UPDATE usuario u
-	SET u.Paginas_Lidas = u.Paginas_Lidas - paginasDeletadas
+	SET u.Paginas_Lidas = u.Paginas_Lidas - paginasDeletadas,
+    u.Tempo_Total_Leitura = u.Tempo_Total_Leitura - OLD.Tempo_Leitura,
+    u.Livros_Lidos = u.Livros_Lidos - 1
 	WHERE u.idUsuario = OLD.idUsuario;
 
 END IF;

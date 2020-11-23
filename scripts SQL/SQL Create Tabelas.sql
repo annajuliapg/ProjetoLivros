@@ -10,7 +10,9 @@ CREATE TABLE Usuario (
     Biografia_Usuario VARCHAR(60),
     Senha_Usuario VARCHAR(30),
     Email_Usuario VARCHAR(40),
-    Paginas_Lidas INT DEFAULT 0
+    Paginas_Lidas INT DEFAULT 0,
+    Livros_Lidos INT DEFAULT 0,
+    Tempo_Total_Leitura INT DEFAULT 0
 );
 
 CREATE TABLE Genero (

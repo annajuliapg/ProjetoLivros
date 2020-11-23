@@ -2,7 +2,7 @@
 
 -- informacoes de 1 ususario
 SELECT * FROM usuario
-WHERE idUsuario = 1;
+WHERE idUsuario = 4;
 
 -- livros com as informações completas
 SELECT l.idLivro,
@@ -34,16 +34,16 @@ VALUES (1, 3,'2020-11-04','2020-11-14', 10, 10, 3);
 -- UPDATE --
 -- STATUS 1 PARA O 2
 UPDATE usuario_livro
-SET Status_Lista = 2 
-AND Data_Inicio_Leitura = '2020-11-14'
+SET Status_Lista = 2,
+Data_Inicio_Leitura = '2020-11-21'
 WHERE idUsuario = 1
 AND idLivro = 1;
 
 -- STATUS 2 PARA O 3
 UPDATE usuario_livro
-SET Status_Lista = 3 
-AND Data_Termino_Leitura = '2020-11-24'
-AND Tempo_Leitura = 20
+SET Status_Lista = 3,
+Data_Termino_Leitura = '2020-11-24',
+Tempo_Leitura = 20
 AND Avaliacao = 9
 WHERE idUsuario = 1
 AND idLivro = 1;
@@ -65,7 +65,7 @@ SELECT u.idUsuario,
 FROM usuario_livro ul
 inner join usuario u on ul.idUsuario = u.idUsuario
 inner join livro l on l.idLivro = ul.idLivro
-WHERE ul.idUsuario = 3;
+WHERE ul.idUsuario = 1;
 
 -- livros que o usuario tem em um lista específica
 SELECT u.idUsuario,
