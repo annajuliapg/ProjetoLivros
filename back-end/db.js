@@ -81,9 +81,31 @@ async function updateLivroS2S3(lista){
     await conn.query(sql, values);
 }
 
+//DELETE
+async function deleteLivroLista(lista){
+    const conn = await connect();
 
+    const sql = 'DELETE FROM usuario_livro where idUsuario = ? AND idLivro = ?;';
 
-module.exports = {selectUsuario, selectLivros, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3};
+    const values = [lista.idUsuario, lista.idLivro];
+
+    await conn.query(sql, values);
+}
+
+//SELECT
+//VER A DATA DE INCIO REGISTRADA
+
+async function selectDataInicio(idUsuario, idLivro){
+    const conn = await connect();
+
+    const [rows] = await conn.query("SELECT Data_Inicio_Leitura FROM usuario_livro WHERE idUsuario = ? AND idLivro = ?;", idUsuario, idLivro);
+
+    return rows[0]; // ver se funciona
+}
+
+module.exports = {selectCustomers, insertCustomer, updateCustomer, deleteCustomer}
+
+module.exports = {selectUsuario, selectLivros, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, deleteLivroLista,selectDataInicio};
 
 /*
 
@@ -94,6 +116,9 @@ autor - join
 genero - join
 livro_autor - join
 
-usuario_livro - insert, update, select, delete
+usuario_livro - insert, update, delete, select
+
+select - lista 1, lista 2, lista 3
+select para pegar a data de inicio
 
 */

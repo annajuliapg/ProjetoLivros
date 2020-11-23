@@ -111,7 +111,9 @@
     async function updateLendo_Lido (idUsuario, idLivro, avaliacao){
 
         // VER DATA INICIO
-        
+
+        const dataInicio = db.selectDataInicio(idUsuario, idLivro); // ver se funciona
+
         const tempoLeitura = diasDeLeitura(dataInicio, dataHoje);
         
         await db.updateLivroS1S2(
@@ -125,6 +127,20 @@
 
         console.log("Livro atualizado de status 'Para Ler' para 'Lendo Agora'");
     }
-    
+
+    updateLendo_Lido(1, 2, 10);
+
+    async function deleteLivroLista (idUsuario, idLivro){
+        
+        await db.deleteLivroLista(
+        {
+            "idUsuario": idUsuario,
+            "idLivro": idLivro
+        });
+
+        console.log("Livro deletado da lista do usuário");
+    }    
+
+    deleteLivroLista(1,1);
 
 })();
