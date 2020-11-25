@@ -1,5 +1,18 @@
 -- TRIGGERS --
 
+/*
+	BEFORE ou AFTER
+	//insert
+    new.campo
+    
+    //update
+    old.campo
+    new.campo
+    
+    //delete
+    old.campo
+*/
+
 DELIMITER $
 CREATE TRIGGER ResumoUsuarioINSERT
 AFTER INSERT

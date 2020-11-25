@@ -79,9 +79,31 @@ inner join livro l on l.idLivro = ul.idLivro
 WHERE ul.idUsuario = 1
 AND ul.Status_Lista = 2;
 
+SELECT * FROM usuario_livro WHERE idUsuario = 1 AND idLivro = 2;
+SELECT * FROM usuario_livro WHERE idUsuario = 1 AND idLivro = 2;
 
+INSERT INTO usuario_livro (idUsuario, idLivro, Data_Inicio_Leitura, Status_Lista)
+VALUES (1, 2,'2020-11-04', 2);
 
+UPDATE usuario_livro 
+SET Status_Lista = 3, Data_Termino_Leitura = '2020-11-25', Tempo_Leitura = DATEDIFF ('2020-11-25', Data_Inicio_Leitura), Avaliacao = 10 
+WHERE idUsuario = 1 AND idLivro = 2;
 
+DELETE FROM usuario_livro
+WHERE idUsuario = 1
+AND idLivro = 2;
 
+SELECT l.Nome_Livro, l.Total_Paginas
+FROM usuario_livro ul
+INNER JOIN livro l ON l.idLivro = ul.idLivro
+WHERE ul.Status_Lista = 1 AND ul.idUsuario = 1;
 
+SELECT l.Nome_Livro, DATEDIFF (CURDATE(), ul.Data_Inicio_Leitura) AS 'Tempo Lendo até Agora'
+FROM usuario_livro ul
+INNER JOIN livro l ON l.idLivro = ul.idLivro
+WHERE ul.Status_Lista = 2 AND ul.idUsuario = 1;
 
+SELECT l.Nome_Livro, ul.Tempo_Leitura, l.Total_Paginas, ul.Avaliacao
+FROM usuario_livro ul
+INNER JOIN livro l ON l.idLivro = ul.idLivro
+WHERE ul.Status_Lista = 3 AND ul.idUsuario = 1;

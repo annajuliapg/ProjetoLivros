@@ -7,18 +7,6 @@
     var hoje = new Date();
 
     var dataHoje = hoje.getFullYear()+'-'+(hoje.getMonth()+1)+'-'+hoje.getDate();
-
-    function diasDeLeitura (a, b){
-        
-        a = new Date(a);
-        b = new Date(b);
-
-        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-        
-        return Math.floor((utc2 - utc1) / (1000 * 60 * 60 * 24));
-
-    }
     
     // USUARIO //
 
@@ -26,10 +14,10 @@
     
     async function getUsuario(idUsuario) {
         const usuario = await db.selectUsuario(idUsuario);
-        console.log(usuario); 
+        console.log(usuario);
     }
 
-    //getUsuario(5);
+    //getUsuario(3);
 
     // LIVROS //
 
@@ -109,26 +97,21 @@
     
     //LENDO - LIDO
     async function updateLendo_Lido (idUsuario, idLivro, avaliacao){
-
-        // VER DATA INICIO
-
-        const dataInicio = db.selectDataInicio(idUsuario, idLivro); // ver se funciona
-
-        const tempoLeitura = diasDeLeitura(dataInicio, dataHoje);
         
-        await db.updateLivroS1S2(
+        console.log(dataHoje);
+        
+        await db.updateLivroS2S3(
         {
             "idUsuario": idUsuario,
             "idLivro": idLivro,
             "Data_Termino_Leitura": dataHoje,
-            "Tempo_Leitura": tempoLeitura,
             "Avaliacao": avaliacao
         });
 
-        console.log("Livro atualizado de status 'Para Ler' para 'Lendo Agora'");
+        console.log("Livro atualizado de status 'Lendo Agora' para 'Lido'");
     }
-
-    updateLendo_Lido(1, 2, 10);
+    
+    //updateLendo_Lido(1, 2, 10);
 
     async function deleteLivroLista (idUsuario, idLivro){
         
@@ -141,6 +124,31 @@
         console.log("Livro deletado da lista do usuário");
     }    
 
-    deleteLivroLista(1,1);
+    //deleteLivroLista(1,1);
+
+    //SELECT STATUS 1
+    async function getListaStatus1(idUsuario) {
+        const usuario = await db.selectStatus1(idUsuario);
+        console.log(usuario);
+    }
+
+    //getListaStatus1(1);
+
+    //SELECT STATUS 2
+    async function getListaStatus2(idUsuario) {
+        const usuario = await db.selectStatus2(idUsuario);
+        console.log(usuario);
+    }
+
+    //getListaStatus2(1);
+
+    //SELECT STATUS 3
+    async function getListaStatus3(idUsuario) {
+        const usuario = await db.selectStatus3(idUsuario);
+        console.log(usuario);
+    }
+
+    //getListaStatus3(1);
+
 
 })();
