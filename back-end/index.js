@@ -1,8 +1,7 @@
 //index.js
 (async () => {
-    
+
     const db = require("./db");
-    console.log('Começou!');
 
     var hoje = new Date();
 
@@ -27,7 +26,7 @@
         console.log(livros);    
     }
 
-    //getLivros();
+    getLivros();
     
     // USUARIO LIVRO //
 

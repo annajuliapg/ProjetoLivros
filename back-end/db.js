@@ -4,11 +4,22 @@ async function connect() {
     if (global.connection && global.connection.state !== 'disconnected')
         return global.connection;
 
-    const mysql = require("mysql2/promise");
-    const connection = await mysql.createConnection("mysql://root:Syst3mSyst3m@localhost:3306/shelf");
-    console.log("Conectou no MySQL!");
-    global.connection = connection;
-    return connection;
+    
+    try {
+        const mysql = require("mysql2/promise");
+
+        const connection = await mysql.createConnection("mysql://root:Syst3mSyst3m@localhost:3306/shelf");
+
+        global.connection = connection;
+
+        console.log("Conectou no MySQL!");
+    
+        return connection;
+    }
+    catch (erro) {
+        console.log("\nNão foi possível estabelecer a conexão com o Bando de Dados. Verifique se o serviço está ligado e tente novamente.\n");
+        process.exit(1);
+    }
 }
 
 /* USUARIO */
