@@ -79,6 +79,18 @@ inner join livro l on l.idLivro = ul.idLivro
 WHERE ul.idUsuario = 1
 AND ul.Status_Lista = 2;
 
+-- avaliacoes que o usuario fez
+SELECT u.idUsuario,
+		u.Nome_Exibicao,
+        l.idLivro,
+        l.Nome_Livro,
+        ul.Avaliacao
+FROM usuario_livro ul
+inner join usuario u on ul.idUsuario = u.idUsuario
+inner join livro l on l.idLivro = ul.idLivro
+WHERE ul.idUsuario = 1
+AND ul.Status_Lista = 3;
+
 SELECT * FROM usuario_livro WHERE idUsuario = 1 AND idLivro = 2;
 SELECT * FROM usuario_livro WHERE idUsuario = 1 AND idLivro = 2;
 

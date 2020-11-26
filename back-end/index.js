@@ -1,153 +1,168 @@
 //index.js
-(async () => {
+var hoje = new Date();
 
+var dataHoje = hoje.getFullYear()+'-'+(hoje.getMonth()+1)+'-'+hoje.getDate();
+
+//rota de READ - SELECT TODOS OS LIVROS
+async function recuperaLivros (req, res)
+{
+    try {
+        
+        let livros = await db.selectLivros();
+
+        return res.status(200).json(livros);
+    }
+    catch (erro) {
+        console.log(erro);
+    }
+}
+
+//rota de READ - SELECT USUARIO
+async function recuperaUsuario (req, res)
+{
+    try {
+        const idUsuario = req.params.usuario;
+
+        if (!isNaN(idUsuario)){
+        
+            const usuario = await db.selectUsuario(idUsuario);
+
+            return res.status(200).json(usuario);
+        }
+        else{
+            return res.status(400).send("Código de usuário inválido")
+        }
+    }
+    catch (erro) {
+        console.log(erro);
+    }
+}
+
+//rota de READ - SELECT AVALIACOES USUARIO
+async function recuperaAvaliacoes (req, res)
+{
+    try {
+        const idUsuario = req.params.usuario;
+
+        if (!isNaN(idUsuario)){
+        
+            const usuario = await db.selectAvaliacoes(idUsuario);
+
+            return res.status(200).json(usuario);
+        }
+        else{
+            return res.status(400).send("Código de usuário inválido")
+        }
+    }
+    catch (erro) {
+        console.log(erro);
+    }
+}
+
+//rota de READ - SELECT STATUS 1
+async function recuperaListaStatus1(req, res) {
+
+    try {    
+        
+        const idUsuario = req.params.usuario;
+
+        if (!isNaN(idUsuario)){
+            const lista1 = await db.selectStatus1(idUsuario);
+
+            return res.status(200).json(lista1);    
+        }
+        else{
+            return res.status(500).send("Código de usuário inválido")
+        } 
+    }
+    catch (erro) {
+        console.log(erro);
+    }
+}
+
+//rota de READ - SELECT STATUS 2
+async function recuperaListaStatus2(req, res) {
+    
+    try {    
+        
+        const idUsuario = req.params.usuario;
+
+        if (!isNaN(idUsuario)){
+            const lista2 = await db.selectStatus2(idUsuario);
+
+            return res.status(200).json(lista2);    
+        }
+        else{
+            return res.status(500).send("Código de usuário inválido")
+        }    
+    }
+    catch (erro) {
+        console.log(erro);
+    }
+}
+
+//rota de READ - SELECT STATUS 3
+async function recuperaListaStatus3(req, res) {
+    
+    try {    
+        
+        const idUsuario = req.params.usuario;
+
+        if (!isNaN(idUsuario)){
+            const lista3 = await db.selectStatus3(idUsuario);
+
+            return res.status(200).json(lista3);    
+        }
+        else{
+            return res.status(500).send("Código de usuário inválido")
+        }    
+    }
+    catch (erro) {
+        console.log(erro);
+    }
+}
+
+function middleWareGlobal (req, res, next)
+{
+    console.time('Requisição'); // marca o início da requisição
+    console.log('Método: '+req.method+'; URL: '+req.url); // retorna qual o método e url foi chamada
+
+    next(); // função que chama as próximas ações
+
+    console.log('Finalizou'); // será chamado após a requisição ser concluída
+
+    console.timeEnd('Requisição'); // marca o fim da requisição
+}
+
+async function ativacaoDoServidor ()
+{
     const db = require("./db");
+    global.db = db;
 
-    var hoje = new Date();
-
-    var dataHoje = hoje.getFullYear()+'-'+(hoje.getMonth()+1)+'-'+hoje.getDate();
+    const express = require('express');
+    const app     = express();
     
-    // USUARIO //
+    app.use(express.json());   // faz com que o express consiga processar JSON
+    app.use(middleWareGlobal); // app.use cria o middleware global
 
-    //SELECT   
-    
-    async function getUsuario(idUsuario) {
-        const usuario = await db.selectUsuario(idUsuario);
-        console.log(usuario);
-    }
+    app.get    ('/livros', recuperaLivros);
+    app.get    ('/perfil/:usuario', recuperaUsuario);
+    app.get    ('/perfil/avaliacoes/:usuario', recuperaAvaliacoes);
+    app.get    ('/para-ler/:usuario', recuperaListaStatus1);
+    app.get    ('/lendo-agora/:usuario', recuperaListaStatus2);
+    app.get    ('/lido/:usuario', recuperaListaStatus3);
+/*
+    app.post   ('/para-ler/:usuario', insereListaStatus1);
+    app.post   ('/lendo-agora/:usuario', insereListaStatus2);
+    app.post   ('/lido/:usuario', insereListaStatus3);
 
-    //getUsuario(3);
+    app.patch  ('/para-ler/:usuario', atulizaListaParaLer_Lendo);
+    app.patch  ('/lendo-agora/:usuario', atulizaLendo_Lido);
 
-    // LIVROS //
+    app.delete ('remover/:livro/:usuario', removeLivroUsuario);
+*/
 
-    //SELECT
-    async function getLivros() {
-        const livros = await db.selectLivros();
-        console.log(livros);    
-    }
-
-    getLivros();
-    
-    // USUARIO LIVRO //
-
-    //INSERT
-    //STATUS 1
-    async function insertLivroParaLer (idUsuario, idLivro) {
-        
-        await db.insertLivroS1({
-            "idUsuario": idUsuario,
-            "idLivro": idLivro
-        })
-
-        console.log("Livro inserido como status 1");    
-    }
-
-    //insertLivroParaLer(1,1);
-
-    //STATUS 2
-    async function insertLivroLendoAgora (idUsuario, idLivro) {
-        
-        await db.insertLivroS2({
-            "idUsuario": idUsuario,
-            "idLivro": idLivro,
-            "Data_Inicio_Leitura": dataHoje
-        })
-        
-        console.log("Livro inserido como status 2");
-    }
-
-    //insertLivroLendoAgora(1,2);
-
-    //STATUS 3
-    async function insertLivroLido (idUsuario, idLivro, dataInicio, dataTermino, avaliacao){
-        
-        const tempoLeitura = diasDeLeitura(dataInicio, dataTermino);
-        
-        await db.insertLivroS3({
-            "idUsuario": idUsuario,
-            "idLivro": idLivro,
-            "Data_Inicio_Leitura": dataTermino,
-            "Data_Termino_Leitura": dataTermino,
-            "Tempo_Leitura": tempoLeitura,
-            "Avaliacao": avaliacao
-
-        })
-        
-        console.log("Livro inserido como status 3");    
-    }
-
-    //insertLivroLido (1, 3, "2020-10-04", "2020-10-20", 10);
-
-    //UPDATE
-    //PARA LER - LENDO
-    async function updateParaLer_Lendo (idUsuario, idLivro){
-
-        await db.updateLivroS1S2(
-        {
-            "idUsuario": idUsuario,
-            "idLivro": idLivro,
-            "Data_Inicio_Leitura": dataHoje
-        });
-
-        console.log("Livro atualizado de status 'Para Ler' para 'Lendo Agora'");
-    }
-    
-    //updateParaLer_Lendo(1,1);
-    
-    //LENDO - LIDO
-    async function updateLendo_Lido (idUsuario, idLivro, avaliacao){
-        
-        console.log(dataHoje);
-        
-        await db.updateLivroS2S3(
-        {
-            "idUsuario": idUsuario,
-            "idLivro": idLivro,
-            "Data_Termino_Leitura": dataHoje,
-            "Avaliacao": avaliacao
-        });
-
-        console.log("Livro atualizado de status 'Lendo Agora' para 'Lido'");
-    }
-    
-    //updateLendo_Lido(1, 2, 10);
-
-    async function deleteLivroLista (idUsuario, idLivro){
-        
-        await db.deleteLivroLista(
-        {
-            "idUsuario": idUsuario,
-            "idLivro": idLivro
-        });
-
-        console.log("Livro deletado da lista do usuário");
-    }    
-
-    //deleteLivroLista(1,1);
-
-    //SELECT STATUS 1
-    async function getListaStatus1(idUsuario) {
-        const usuario = await db.selectStatus1(idUsuario);
-        console.log(usuario);
-    }
-
-    //getListaStatus1(1);
-
-    //SELECT STATUS 2
-    async function getListaStatus2(idUsuario) {
-        const usuario = await db.selectStatus2(idUsuario);
-        console.log(usuario);
-    }
-
-    //getListaStatus2(1);
-
-    //SELECT STATUS 3
-    async function getListaStatus3(idUsuario) {
-        const usuario = await db.selectStatus3(idUsuario);
-        console.log(usuario);
-    }
-
-    //getListaStatus3(1);
-
-
-})();
+    console.log ('Servidor ativo na porta 3000...');
+    app.listen(3000);
+}
+ativacaoDoServidor();

@@ -20,7 +20,7 @@ async function connect() {
         console.log("\nNão foi possível estabelecer a conexão com o Bando de Dados. Verifique se o serviço está ligado e tente novamente.\n");
         process.exit(1);
     }
-}
+}connect();
 
 /* USUARIO */
 
@@ -48,6 +48,47 @@ async function selectLivros() {
 
 /* USUARIO LIVRO */
 
+//SELECT
+//SELECT STATUS 1
+async function selectStatus1(idUsuario) {
+    const conn = await connect();
+    
+    const [rows] = await conn.query("SELECT l.Nome_Livro, l.Total_Paginas FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 1 AND ul.idUsuario = ?;", idUsuario);
+
+    if (!rows.length) return "Não há livros nessa lista do usuário"
+    else return rows;
+}
+
+//SELECT STATUS 2
+async function selectStatus2(idUsuario) {
+    const conn = await connect();
+
+    const [rows] = await conn.query("SELECT l.Nome_Livro, DATEDIFF (CURDATE(), ul.Data_Inicio_Leitura) AS 'Tempo Lendo até Agora' FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 2 AND ul.idUsuario = ?;", idUsuario);
+
+    if (!rows.length) return "Não há livros nessa lista do usuário"
+    else return rows;
+}
+
+//SELECT STATUS 3
+async function selectStatus3(idUsuario) {
+    const conn = await connect();
+
+    const [rows] = await conn.query("SELECT l.Nome_Livro, ul.Tempo_Leitura, l.Total_Paginas, ul.Avaliacao FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 3 AND ul.idUsuario = ?;", idUsuario);
+
+    if (!rows.length) return "Não há livros nessa lista do usuário"
+    else return rows;
+}
+
+//SELECT AVALIACOES
+async function selectAvaliacoes(idUsuario) {
+    const conn = await connect();
+
+    const [rows] = await conn.query("SELECT l.Nome_Livro, ul.Avaliacao FROM usuario_livro ul inner join livro l on l.idLivro = ul.idLivro WHERE ul.idUsuario = ? AND ul.Status_Lista = 3;", idUsuario);
+
+    if (!rows.length) return "Não há livros lidos do usuário"
+    else return rows;
+}
+
 //INSERT
 //STATUS 1
 async function insertLivroS1(lista) {
@@ -74,8 +115,11 @@ async function insertLivroS2(lista) {
 //STATUS 3
 async function insertLivroS3(lista) {
     const conn = await connect();
-    const sql = "INSERT INTO usuario_livro (idUsuario, idLivro, Data_Inicio_Leitura, Data_Termino_Leitura, Tempo_Leitura, Avaliacao, Status_Lista)VALUES ( ?, ?, ?, ?, ?, ?, 3);";
-    const values = [lista.idUsuario, lista.idLivro, lista.Data_Inicio_Leitura, lista.Data_Termino_Leitura, lista.Tempo_Leitura, lista.Avaliacao];
+
+    const sql = "INSERT INTO usuario_livro (idUsuario, idLivro, Data_Inicio_Leitura, Data_Termino_Leitura, Tempo_Leitura, Avaliacao, Status_Lista) VALUES ( ?, ?, ?, ?, DATEDIFF (?, ?), ?, 3);";
+
+    const values = [lista.idUsuario, lista.idLivro, lista.Data_Inicio_Leitura, lista.Data_Termino_Leitura, lista.Data_Termino_Leitura, lista.Data_Inicio_Leitura, lista.Avaliacao];
+
     await conn.query(sql, values);
 }
 
@@ -113,38 +157,7 @@ async function deleteLivroLista(lista) {
     await conn.query(sql, values);
 }
 
-//SELECT STATUS 1
-async function selectStatus1(idUsuario) {
-    const conn = await connect();
-
-    const [rows] = await conn.query("SELECT l.Nome_Livro, l.Total_Paginas FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 1 AND ul.idUsuario = ?;", idUsuario);
-
-    if (!rows.length) return "Não há livros nessa lista do usuário"
-    else return rows;
-}
-
-//SELECT STATUS 2
-async function selectStatus2(idUsuario) {
-    const conn = await connect();
-
-    const [rows] = await conn.query("SELECT l.Nome_Livro, DATEDIFF (CURDATE(), ul.Data_Inicio_Leitura) AS 'Tempo Lendo até Agora' FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 2 AND ul.idUsuario = ?;", idUsuario);
-
-    if (!rows.length) return "Não há livros nessa lista do usuário"
-    else return rows;
-}
-
-//SELECT STATUS 3
-async function selectStatus3(idUsuario) {
-    const conn = await connect();
-
-    const [rows] = await conn.query("SELECT l.Nome_Livro, ul.Tempo_Leitura, l.Total_Paginas, ul.Avaliacao FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 3 AND ul.idUsuario = ?;", idUsuario);
-
-    if (!rows.length) return "Não há livros nessa lista do usuário"
-    else return rows;
-}
-
-
-module.exports = { selectUsuario, selectLivros, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, deleteLivroLista, selectStatus1, selectStatus2, selectStatus3};
+module.exports = { selectUsuario, selectLivros, selectStatus1, selectStatus2, selectStatus3, selectAvaliacoes, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, deleteLivroLista};
 
 /*
 
@@ -161,7 +174,7 @@ insert - lista 1, 2 e 3
 
 update - lista 1 para 2, lista 2 para 3
 
-select - lista 1, lista 2, lista 3
+select - lista 1, lista 2, lista 3, avaliacoes
 
 delete - off
 
