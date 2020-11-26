@@ -30,19 +30,29 @@ async function selectUsuario(idUsuario) {
 
     const [rows] = await conn.query("SELECT * FROM usuario WHERE idUsuario = ?;", idUsuario);
 
-    if (!rows.length) return "Não há usuário com esse id"
+    if (!rows.length) return 1
     else return rows;
 }
 
 /* LIVROS */
 
-//SELECT
+//SELECT TODOS
 async function selectLivros() {
     const conn = await connect();
 
     const [rows] = await conn.query("SELECT l.idLivro, l.Nome_Livro, a.Nome_Autor, l.Total_Paginas, l.Ano_Lancamento, g.Nome_Genero FROM livro l INNER JOIN genero g ON l.idGenero = g.idGenero INNER JOIN livro_autor la ON l.idLivro = la.idLivro INNER JOIN autor a ON la.idAutor = a.idAutor;");
 
     if (!rows.length) return "Não há livros registardos"
+    else return rows;
+}
+
+//SELECT LIVROS QUE 1 USUARIO NAO TEM
+async function selectLivrosNaoTem(idUsuario) {
+    const conn = await connect();
+
+    const [rows] = await conn.query("SELECT l.idLivro, l.Nome_Livro, a.Nome_Autor, l.Total_Paginas, l.Ano_Lancamento, g.Nome_Genero FROM livro l INNER JOIN genero g ON l.idGenero = g.idGenero INNER JOIN livro_autor la ON l.idLivro = la.idLivro INNER JOIN autor a ON la.idAutor = a.idAutor WHERE l.idLivro NOT IN ( SELECT idLivro FROM usuario_livro WHERE idUsuario = ?) ORDER BY l.idLivro;", idUsuario);
+
+    if (!rows.length) return "O usuário tem todos os livros adicionados"
     else return rows;
 }
 
@@ -157,7 +167,7 @@ async function deleteLivroLista(lista) {
     await conn.query(sql, values);
 }
 
-module.exports = { selectUsuario, selectLivros, selectStatus1, selectStatus2, selectStatus3, selectAvaliacoes, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, deleteLivroLista};
+module.exports = {selectUsuario, selectLivros, selectLivrosNaoTem, selectStatus1, selectStatus2, selectStatus3, selectAvaliacoes, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, deleteLivroLista};
 
 /*
 

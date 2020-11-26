@@ -57,7 +57,7 @@ function Livros (bd)
 		const conexao = await this.bd.getConexao();
 		
 		const sql = 'SELECT * FROM Livros';
-		ret =  await conexao.execute(sql);
+		var ret =  await conexao.execute(sql);
 
 		return ret.rows;
 	}
@@ -68,7 +68,7 @@ function Livros (bd)
 		
 		const sql = 'SELECT * FROM Livros WHERE Codigo=:0';
 		const dados = [codigo];
-		ret =  await conexao.execute(sql,dados);
+		var ret =  await conexao.execute(sql,dados);
 		
 		return ret.rows;
 	}
@@ -172,7 +172,7 @@ async function recuperacaoDeTodos (req, res)
 	else
 	{
 		const ret=[];
-		for (i=0;i<rec.length;i++) ret.push (new Livro (rec[i][0],rec[i][1],rec[i][2]));
+		for (var i=0;i<rec.length;i++) ret.push (new Livro (rec[i][0],rec[i][1],rec[i][2]));
 		return res.status(200).json(ret);
 	}
 } 

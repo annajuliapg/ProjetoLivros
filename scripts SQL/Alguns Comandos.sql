@@ -79,6 +79,25 @@ inner join livro l on l.idLivro = ul.idLivro
 WHERE ul.idUsuario = 1
 AND ul.Status_Lista = 2;
 
+-- livros que o usuario não tem em listas (com info completa)
+SELECT l.idLivro,
+		l.Nome_Livro,
+        a.Nome_Autor,
+        l.Total_Paginas,
+        l.Ano_Lancamento,
+        g.Nome_Genero
+FROM livro l
+INNER JOIN genero g ON l.idGenero = g.idGenero
+INNER JOIN livro_autor la ON l.idLivro = la.idLivro
+INNER JOIN autor a ON la.idAutor = a.idAutor
+WHERE l.idLivro NOT IN 
+(
+	SELECT idLivro
+	FROM usuario_livro
+	WHERE idUsuario = 1
+)
+ORDER BY l.idLivro;
+
 -- avaliacoes que o usuario fez
 SELECT u.idUsuario,
 		u.Nome_Exibicao,

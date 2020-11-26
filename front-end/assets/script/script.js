@@ -11,3 +11,7 @@ function enterPesquisa(e) {
     return false;
   }
 }
+
+var hoje = new Date();
+
+var dataHoje = hoje.getFullYear()+'-'+(hoje.getMonth()+1)+'-'+hoje.getDate();
