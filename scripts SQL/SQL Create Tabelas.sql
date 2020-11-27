@@ -8,8 +8,8 @@ CREATE TABLE Usuario (
     Nome_Usuario VARCHAR(20),
     Nome_Exibicao VARCHAR(40),
     Biografia_Usuario VARCHAR(60),
-    Senha_Usuario VARCHAR(30),
     Email_Usuario VARCHAR(40),
+    Senha_Usuario VARCHAR(30),
     Paginas_Lidas INT DEFAULT 0,
     Livros_Lidos INT DEFAULT 0,
     Tempo_Total_Leitura INT DEFAULT 0
