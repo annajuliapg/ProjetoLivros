@@ -24,11 +24,21 @@ async function connect() {
 
 /* USUARIO */
 
-//SELECT
+//SELECT TODOS USUARIOS
+async function selectTodosUsuarios(idUsuario) {
+    const conn = await connect();
+
+    const [rows] = await conn.query("SELECT idUsuario, Email_Usuario, Senha_Usuario FROM usuario", idUsuario);
+
+    if (!rows.length) return 1
+    else return rows;
+}
+
+//SELECT 1 USUARIO
 async function selectUsuario(idUsuario) {
     const conn = await connect();
 
-    const [rows] = await conn.query("SELECT * FROM usuario WHERE idUsuario = ?;", idUsuario);
+    const [rows] = await conn.query("SELECT idUsuario, Nome_Usuario, Nome_Exibicao, Biografia_Usuario, Paginas_Lidas, Livros_Lidos, Tempo_Total_Leitura FROM usuario WHERE idUsuario = ?;", idUsuario);
 
     if (!rows.length) return 1
     else return rows;
@@ -169,7 +179,7 @@ async function deleteLivroLista(lista) {
     await conn.query(sql, values);
 }
 
-module.exports = {selectUsuario, selectLivros, selectLivrosNaoTem, selectStatus1, selectStatus2, selectStatus3, selectAvaliacoes, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, deleteLivroLista};
+module.exports = {selectTodosUsuarios, selectUsuario, selectLivros, selectLivrosNaoTem, selectStatus1, selectStatus2, selectStatus3, selectAvaliacoes, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, deleteLivroLista};
 
 /*
 

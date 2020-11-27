@@ -37,14 +37,12 @@
         <section class="text-center h-100" id="main-login">
             <h2>Login</h2>
             <div class="login-form">
-                <form class="form-signin">
-                    <input id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                <form class="form-signin" onsubmit="">
+                    <input id="inputEmail" name="inputEmail" class="form-control" placeholder="Email" required autofocus>
                     <br>
-                    <input id="inputPassword" class="form-control" placeholder="Senha" required>
+                    <input id="inputSenha" name="inputSenha" class="form-control" placeholder="Senha" required>
                 </form>
-                <button type="button" class="btn btn-lg btn-info btn-block" onclick="window.location.href='../portal/index.html';">
-                    Entrar
-                </button>
+                <button type="submit" class="btn btn-lg btn-info btn-block" onclick="login()">Entrar</button>
             </div>
             <p>Não tem conta?</p>
             <button type="button" class="btn btn-secondary">

@@ -1,5 +1,19 @@
 //index.js
 
+//rota de READ - SELECT TODOS USUARIOS
+async function recuperaTodosUsuarios (req, res)
+{
+    try {
+        
+        const usuarios = await db.selectTodosUsuarios();
+
+        return res.status(200).json(usuarios);
+    }
+    catch (erro) {
+        console.log(erro);
+    }
+}
+
 //rota de READ - SELECT TODOS OS LIVROS
 async function recuperaLivros (req, res)
 {
@@ -36,7 +50,7 @@ async function recuperaLivrosNovos (req, res)
 }
 
 //rota de READ - SELECT USUARIO
-async function recuperaUsuario (req, res)
+async function recuperaUmUsuario (req, res)
 {
     try {
         const idUsuario = req.params.usuario;
@@ -353,9 +367,10 @@ async function ativacaoDoServidor ()
     app.use(express.json());   // faz com que o express consiga processar JSON
     app.use(middleWareGlobal); // app.use cria o middleware global
 
+    app.get    ('/usuarios', recuperaTodosUsuarios);
     app.get    ('/livros', recuperaLivros);
     app.get    ('/novos-livros/:usuario', recuperaLivrosNovos);
-    app.get    ('/perfil/:usuario', recuperaUsuario);
+    app.get    ('/perfil/:usuario', recuperaUmUsuario);
     app.get    ('/perfil/avaliacoes/:usuario', recuperaAvaliacoes);
     app.get    ('/para-ler/:usuario', recuperaListaStatus1);
     app.get    ('/lendo-agora/:usuario', recuperaListaStatus2);

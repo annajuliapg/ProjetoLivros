@@ -55,7 +55,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="perfil.html">Perfil</a>
                           <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="../home/index.html">Sair</a>
+                          <a class="dropdown-item" href="../home/index.html" onclick="sair()">Sair</a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>3</td>
+                                    <td>
+                                        <span id="livros-lidos" name="livros-lidos">3</span>
+                                    </td>
                             </tbody>
                         </table>
                         <table class="table table-striped table-light mt-5" style="text-align:center; font-size: large">
@@ -90,7 +92,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1400</td>
+                                    <td>
+                                        <span id="paginas-lidas" nome="paginas-lidas">1400</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -104,7 +108,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>60 dias</td>
+                                    <td>
+                                        <span id="tempo-leitura" nome="tempo-leitura">60</span>
+                                        <span> dias</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -116,7 +123,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>23 páginas/dia</td>
+                                    <td >
+                                        <span id="media-leitura" name="media-leitura">23</span>
+                                        <span> páginas/dia</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

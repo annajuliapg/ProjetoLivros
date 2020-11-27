@@ -40,7 +40,7 @@ async function selectUsuario(idUsuario) {
     con.query("SELECT * FROM usuario WHERE idUsuario = ?;", idUsuario, (err, rows) => {
         if (err) throw err
 
-        else if (!rows.length) return 1
+        else if (!rows.length) return -1
         else return rows;
     }
     );
