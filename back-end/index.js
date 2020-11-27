@@ -237,6 +237,99 @@ async function insereListaStatus3 (req, res)
     }
 }
 
+//rota PATCH - ATUALIZA PARA LER - LENDO AGORA (1 -2)
+async function atulizaListaParaLer_Lendo (req, res)
+{
+    if (!req.body.idLivro || !req.body.Data_Inicio_Leitura)
+    {
+        return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro, Data_Inicio_Leitura"});
+    }
+
+    try
+    {
+        const idUsuario = req.params.usuario;
+        
+        if (!isNaN(idUsuario)){
+            
+            await db.updateLivroS1S2({
+                "idUsuario": idUsuario,
+                "idLivro": req.body.idLivro,
+                "Data_Inicio_Leitura": req.body.Data_Inicio_Leitura
+            });
+
+            return res.status(200).json("Livro atualizado de status 'Para Ler' para 'Lendo Agora'");  
+        }
+        else{
+            return res.status(500).send("Código de usuário inválido");
+        }  
+	}
+	catch (erro)
+	{
+        return res.status(409).json("ERRO");
+    }
+}
+
+//rota PATCH - ATUALIZA LENDO AGORA - LIDO (2 -3)
+async function atulizaLendo_Lido (req, res)
+{
+    if (!req.body.idLivro || !req.body.Data_Termino_Leitura || !req.body.Avaliacao)
+    {
+        return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro, Data_Inicio_Leitura"});
+    }
+
+    try
+    {
+        const idUsuario = req.params.usuario;
+        
+        if (!isNaN(idUsuario)){
+            
+            await db.updateLivroS2S3({
+                "idUsuario": idUsuario,
+                "idLivro": req.body.idLivro,
+                "Data_Termino_Leitura": req.body.Data_Termino_Leitura,
+                "Avaliacao": req.body.Avaliacao
+            });
+
+            return res.status(200).json("Livro atualizado de status 'Lendo Agora' para 'Lido'");  
+        }
+        else{
+            return res.status(500).send("Código de usuário inválido");
+        }  
+	}
+	catch (erro)
+	{
+        return res.status(409).json("ERRO");
+    }
+}
+
+//rota DELETE - TIRAR LIVRO DA LISTA DO USUARIO
+async function removeLivroUsuario (req, res)
+{
+    try
+    {
+        const idUsuario = req.params.usuario;
+        const idLivro = req.params.livro;
+        
+        if (!isNaN(idUsuario) || !isNaN(idLivro)){
+            
+            await db.deleteLivroLista(
+            {
+                "idUsuario": idUsuario,
+                "idLivro": idLivro
+            });
+
+            return res.status(200).json("Livro deletado da lista do usuário");
+        }
+        else{
+            return res.status(500).send("Código de usuário e/ou livro inválido");
+        }  
+	}
+	catch (erro)
+	{
+        return res.status(409).json({"Mensagem": "Livro não existe em nenhuma lista do usuário"});
+    }
+}
+
 function middleWareGlobal (req, res, next)
 {
     console.time('Requisição'); // marca o início da requisição
@@ -270,13 +363,12 @@ async function ativacaoDoServidor ()
 
     app.post   ('/para-ler/:usuario', insereListaStatus1);
     app.post   ('/lendo-agora/:usuario', insereListaStatus2);
-    app.post   ('/lido/:usuario', insereListaStatus3);
-/* 
-    app.patch  ('/para-ler/:usuario', atulizaListaParaLer_Lendo);
-    app.patch  ('/lendo-agora/:usuario', atulizaLendo_Lido);
+    app.post   ('/lido/:usuario', insereListaStatus3);             //TESTAR
 
-    app.delete ('remover/:livro/:usuario', removeLivroUsuario);
-*/
+    app.patch  ('/para-ler/:usuario', atulizaListaParaLer_Lendo);  //TESTAR
+    app.patch  ('/lendo-agora/:usuario', atulizaLendo_Lido);       //TESTAR
+
+    app.delete ('remover/:livro/:usuario', removeLivroUsuario);    //TESTAR
 
     console.log ('Servidor ativo na porta 3000...');
     app.listen(3000);
