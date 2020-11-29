@@ -1,4 +1,3 @@
-// db.js
 async function connect() {
 
     if (global.connection && global.connection.state !== 'disconnected')
@@ -12,7 +11,7 @@ async function connect() {
 
         global.connection = connection;
 
-        console.log("Conectou no MySQL!");
+        console.log("Conectou no MySQL");
     
         return connection;
     }
@@ -20,6 +19,17 @@ async function connect() {
         console.log("\nNão foi possível estabelecer a conexão com o Bando de Dados. Verifique se o serviço está ligado e tente novamente.\n");
         process.exit(1);
     }
+}
+
+async function close() {
+    try{
+       global.connection.end();
+    
+        console.log("Desconectou do MySQL"); 
+    }
+    catch (error) {
+        console.log(error);
+    }  
 }
 
 /* USUARIO */
@@ -40,7 +50,7 @@ async function selectUsuario(idUsuario) {
 
     const [rows] = await conn.query("SELECT idUsuario, Nome_Usuario, Nome_Exibicao, Biografia_Usuario, Paginas_Lidas, Livros_Lidos, Tempo_Total_Leitura FROM usuario WHERE idUsuario = ?;", idUsuario);
 
-    if (!rows.length) return 1
+    if (!rows.length) return -1
     else return rows;
 }
 
@@ -168,6 +178,17 @@ async function updateLivroS2S3(lista) {
     await conn.query(sql, values);
 }
 
+//UPDATE SOMENTE AVALIAÇÃO
+async function updateLivroS3Avaliacao(lista) {
+    const conn = await connect();
+
+    const sql = "UPDATE usuario_livro SET Avaliacao = ? WHERE Status_Lista = 3 AND idUsuario = ? AND idLivro = ?;";
+
+    const values = [lista.Avaliacao, lista.idUsuario, lista.idLivro];
+
+    await conn.query(sql, values);
+}
+
 //DELETE
 async function deleteLivroLista(lista) {
     const conn = await connect();
@@ -179,7 +200,7 @@ async function deleteLivroLista(lista) {
     await conn.query(sql, values);
 }
 
-module.exports = {selectTodosUsuarios, selectUsuario, selectLivros, selectLivrosNaoTem, selectStatus1, selectStatus2, selectStatus3, selectAvaliacoes, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, deleteLivroLista};
+module.exports = {close, selectTodosUsuarios, selectUsuario, selectLivros, selectLivrosNaoTem, selectStatus1, selectStatus2, selectStatus3, selectAvaliacoes, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, updateLivroS3Avaliacao, deleteLivroLista};
 
 /*
 

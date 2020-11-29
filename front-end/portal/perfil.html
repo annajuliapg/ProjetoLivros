@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="..\assets\css\style.css">
 </head>
 
-<body>
+<body onload="getPerfil()">
 
     <header id="menu-portal-resumo">
 
@@ -74,12 +74,14 @@
                     </div>
                     <div id="dados-perfil">
                         <h5>
-                            <strong>Nome de Exibição</strong>
+                            <strong id="nome-exibicao" name="nome-exibicao">Nome de Exibição</strong>
                         </h5>
                         <h6>
-                            <strong>@usuario</strong>
+                            <strong>
+                                <span>@</span><span id="nome-usuario" name="nome-usuario">usuario</span>
+                            </strong>
                         </h6>
-                        <p>
+                        <p id="biografia" name="biografia">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a quam quis odio
                             sodales semper ut eu mi. Quisque id odio laoreet urna commodo porta. Nullam at vulputate velit. Aliquam ut felis gravida, scelerisque enim in, dignissim elit.
                         </p>
@@ -103,7 +105,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>3</td>
+                                    <td>
+                                        <span id="livros-lidos" name="livros-lidos">?</span>
+                                    </td>
                             </tbody>
                         </table>
                         <table class="table table-striped table-light mt-5" style="text-align:center; font-size: large">
@@ -114,7 +118,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1400</td>
+                                    <td>
+                                        <span id="paginas-lidas" nome="paginas-lidas">?</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -128,7 +134,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>60 dias</td>
+                                    <td>
+                                        <span id="tempo-leitura" nome="tempo-leitura">?</span>
+                                        <span> dias</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -140,7 +149,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>23 páginas/dia</td>
+                                    <td >
+                                        <span id="media-leitura" name="media-leitura">?</span>
+                                        <span> páginas/dia</span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -202,6 +214,7 @@
 
   </footer>
   <!-- JS -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../assets/script/jquery.js"></script>
     <script src="../assets/script/bootstrap.bundle.min.js"></script>
     <script src="../assets/script/script.js"></script>

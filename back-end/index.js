@@ -4,6 +4,8 @@
 async function recuperaTodosUsuarios (req, res)
 {
     try {
+
+        res.setHeader("Access-Control-Allow-Origin", "*");
         
         const usuarios = await db.selectTodosUsuarios();
 
@@ -53,6 +55,9 @@ async function recuperaLivrosNovos (req, res)
 async function recuperaUmUsuario (req, res)
 {
     try {
+
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        
         const idUsuario = req.params.usuario;
 
         if (!isNaN(idUsuario)){
@@ -220,7 +225,7 @@ async function insereListaStatus2 (req, res)
 //rota POST - INSERE LISTA 3
 async function insereListaStatus3 (req, res)
 {
-    if (!req.body.idLivro || !req.body.Data_Inicio_Leitura || !req.body.Data_Termino_Leitura || !req.body.Avaliacao)
+    if (!req.body.idLivro || !req.body.Data_Inicio_Leitura || !req.body.Data_Termino_Leitura)
     {
         return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro, Data_Inicio_Leitura, Data_Termino_Leitura, Avaliacao"});
     }
@@ -286,7 +291,7 @@ async function atulizaListaParaLer_Lendo (req, res)
 //rota PATCH - ATUALIZA LENDO AGORA - LIDO (2 -3)
 async function atulizaLendo_Lido (req, res)
 {
-    if (!req.body.idLivro || !req.body.Data_Termino_Leitura || !req.body.Avaliacao)
+    if (!req.body.idLivro || !req.body.Data_Termino_Leitura)
     {
         return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro, Data_Inicio_Leitura"});
     }
@@ -305,6 +310,38 @@ async function atulizaLendo_Lido (req, res)
             });
 
             return res.status(200).json("Livro atualizado de status 'Lendo Agora' para 'Lido'");  
+        }
+        else{
+            return res.status(500).send("Código de usuário inválido");
+        }  
+	}
+	catch (erro)
+	{
+        return res.status(409).json("ERRO");
+    }
+}
+
+//rota PATCH - ATUALIZA AVALICAO LIVRO LIDO
+async function atulizaAvaliacao (req, res)
+{
+    if (!req.body.idLivro || !req.body.Avaliacao)
+    {
+        return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro, Avaliacao"});
+    }
+
+    try
+    {
+        const idUsuario = req.params.usuario;
+        
+        if (!isNaN(idUsuario)){
+            
+            await db.updateLivroS3Avaliacao({
+                "idUsuario": idUsuario,
+                "idLivro": req.body.idLivro,
+                "Avaliacao": req.body.Avaliacao
+            });
+
+            return res.status(200).json({"Avaliação do livro atualizada para": req.body.Avaliacao});
         }
         else{
             return res.status(500).send("Código de usuário inválido");
@@ -378,10 +415,11 @@ async function ativacaoDoServidor ()
 
     app.post   ('/para-ler/:usuario', insereListaStatus1);
     app.post   ('/lendo-agora/:usuario', insereListaStatus2);
-    app.post   ('/lido/:usuario', insereListaStatus3);             //TESTAR
+    app.post   ('/lido/:usuario', insereListaStatus3);
 
     app.patch  ('/para-ler/:usuario', atulizaListaParaLer_Lendo);  //TESTAR
     app.patch  ('/lendo-agora/:usuario', atulizaLendo_Lido);       //TESTAR
+    app.patch  ('/perfil/avaliacoes/:usuario', atulizaAvaliacao);
 
     app.delete ('remover/:livro/:usuario', removeLivroUsuario);    //TESTAR
 

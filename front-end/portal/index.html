@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="..\assets\css\style.css">
 </head>
 
-<body class="body-overflow">
+<body class="body-overflow" onload="getResumo()">
 
     <header id="menu-portal-resumo">
 
@@ -80,7 +80,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <span id="livros-lidos" name="livros-lidos">3</span>
+                                        <span id="livros-lidos" name="livros-lidos">?</span>
                                     </td>
                             </tbody>
                         </table>
@@ -93,7 +93,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <span id="paginas-lidas" nome="paginas-lidas">1400</span>
+                                        <span id="paginas-lidas" nome="paginas-lidas">?</span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -109,7 +109,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <span id="tempo-leitura" nome="tempo-leitura">60</span>
+                                        <span id="tempo-leitura" nome="tempo-leitura">?</span>
                                         <span> dias</span>
                                     </td>
                                 </tr>
@@ -124,7 +124,7 @@
                             <tbody>
                                 <tr>
                                     <td >
-                                        <span id="media-leitura" name="media-leitura">23</span>
+                                        <span id="media-leitura" name="media-leitura">?</span>
                                         <span> páginas/dia</span>
                                     </td>
                                 </tr>
@@ -144,6 +144,7 @@
 
   </footer>
   <!-- JS -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../assets/script/jquery.js"></script>
     <script src="../assets/script/bootstrap.bundle.min.js"></script>
     <script src="../assets/script/script.js"></script>
