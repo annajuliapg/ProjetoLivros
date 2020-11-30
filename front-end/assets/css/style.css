@@ -133,10 +133,26 @@ body {
 
 #dados-perfil {
     min-height: 16em;
-    padding: 2em 1em;
+    padding: 2em 1em 0.5em 1em;
     margin-left: 0;
     background-color: rgba(255, 255, 255, 0.9);
     width: 60rem;
+}
+
+#dados-perfil > h6 {
+    margin-top: 1em;
+}
+
+#nome-exibicao {
+    color: #138496;
+}
+
+#dados-perfil > h5 {
+    color: rgb(95, 95, 95);;
+}
+
+#biografia {
+    color: rgb(95, 95, 95);
 }
 
 #resumo-perfil {

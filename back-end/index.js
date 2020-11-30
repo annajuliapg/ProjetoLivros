@@ -79,6 +79,9 @@ async function recuperaUmUsuario (req, res)
 async function recuperaAvaliacoes (req, res)
 {
     try {
+
+        res.setHeader("Access-Control-Allow-Origin", "*");
+
         const idUsuario = req.params.usuario;
 
         if (!isNaN(idUsuario)){

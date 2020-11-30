@@ -117,7 +117,7 @@ async function selectAvaliacoes(idUsuario) {
 
     const [rows] = await conn.query("SELECT l.Nome_Livro, ul.Avaliacao FROM usuario_livro ul inner join livro l on l.idLivro = ul.idLivro WHERE ul.idUsuario = ? AND ul.Status_Lista = 3;", idUsuario);
 
-    if (!rows.length) return "Não há livros lidos do usuário"
+    if (!rows.length) return -1
     else return rows;
 }
 

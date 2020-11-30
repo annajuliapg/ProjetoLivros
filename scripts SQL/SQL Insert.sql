@@ -11,6 +11,12 @@ VALUES ('toby', 'Toby', 'Não sei ler mas to aqui', 'toby@gmail.com', 'ursinho')
 INSERT INTO usuario (Nome_Usuario, Nome_Exibicao, Biografia_Usuario, Email_Usuario, Senha_Usuario)
 VALUES ('Stitch', 'Maria', "Don't talk to me I'm reading", 'maria@gmail.com', 'stitch');
 
+INSERT INTO usuario (Nome_Usuario, Nome_Exibicao, Biografia_Usuario, Email_Usuario, Senha_Usuario)
+VALUES ('Isa', 'Isadora', "AMOOOOOOOOOOOO LER", 'isadora@gmail.com', '6789');
+
+INSERT INTO usuario (Nome_Usuario, Nome_Exibicao, Biografia_Usuario, Email_Usuario, Senha_Usuario)
+VALUES ('blequizinho', 'Othavio', "Ler é massa!", 'othavio@gmail.com', '0000');
+
 -- generos --
 
 /*1*/
