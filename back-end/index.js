@@ -104,6 +104,8 @@ async function recuperaListaStatus1(req, res) {
 
     try {    
         
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        
         const idUsuario = req.params.usuario;
 
         if (!isNaN(idUsuario)){
@@ -125,6 +127,8 @@ async function recuperaListaStatus2(req, res) {
     
     try {    
         
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        
         const idUsuario = req.params.usuario;
 
         if (!isNaN(idUsuario)){
@@ -145,6 +149,8 @@ async function recuperaListaStatus2(req, res) {
 async function recuperaListaStatus3(req, res) {
     
     try {    
+        
+        res.setHeader("Access-Control-Allow-Origin", "*");
         
         const idUsuario = req.params.usuario;
 

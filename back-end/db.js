@@ -64,7 +64,7 @@ async function selectLivros() {
 
     conn.end();
 
-    if (!rows.length) return "Não há livros registardos"
+    if (!rows.length) return -1
     else return rows;
 }
 
@@ -74,7 +74,7 @@ async function selectLivrosNaoTem(idUsuario) {
 
     const [rows] = await conn.query("SELECT l.idLivro, l.Nome_Livro, a.Nome_Autor, l.Total_Paginas, l.Ano_Lancamento, g.Nome_Genero FROM livro l INNER JOIN genero g ON l.idGenero = g.idGenero INNER JOIN livro_autor la ON l.idLivro = la.idLivro INNER JOIN autor a ON la.idAutor = a.idAutor WHERE l.idLivro NOT IN ( SELECT idLivro FROM usuario_livro WHERE idUsuario = ?) ORDER BY l.idLivro;", idUsuario);
 
-    if (!rows.length) return "O usuário tem todos os livros adicionados"
+    if (!rows.length) return -1
     else return rows;
 }
 
@@ -87,7 +87,7 @@ async function selectStatus1(idUsuario) {
     
     const [rows] = await conn.query("SELECT l.Nome_Livro, l.Total_Paginas FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 1 AND ul.idUsuario = ?;", idUsuario);
 
-    if (!rows.length) return "Não há livros nessa lista do usuário"
+    if (!rows.length) return -1
     else return rows;
 }
 
@@ -97,7 +97,7 @@ async function selectStatus2(idUsuario) {
 
     const [rows] = await conn.query("SELECT l.Nome_Livro, DATEDIFF (CURDATE(), ul.Data_Inicio_Leitura) AS 'Tempo Lendo até Agora' FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 2 AND ul.idUsuario = ?;", idUsuario);
 
-    if (!rows.length) return "Não há livros nessa lista do usuário"
+    if (!rows.length) return -1
     else return rows;
 }
 
@@ -107,7 +107,7 @@ async function selectStatus3(idUsuario) {
 
     const [rows] = await conn.query("SELECT l.Nome_Livro, ul.Tempo_Leitura, l.Total_Paginas, ul.Avaliacao FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 3 AND ul.idUsuario = ?;", idUsuario);
 
-    if (!rows.length) return "Não há livros nessa lista do usuário"
+    if (!rows.length) return -1
     else return rows;
 }
 

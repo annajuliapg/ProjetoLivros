@@ -155,7 +155,7 @@ function getAvaliacoes() {
         imagem.setAttribute("height", "25%");
 
         var tagDNomeLivro = document.createElement('td');
-        var nomeLivro = document.createTextNode(`${item.Nome_Livro}`); // possivel erro
+        var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
 
         var tagDAvaliacao = document.createElement('td');
 
@@ -190,6 +190,95 @@ function getAvaliacoes() {
         novaLinha.appendChild(tagDAvaliacao);
 
         tabela.appendChild(novaLinha);
+
+        countIndex++;
+      }
+    }
+  
+
+  })
+    .catch(error  =>  {
+      alert(error)
+    })
+
+  event.preventDefault();
+}
+
+function getListaParaLer() {
+  let usuario = localStorage.getItem("idUsuario");
+  let url = `http://localhost:3000/para-ler/${usuario}`;
+
+  axios.get(url)
+  .then(res => {
+
+    let tabela = document.getElementById('lista-para-ler-conteudo');
+
+    if (res.data == -1){
+
+      var linha = document.createElement('tr');
+
+      var tagConteudo = document.createElement('td');
+      tagConteudo.setAttribute("colspan", 5);
+
+      var conteudo = document.createTextNode("Lista Vazia. Adicione livros.");
+
+      tagConteudo.appendChild(conteudo);
+      linha.appendChild(tagConteudo);
+      tabela.appendChild(linha);
+
+    }
+    else {
+      
+      var lista = res.data;
+
+      var countIndex  = 1;
+        
+      for (var item of lista){
+
+        var novaLinha = document.createElement('tr');
+        
+        var tagH = document.createElement('th');
+        tagH.setAttribute("scope","row");
+        var tagHConteudo = document.createTextNode(countIndex);
+
+        var tagDImagem = document.createElement('td');
+        var imagem = document.createElement('img');
+        imagem.setAttribute("src", "../assets/images/capa-livro.png");
+        imagem.setAttribute("alt", "logo");
+        imagem.setAttribute("height", "25%");
+
+        var tagDNomeLivro = document.createElement('td');
+        var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
+
+        var tagDPaginasLivro = document.createElement('td');
+        var paginasLivro = document.createTextNode(`${item.Total_Paginas}`);
+
+        //<td><a class="nav-link" href="javascript:void(0);">Atualizar Status</a></td>
+
+        var tagDAtualizarStatus = document.createElement('td');
+        var tagA = document.createElement('a');
+        tagA.setAttribute("class", "nav-link");
+        tagA.href = "javascript:void(0)";
+        var atualizarStatus = document.createTextNode("Atualizar Status");
+
+        tagA.appendChild(atualizarStatus);
+        tagDAtualizarStatus.appendChild(tagA);
+
+        tagDPaginasLivro.appendChild(paginasLivro);
+
+        tagDNomeLivro.appendChild(nomeLivro);
+
+        tagDImagem.appendChild(imagem);
+
+        tagH.appendChild(tagHConteudo);
+
+        novaLinha.appendChild(tagH);
+        novaLinha.appendChild(tagDImagem);
+        novaLinha.appendChild(tagDNomeLivro);
+        novaLinha.appendChild(tagDPaginasLivro);
+        novaLinha.appendChild(tagDAtualizarStatus);
+
+        tabela.appendChild(novaLinha);        
 
         countIndex++;
       }

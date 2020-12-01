@@ -3,11 +3,14 @@ html {
 }
 
 body {
-    height:100%;
+    height: calc(100% - 121px);
+    margin: 0;
+    padding: 0;
+    background-color: #232323;
 }
 
-.body-overflow{
-    overflow: hidden;
+main {
+    height: 100%;
 }
 
 .footer {
@@ -44,8 +47,8 @@ body {
 }
 
 #features-home {
-    margin: 3em;
-    padding: 3em 0;
+    padding: 6em 0;
+    background-color: white;
 }
 
 #features-home h2 {
@@ -60,14 +63,11 @@ body {
 
 /* Home Login */
 
-#body-login {
-    overflow: hidden;
-}
-
 #main-login {
     background-image: url('../../assets/images/img-login.jpg');
     background-size: cover;
-    padding: 2em 3em 15em 3em;
+    padding: 2em 3em 2em 3em;
+    min-height: 100%;
 }
 
 #main-login h2 {
@@ -87,14 +87,11 @@ body {
 #resumo-header {
     background-image: url("../../assets/images/fundo-resumo.jpg");
     background-size: cover;
+    height: 100%;
 }
 
 #resumo-header h1 {
     padding-bottom: 1em;
-}
-
-#resumo-header .row {
-    padding-bottom: 12em;
 }
 
 /* Portal Para Ler */
@@ -102,6 +99,7 @@ body {
 #lista-para-ler-header {
     background-image: url("../../assets/images/fundo-para-ler.jpg");
     background-size: cover;
+    min-height: 100%;
 }
 
 /* Portal Lendo Agora */
@@ -109,7 +107,7 @@ body {
 #lista-lendo-agora-header {
     background-image: url("../../assets/images/fundo-lendo-agora.jpg");
     background-size: cover;
-    padding-bottom: 25em;
+    min-height: 100%;
 }
 
 /* Portal Lidos */
@@ -117,7 +115,15 @@ body {
 #lista-lidos-header {
     background-image: url("../../assets/images/fundo-lidos.jpg");
     background-size: cover;
-    padding-bottom: 25em;
+    min-height: 100%;
+}
+
+/* Portal Livros */
+
+#lista-livros {
+    background-image: url("../../assets/images/img-login.jpg");
+    background-size: cover;
+    min-height: 100%;
 }
 
 /* Portal Perfil */
