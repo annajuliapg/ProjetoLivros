@@ -109,6 +109,7 @@ body {
 #lista-lendo-agora-header {
     background-image: url("../../assets/images/fundo-lendo-agora.jpg");
     background-size: cover;
+    padding-bottom: 25em;
 }
 
 /* Portal Lidos */
@@ -116,6 +117,7 @@ body {
 #lista-lidos-header {
     background-image: url("../../assets/images/fundo-lidos.jpg");
     background-size: cover;
+    padding-bottom: 25em;
 }
 
 /* Portal Perfil */
