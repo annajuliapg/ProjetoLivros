@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="..\assets\css\style.css">
 </head>
 
-<body>
+<body onload="getListaLidos()">
 
     <header id="menu-portal-resumo">
 
@@ -70,7 +70,7 @@
             <div class="container text-center pt-4">
                 <div class="d-flex justify-content-between">
                     <h1>Lidos</h1>
-                    <button type="button" class="btn btn-lg btn-dark" onclick="window.location.href='livros.html';">
+                    <button type="button" class="btn btn-lg btn-dark" onclick="guardaListaAdd(3)">
                         Adicionar Livro
                     </button>
                 </div>
@@ -87,39 +87,8 @@
                                 <th scope="col" style="width: 15%">Avaliação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td><img src="..\assets\images\capa-livro.png" alt="logo" height="25%"></td>
-                                <td>Livro</td>
-                                <td>10 dias</td>
-                                <td>400</td>
-                                <td>5 estrelas <br> <a href="javascript:void(0);">Editar</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td><img src="..\assets\images\capa-livro.png" alt="logo" height="25%"></td>
-                                <td>Livro</td>
-                                <td>20 dias</td>
-                                <td>500</td>
-                                <td>4 estrelas <br> <a href="javascript:void(0);">Editar</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td><img src="..\assets\images\capa-livro.png" alt="logo" height="25%"></td>
-                                <td>Livro</td>
-                                <td>30 dias</td>
-                                <td>500</td>
-                                <td>Sem avaliação <br> <a href="javascript:void(0);">Editar</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td><img src="..\assets\images\capa-livro.png" alt="logo" height="25%"></td>
-                                <td>Livro</td>
-                                <td>60 dias</td>
-                                <td>700</td>
-                                <td>Sem avaliação <br> <a href="javascript:void(0);">Editar</a></td>
-                            </tr>
+                        <tbody id="lista-lidos-conteudo">
+                            
                         </tbody>
                     </table>
                 </div>

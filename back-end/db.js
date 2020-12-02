@@ -95,7 +95,7 @@ async function selectStatus1(idUsuario) {
 async function selectStatus2(idUsuario) {
     const conn = await connect();
 
-    const [rows] = await conn.query("SELECT l.Nome_Livro, DATEDIFF (CURDATE(), ul.Data_Inicio_Leitura) AS 'Tempo Lendo até Agora' FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 2 AND ul.idUsuario = ?;", idUsuario);
+    const [rows] = await conn.query("SELECT l.Nome_Livro, DATEDIFF (CURDATE(), ul.Data_Inicio_Leitura) AS 'Tempo_Lendo' FROM usuario_livro ul INNER JOIN livro l ON l.idLivro = ul.idLivro WHERE ul.Status_Lista = 2 AND ul.idUsuario = ?;", idUsuario);
 
     if (!rows.length) return -1
     else return rows;

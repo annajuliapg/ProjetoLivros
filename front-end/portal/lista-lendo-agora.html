@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="..\assets\css\style.css">
 </head>
 
-<body>
+<body onload="getListaLendoAgora()">
 
     <header id="menu-portal-resumo">
 
@@ -70,7 +70,7 @@
             <div class="container text-center pt-4">
                 <div class="d-flex justify-content-between">
                     <h1>Lendo Agora</h1>
-                    <button type="button" class="btn btn-lg btn-dark" onclick="window.location.href='livros.html';">
+                    <button type="button" class="btn btn-lg btn-dark" onclick="guardaListaAdd(2)">
                         Adicionar Livro
                     </button>
                 </div>
@@ -86,21 +86,8 @@
                                 <th scope="col" style="width: 25%">Opção</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td><img src="..\assets\images\capa-livro.png" alt="logo" height="25%"></td>
-                                <td>Livro</td>
-                                <td>5 dias</td>
-                                <td><a class="nav-link" href="javascript:void(0);">Atualizar Status</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td><img src="..\assets\images\capa-livro.png" alt="logo" height="25%"></td>
-                                <td>Livro</td>
-                                <td>30 dias</td>
-                                <td><a class="nav-link" href="javascript:void(0);">Atualizar Status</a></td>
-                            </tr>
+                        <tbody id="lista-lendo-agora-conteudo">
+                            
                         </tbody>
                     </table>
                 </div>

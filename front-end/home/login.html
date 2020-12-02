@@ -38,9 +38,9 @@
             <h2>Login</h2>
             <div class="login-form">
                 <form class="form-signin" onsubmit="">
-                    <input id="inputEmail" name="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
+                    <input id="inputEmail" name="inputEmail" class="form-control" placeholder="E-mail" required autofocus onkeypress="return enterLogin(event)">
                     <br>
-                    <input id="inputSenha" name="inputSenha" class="form-control" placeholder="Senha" required type="password">
+                    <input id="inputSenha" name="inputSenha" class="form-control" placeholder="Senha" required type="password" onkeypress="return enterLogin(event)">
                 </form>
                 <button type="submit" class="btn btn-lg btn-info btn-block" onclick="login()">Entrar</button>
             </div>

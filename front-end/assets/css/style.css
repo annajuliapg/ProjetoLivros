@@ -120,7 +120,7 @@ main {
 
 /* Portal Livros */
 
-#lista-livros {
+#lista-livros-novos {
     background-image: url("../../assets/images/img-login.jpg");
     background-size: cover;
     min-height: 100%;

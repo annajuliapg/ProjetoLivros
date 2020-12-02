@@ -20,6 +20,8 @@ async function recuperaTodosUsuarios (req, res)
 async function recuperaLivros (req, res)
 {
     try {
+
+        res.setHeader("Access-Control-Allow-Origin", "*");
         
         const livros = await db.selectLivros();
 
@@ -34,6 +36,9 @@ async function recuperaLivros (req, res)
 async function recuperaLivrosNovos (req, res)
 {
     try {
+
+        res.setHeader("Access-Control-Allow-Origin", "*");
+
         const idUsuario = req.params.usuario;
 
         if (!isNaN(idUsuario)){
@@ -420,7 +425,7 @@ async function ativacaoDoServidor ()
     app.get    ('/perfil/avaliacoes/:usuario', recuperaAvaliacoes);
     app.get    ('/para-ler/:usuario', recuperaListaStatus1);
     app.get    ('/lendo-agora/:usuario', recuperaListaStatus2);
-    app.get    ('/lido/:usuario', recuperaListaStatus3);
+    app.get    ('/lidos/:usuario', recuperaListaStatus3);
 
     app.post   ('/para-ler/:usuario', insereListaStatus1);
     app.post   ('/lendo-agora/:usuario', insereListaStatus2);
