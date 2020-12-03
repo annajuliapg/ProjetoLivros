@@ -494,7 +494,7 @@ function getListaLidos() {
   event.preventDefault();
 }
 /* LISTA LIVROS NOVOS */
-function getLivrosNovos() {
+function getLivrosNovos(tipoLista) {
   let usuario = localStorage.getItem("idUsuario");
   let url = `http://localhost:3000/novos-livros/${usuario}`;
 
@@ -568,11 +568,18 @@ function getLivrosNovos() {
 
         var tagDAdicionarLivro = document.createElement('td');
 		
-        var tagButton = document.createElement('button');
+		// <button class="btn btn-secondary" data-id="1" data-toggle="modal" data-target="#modalLista3">Adicionar Livro</button>
+		
+		var tagButton = document.createElement('button');
         tagButton.setAttribute("type", "button");
 		tagButton.setAttribute("class", "btn btn-lg btn-dark");
-		var teste = "addLivro(" + `${item.idLivro}` + ")";
-        tagButton.setAttribute("onclick", teste);
+
+		var idLivro = `${item.idLivro}`
+		tagButton.setAttribute("data-id", idLivro);
+		tagButton.setAttribute("data-toggle", "modal");
+		var tipoModal = "modalLista" + tipoLista;
+		tagButton.setAttribute("data-target", tipoModal);
+
         var adicionarLivro = document.createTextNode("Adicionar Livro");
 
         tagButton.appendChild(adicionarLivro);
@@ -604,42 +611,59 @@ function getLivrosNovos() {
 
 /* ------ POST ------ */
 
-//ADD LIVRO - DEFINE A LLSTA
-function guardaListaAdd (lista) {
+/* MODAL */
 
-	localStorage.setItem("ListaParaAdd", lista);
+$('#modalLista1').on('show.bs.modal', function(event) {
+	var button = $(event.relatedTarget);
+	
+	var idLivro = button.data('id');
 
-	return window.location.href='livros.html';
+	var modal = $(this);
+	
+	modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
+	modal.find('.modal-body #nomeLivro').val(idLivro);
+});
 
-}
+$('#modalLista2').on('show.bs.modal', function(event) {
+	var button = $(event.relatedTarget);
+	
+	var idLivro = button.data('id');
 
-function setTituloNovosLivros () {
-	let lista = localStorage.getItem("ListaParaAdd");
+	var modal = $(this);
+	
+	modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
+	modal.find('.modal-body #nomeLivro').val(idLivro);
 
-	if (lista == 1) document.getElementById('titulo-novos-livros').innerHTML = "Adicione Livros em 'Para Ler'";
-	else if (lista == 2) document.getElementById('titulo-novos-livros').innerHTML = "Adicione Livros em 'Lendo Agora'";
-	else document.getElementById('titulo-novos-livros').innerHTML = "Adicione Livros em 'Lidos'";
-}
+	var hoje = new Date().toISOString().split('T')[0];
+	$('#dataIniL2').prop('max', hoje);
 
-function addLivro(idLivro) {
-  
-	let lista = localStorage.getItem("ListaParaAdd");
+});
 
-	if (lista == 1) postLista1(idLivro);
-	else if (lista == 2) postLista2(idLivro);
-	else postLista3(idLivro);
+$('#modalLista3').on('show.bs.modal', function(event) {
+	var button = $(event.relatedTarget);
+	
+	var idLivro = button.data('id');
 
-	// localStorage.removeItem("ListaParaAdd");
+	var modal = $(this);
+	
+	modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
+	modal.find('.modal-body #nomeLivro').val(idLivro);
 
-}
+	var hoje = new Date().toISOString().split('T')[0];
+	$('#dataIniL3').prop('max', hoje);
+	$('#dataFimL3').prop('max', hoje);
+
+});
+
+//POST
 
 function postLista1(idLivro) {
 	alert("1 e idLivro " + idLivro);
 
-	// axios.defaults.headers.common['header1'] = ["Access-Control-Allow-Origin", "*"];
+  // axios.defaults.headers.common['header1'] = ["Access-Control-Allow-Origin", "*"];
 
 	let usuario = localStorage.getItem("idUsuario");
-  	let url = `http://localhost:3000/para-ler/${usuario}`;
+  let url = `http://localhost:3000/para-ler/${usuario}`;
 
 	let json = {"idUsuario": usuario, "idLivro": idLivro};
 

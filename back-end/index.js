@@ -422,6 +422,11 @@ async function ativacaoDoServidor ()
     app.use(express.json());   // faz com que o express consiga processar JSON
     app.use(middleWareGlobal); // app.use cria o middleware global
 
+    //instalar cors - $ npm install cors
+    var cors = require('cors');
+    app.use(cors());
+    
+
     app.get    ('/usuarios', recuperaTodosUsuarios);
     app.get    ('/livros', recuperaLivros);
     app.get    ('/novos-livros/:usuario', recuperaLivrosNovos);
