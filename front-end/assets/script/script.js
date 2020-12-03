@@ -10,6 +10,8 @@ function enterLogin(e) {
   }
 }
 
+//axios.defaults.headers.common['header1'] = {"Access-Control-Allow-Origin": "*"};
+
 /* ------ GET ------ */
 
 //LOGIN
@@ -566,11 +568,12 @@ function getLivrosNovos() {
 
         var tagDAdicionarLivro = document.createElement('td');
 		
-		var tagButton = document.createElement('button');
-		tagButton.setAttribute("type", "button");
+        var tagButton = document.createElement('button');
+        tagButton.setAttribute("type", "button");
 		tagButton.setAttribute("class", "btn btn-lg btn-dark");
-		tagButton.setAttribute("onclick", "addLivro()");
-		var adicionarLivro = document.createTextNode("Adicionar Livro");
+		var teste = "addLivro(" + `${item.idLivro}` + ")";
+        tagButton.setAttribute("onclick", teste);
+        var adicionarLivro = document.createTextNode("Adicionar Livro");
 
         tagButton.appendChild(adicionarLivro);
         tagDAdicionarLivro.appendChild(tagButton);
@@ -618,27 +621,47 @@ function setTituloNovosLivros () {
 	else document.getElementById('titulo-novos-livros').innerHTML = "Adicione Livros em 'Lidos'";
 }
 
-function addLivro() {
+function addLivro(idLivro) {
   
-  let lista = localStorage.getItem("ListaParaAdd");
+	let lista = localStorage.getItem("ListaParaAdd");
 
-  if (lista == 1) postLista1();
-  else if (lista == 2) postLista2();
-  else postLista3();
+	if (lista == 1) postLista1(idLivro);
+	else if (lista == 2) postLista2(idLivro);
+	else postLista3(idLivro);
 
-  localStorage.removeItem("ListaParaAdd");
+	// localStorage.removeItem("ListaParaAdd");
 
 }
 
-function postLista1() {
-	alert(1);
+function postLista1(idLivro) {
+	alert("1 e idLivro " + idLivro);
+
+	// axios.defaults.headers.common['header1'] = ["Access-Control-Allow-Origin", "*"];
+
+	let usuario = localStorage.getItem("idUsuario");
+  	let url = `http://localhost:3000/para-ler/${usuario}`;
+
+	let json = {"idUsuario": usuario, "idLivro": idLivro};
+
+  axios.post(url , json)
+  .then(res => {
+    
+     console.log(res.data);    
+
+})
+  .catch(error  =>  {
+    alert(error)
+  })
+
+  event.preventDefault()
+
 }
 
-function postLista2() {
-	alert(2);
+function postLista2(idLivro) {
+	alert("2 e idLivro " + idLivro);
 }
 
-function postLista3() {
-	alert(3);
+function postLista3(idLivro) {
+	alert("3 e idLivro " + idLivro);
 }
 

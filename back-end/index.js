@@ -176,6 +176,8 @@ async function recuperaListaStatus3(req, res) {
 //rota POST - INSERE LISTA 1
 async function insereListaStatus1 (req, res)
 {
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    
     if (!req.body.idLivro)
     {
         return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro"});
@@ -183,6 +185,8 @@ async function insereListaStatus1 (req, res)
 
     try
     {
+        // res.setHeader("Access-Control-Allow-Origin", "*");
+        
         const idUsuario = req.params.usuario;
         
         if (!isNaN(idUsuario)){

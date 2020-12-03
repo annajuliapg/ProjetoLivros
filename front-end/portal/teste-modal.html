@@ -48,10 +48,7 @@
 									<span>Data: </span>
 								</div>
 								<div class="col-8">
-									<div class="input-append date form_datetime">
-                                        <input size="16" type="text" value="" readonly>
-                                        <span class="add-on"><i class="icon-th"></i></span>
-                                    </div>
+									<input id="somedate" type="date" max="2020-12-03">
 								</div>							
                             </div>
                             <br>
@@ -78,17 +75,22 @@
             <script src="../assets/script/bootstrap.bundle.min.js"></script>
 
 			<script type="text/javascript">
+
 				$('#conteudoModal').on('show.bs.modal', function(event) {
 					var button = $(event.relatedTarget);
                     
                     var idLivro = button.data('id');
 
-                    var nomeLivro = "Livro" // pegar da tabela pelo id
 					var modal = $(this);
                     
-                    modal.find('.modal-title').text("Adicionar Livro '"+nomeLivro+"'");
-                    modal.find('.modal-body #nomeLivro').val(nomeLivro);
-                });
+                    modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
+					modal.find('.modal-body #nomeLivro').val(idLivro);
+					
+					var hoje = new Date().toISOString().split('T')[0];
+					$('#somedate').prop('max', hoje);
+				});				
+
+
 			</script>
 		</footer>
 	</body>
