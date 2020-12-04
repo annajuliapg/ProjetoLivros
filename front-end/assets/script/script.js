@@ -568,17 +568,15 @@ function getLivrosNovos(tipoLista) {
 
         var tagDAdicionarLivro = document.createElement('td');
 		
-		// <button class="btn btn-secondary" data-id="1" data-toggle="modal" data-target="#modalLista3">Adicionar Livro</button>
 		
-		var tagButton = document.createElement('button');
-        tagButton.setAttribute("type", "button");
-		tagButton.setAttribute("class", "btn btn-lg btn-dark");
+        var tagButton = document.createElement('button');
+        tagButton.setAttribute("class", "btn btn-lg btn-dark");
 
-		var idLivro = `${item.idLivro}`
-		tagButton.setAttribute("data-id", idLivro);
-		tagButton.setAttribute("data-toggle", "modal");
-		var tipoModal = "modalLista" + tipoLista;
-		tagButton.setAttribute("data-target", tipoModal);
+        var idLivro = `${item.idLivro}`
+        tagButton.setAttribute("data-id", idLivro);
+        tagButton.setAttribute("data-toggle", "modal");
+        var tipoModal = "#modalLista" + tipoLista;
+        tagButton.setAttribute("data-target", tipoModal);
 
         var adicionarLivro = document.createTextNode("Adicionar Livro");
 
@@ -611,56 +609,8 @@ function getLivrosNovos(tipoLista) {
 
 /* ------ POST ------ */
 
-/* MODAL */
-
-$('#modalLista1').on('show.bs.modal', function(event) {
-	var button = $(event.relatedTarget);
-	
-	var idLivro = button.data('id');
-
-	var modal = $(this);
-	
-	modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
-	modal.find('.modal-body #nomeLivro').val(idLivro);
-});
-
-$('#modalLista2').on('show.bs.modal', function(event) {
-	var button = $(event.relatedTarget);
-	
-	var idLivro = button.data('id');
-
-	var modal = $(this);
-	
-	modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
-	modal.find('.modal-body #nomeLivro').val(idLivro);
-
-	var hoje = new Date().toISOString().split('T')[0];
-	$('#dataIniL2').prop('max', hoje);
-
-});
-
-$('#modalLista3').on('show.bs.modal', function(event) {
-	var button = $(event.relatedTarget);
-	
-	var idLivro = button.data('id');
-
-	var modal = $(this);
-	
-	modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
-	modal.find('.modal-body #nomeLivro').val(idLivro);
-
-	var hoje = new Date().toISOString().split('T')[0];
-	$('#dataIniL3').prop('max', hoje);
-	$('#dataFimL3').prop('max', hoje);
-
-});
-
-//POST
-
 function postLista1(idLivro) {
 	alert("1 e idLivro " + idLivro);
-
-  // axios.defaults.headers.common['header1'] = ["Access-Control-Allow-Origin", "*"];
 
 	let usuario = localStorage.getItem("idUsuario");
   let url = `http://localhost:3000/para-ler/${usuario}`;

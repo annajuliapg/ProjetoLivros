@@ -4,8 +4,6 @@
 async function recuperaTodosUsuarios (req, res)
 {
     try {
-
-        res.setHeader("Access-Control-Allow-Origin", "*");
         
         const usuarios = await db.selectTodosUsuarios();
 
@@ -20,8 +18,6 @@ async function recuperaTodosUsuarios (req, res)
 async function recuperaLivros (req, res)
 {
     try {
-
-        res.setHeader("Access-Control-Allow-Origin", "*");
         
         const livros = await db.selectLivros();
 
@@ -36,8 +32,6 @@ async function recuperaLivros (req, res)
 async function recuperaLivrosNovos (req, res)
 {
     try {
-
-        res.setHeader("Access-Control-Allow-Origin", "*");
 
         const idUsuario = req.params.usuario;
 
@@ -60,8 +54,6 @@ async function recuperaLivrosNovos (req, res)
 async function recuperaUmUsuario (req, res)
 {
     try {
-
-        res.setHeader("Access-Control-Allow-Origin", "*");
         
         const idUsuario = req.params.usuario;
 
@@ -85,8 +77,6 @@ async function recuperaAvaliacoes (req, res)
 {
     try {
 
-        res.setHeader("Access-Control-Allow-Origin", "*");
-
         const idUsuario = req.params.usuario;
 
         if (!isNaN(idUsuario)){
@@ -107,9 +97,7 @@ async function recuperaAvaliacoes (req, res)
 //rota de READ - SELECT STATUS 1
 async function recuperaListaStatus1(req, res) {
 
-    try {    
-        
-        res.setHeader("Access-Control-Allow-Origin", "*");
+    try {
         
         const idUsuario = req.params.usuario;
 
@@ -130,9 +118,7 @@ async function recuperaListaStatus1(req, res) {
 //rota de READ - SELECT STATUS 2
 async function recuperaListaStatus2(req, res) {
     
-    try {    
-        
-        res.setHeader("Access-Control-Allow-Origin", "*");
+    try {
         
         const idUsuario = req.params.usuario;
 
@@ -153,9 +139,7 @@ async function recuperaListaStatus2(req, res) {
 //rota de READ - SELECT STATUS 3
 async function recuperaListaStatus3(req, res) {
     
-    try {    
-        
-        res.setHeader("Access-Control-Allow-Origin", "*");
+    try {
         
         const idUsuario = req.params.usuario;
 
@@ -176,17 +160,13 @@ async function recuperaListaStatus3(req, res) {
 //rota POST - INSERE LISTA 1
 async function insereListaStatus1 (req, res)
 {
-    // res.setHeader("Access-Control-Allow-Origin", "*");
-    
     if (!req.body.idLivro)
     {
         return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro"});
     }
 
     try
-    {
-        // res.setHeader("Access-Control-Allow-Origin", "*");
-        
+    {        
         const idUsuario = req.params.usuario;
         
         if (!isNaN(idUsuario)){

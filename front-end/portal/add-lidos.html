@@ -68,7 +68,7 @@
     <main>
         <section id="lista-livros-novos">
             <div class="container text-center py-4">
-                <h1>Adicione Livros em 'Para Ler'</h1>
+                <h1>Adicione Livros em 'Lidos'</h1>
                 <br>
                 <div class="row pb-5">
                     <table class="table table-striped table-light" style="font-size: large;">
@@ -169,6 +169,27 @@
     <script src="../assets/script/jquery.js"></script>
     <script src="../assets/script/bootstrap.bundle.min.js"></script>
     <script src="../assets/script/script.js"></script>
+    <script type="text/javascript">
+        $('#modalLista3').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            
+            var idLivro = button.data('id');
+
+            var modal = $(this);
+            
+            modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
+            modal.find('.modal-body #nomeLivro').val(idLivro);
+
+            var hoje = new Date().toISOString().split('T')[0];
+            $('#dataIniL3').prop('max', hoje);
+            $('#dataFimL3').prop('max', hoje);
+        });
+
+        $("#dataIniL3").change(function(){
+            $('#dataFimL3').prop('min', $("#dataIniL3").val());
+        });
+
+    </script>
 
 </body>
 
