@@ -98,62 +98,55 @@
 					<div class="modal-content">
 						<!-- título -->
 						<div class="modal-header">
-							<h4 class="modal-title"></h4>
+							<h4 class="modal-title">Adicionar Livro Lido</h4>
 							<button class="close" data-dismiss="modal" arial-label="Fechar">
 								<span aria-hidden="true">&times;</span>
 							</button>
-						</div>
-						<!-- conteúdo -->
-						<div class="modal-body">
-							<form>
-								<div class="row">
-									<div class="col-4">
-										<span>Nome do Livro:</span>
-									</div>
-									<div class="col-8">
-										<input type="text" id="nomeLivro" class="form-control" readonly>
-									</div>							
-								</div>
-								<br>
-								<div class="row">
-									<div class="col-4">
-										<span>Data Inicio Leitura:</span>
-									</div>
-									<div class="col-8">
-										<input id="dataIniL3" type="date" required>
-									</div>							
-								</div>
-								<br>
-								<div class="row">
-									<div class="col-4">
-										<span>Data Fim Leitura:</span>
-									</div>
-									<div class="col-8">
-										<input id="dataFimL3" type="date" required>
-									</div>							
-								</div>
-								<br>
-								<div class="row">
-									<div class="col-4">
-										<span>Avaliação:</span>
-									</div>
-									<div class="col-8">
-										<input type="number" min="0" max="10">
-									</div>							
-								</div>
-								<br>
-								<div class="container">
-									<div class="row justify-content-center">
-										<button id="btnConfirmar" class="btn btn-primary" type="submit">Confirmar</button>	
-									</div>
-								</div>
-							</form>
                         </div>
-
-						<!-- rodapé -->
-						<div class="modal-footer">
-							<button class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-						</div>
+                        <form>
+                            <!-- conteúdo -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span>Nome do Livro:</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" id="nomeLivro" class="form-control" readonly>
+                                    </div>							
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span>Data Inicio Leitura:</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <input id="dataIniL3" type="date" required>
+                                    </div>							
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span>Data Fim Leitura:</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <input id="dataFimL3" type="date" required>
+                                    </div>							
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span>Avaliação:</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <input id="addAvaliacaoL3" type="number" min="0" max="10">
+                                    </div>							
+                                </div>
+                            </div>
+                            <!-- rodapé -->
+                            <div class="modal-footer">
+                                <button id="btnConfirmar" class="btn btn-primary" type="submit">Confirmar</button>
+                            </div>
+                        </form>
 					</div>
 				</div>
 			</div>
@@ -175,10 +168,18 @@
             
             var idLivro = button.data('id');
 
+            var acao = "postLista3("+idLivro+")";
+
+            var nomeLivro = button.data('nome');
+
+            $('#dataIniL3').val(null);
+            $('#dataFimL3').val(null);
+            $('#addAvaliacaoL3').val(null);
+
             var modal = $(this);
             
-            modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
-            modal.find('.modal-body #nomeLivro').val(idLivro);
+            modal.find('.modal-body #nomeLivro').val(nomeLivro);
+            modal.find('.modal-footer #btnConfirmar').attr("onclick", acao);
 
             var hoje = new Date().toISOString().split('T')[0];
             $('#dataIniL3').prop('max', hoje);

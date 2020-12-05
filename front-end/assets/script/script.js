@@ -183,11 +183,14 @@ function getAvaliacoes() {
         else {
           avaliacao = document.createTextNode(`${item.Avaliacao}`);
         }
-        
-        var br = document.createElement('br');
-        var tagEditar = document.createElement('a');
-        tagEditar.href = "javascript:void(0)";
-        var editar = document.createTextNode("Editar");
+		
+		var br = document.createElement('br');
+        var tagEditar = document.createElement('button');
+        tagEditar.setAttribute("class", "btn btn-link");
+		var editar = document.createTextNode("Editar");
+
+        // var acao = "deleteLivroLista("+`${item.idLivro}`+")"
+		// tagEditar.setAttribute("onclick", acao);
 
         tagEditar.appendChild(editar);
         tagDAvaliacao.appendChild(avaliacao);
@@ -271,20 +274,34 @@ function getListaParaLer() {
 
         tagDPaginasLivro.appendChild(paginasLivro);
 
-        var tagDAtualizarStatus = document.createElement('td');
-        var tagA = document.createElement('a');
-        tagA.setAttribute("class", "nav-link");
-        tagA.href = "javascript:void(0)";
+        var tagDAtualizarStatus = document.createElement('td');		
+		var tagButtonA = document.createElement('button');
+        tagButtonA.setAttribute("class", "btn btn-info");
+        tagButtonA.setAttribute("onclick", "javascript:void(0)");
+
         var atualizarStatus = document.createTextNode("Atualizar Status");
 
-        tagA.appendChild(atualizarStatus);
-        tagDAtualizarStatus.appendChild(tagA);
+        tagButtonA.appendChild(atualizarStatus);
+        tagDAtualizarStatus.appendChild(tagButtonA);
+
+        var tagDDeleteLivro = document.createElement('td');
+        var tagButtonE = document.createElement('button');
+        tagButtonE.setAttribute("class", "btn btn-danger");
+
+        var acao = "deleteLivroLista("+`${item.idLivro}`+")"
+        tagButtonE.setAttribute("onclick", acao);
+
+        var deleteLivro = document.createTextNode("Excluir");
+
+        tagButtonE.appendChild(deleteLivro);
+        tagDDeleteLivro.appendChild(tagButtonE);
 
         novaLinha.appendChild(tagH);
         novaLinha.appendChild(tagDImagem);
         novaLinha.appendChild(tagDNomeLivro);
         novaLinha.appendChild(tagDPaginasLivro);
         novaLinha.appendChild(tagDAtualizarStatus);
+        novaLinha.appendChild(tagDDeleteLivro);
 
         tabela.appendChild(novaLinha);        
 
@@ -359,22 +376,36 @@ function getListaLendoAgora() {
         tagDTempoLendo.appendChild(tempoLendo);
         tagDTempoLendo.appendChild(document.createTextNode(" dias"));
 
-        var tagDAtualizarStatus = document.createElement('td');
-        var tagA = document.createElement('a');
-        tagA.setAttribute("class", "nav-link");
-        tagA.href = "javascript:void(0)";
+        var tagDAtualizarStatus = document.createElement('td');		
+		var tagButtonA = document.createElement('button');
+        tagButtonA.setAttribute("class", "btn btn-info");
+        tagButtonA.setAttribute("onclick", "javascript:void(0)");
+
         var atualizarStatus = document.createTextNode("Atualizar Status");
 
-        tagA.appendChild(atualizarStatus);
-        tagDAtualizarStatus.appendChild(tagA);
+        tagButtonA.appendChild(atualizarStatus);
+        tagDAtualizarStatus.appendChild(tagButtonA);
+
+        var tagDDeleteLivro = document.createElement('td');
+        var tagButtonE = document.createElement('button');
+        tagButtonE.setAttribute("class", "btn btn-danger");
+
+        var acao = "deleteLivroLista("+`${item.idLivro}`+")"
+        tagButtonE.setAttribute("onclick", acao);
+
+        var deleteLivro = document.createTextNode("Excluir");
+
+        tagButtonE.appendChild(deleteLivro);
+        tagDDeleteLivro.appendChild(tagButtonE);
 
         novaLinha.appendChild(tagH);
         novaLinha.appendChild(tagDImagem);
         novaLinha.appendChild(tagDNomeLivro);
         novaLinha.appendChild(tagDTempoLendo);
         novaLinha.appendChild(tagDAtualizarStatus);
-
-        tabela.appendChild(novaLinha);        
+        novaLinha.appendChild(tagDDeleteLivro);
+		
+		tabela.appendChild(novaLinha);        
 
         countIndex++;
       }
@@ -463,21 +494,35 @@ function getListaLidos() {
         }
 
         var br = document.createElement('br');
-        var tagEditar = document.createElement('a');
-        tagEditar.href = "javascript:void(0)";
-        var editar = document.createTextNode("Editar");
+        var tagEditar = document.createElement('button');
+        tagEditar.setAttribute("class", "btn btn-link");
+		var editar = document.createTextNode("Editar");
 
-        tagEditar.appendChild(editar);
+        // var acao = "deleteLivroLista("+`${item.idLivro}`+")"
+		// tagEditar.setAttribute("onclick", acao);
+
+		tagEditar.appendChild(editar);
         tagDAvaliacao.appendChild(avaliacao);
         tagDAvaliacao.appendChild(br);
-        tagDAvaliacao.appendChild(tagEditar);       
+        tagDAvaliacao.appendChild(tagEditar); 
+		
+		var tagDDeleteLivro = document.createElement('td');
+        var tagButtonE = document.createElement('button');
+        tagButtonE.setAttribute("class", "btn btn-danger");
+        var acao = "deleteLivroLista("+`${item.idLivro}`+")"
+        tagButtonE.setAttribute("onclick", acao);
+		var deleteLivro = document.createTextNode("Excluir");
+		
+		tagButtonE.appendChild(deleteLivro);
+        tagDDeleteLivro.appendChild(tagButtonE);     
 
         novaLinha.appendChild(tagH);
         novaLinha.appendChild(tagDImagem);
         novaLinha.appendChild(tagDNomeLivro);
         novaLinha.appendChild(tagDTempoLeitura);
         novaLinha.appendChild(tagDPaginas);
-        novaLinha.appendChild(tagDAvaliacao);
+		novaLinha.appendChild(tagDAvaliacao);
+		novaLinha.appendChild(tagDDeleteLivro);
 
         tabela.appendChild(novaLinha);
 
@@ -568,12 +613,11 @@ function getLivrosNovos(tipoLista) {
 
         var tagDAdicionarLivro = document.createElement('td');
 		
-		
         var tagButton = document.createElement('button');
-        tagButton.setAttribute("class", "btn btn-lg btn-dark");
+        tagButton.setAttribute("class", "btn btn-dark");
 
-        var idLivro = `${item.idLivro}`
-        tagButton.setAttribute("data-id", idLivro);
+		tagButton.setAttribute("data-id", `${item.idLivro}`);
+		tagButton.setAttribute("data-nome", `${item.Nome_Livro}`);
         tagButton.setAttribute("data-toggle", "modal");
         var tipoModal = "#modalLista" + tipoLista;
         tagButton.setAttribute("data-target", tipoModal);
@@ -610,32 +654,125 @@ function getLivrosNovos(tipoLista) {
 /* ------ POST ------ */
 
 function postLista1(idLivro) {
-	alert("1 e idLivro " + idLivro);
 
 	let usuario = localStorage.getItem("idUsuario");
-  let url = `http://localhost:3000/para-ler/${usuario}`;
+	let url = `http://localhost:3000/para-ler/${usuario}`;
 
-	let json = {"idUsuario": usuario, "idLivro": idLivro};
+	let json = {
+		"idUsuario": usuario, 
+		"idLivro": idLivro
+	};
 
-  axios.post(url , json)
-  .then(res => {
-    
-     console.log(res.data);    
+	axios.post(url , json)
+	.then(res => {
 
-})
-  .catch(error  =>  {
-    alert(error)
-  })
+		alert(res.data);
+		location.reload();
 
-  event.preventDefault()
+	})
+	.catch(error  =>  {
+		alert(error)
+	})
+
+	event.preventDefault()
 
 }
 
 function postLista2(idLivro) {
-	alert("2 e idLivro " + idLivro);
+	
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/lendo-agora/${usuario}`;
+
+	let dataIni = document.getElementById("dataIniL2").value;
+
+	if (!dataIni) return;
+
+	let json = {
+		"idUsuario": usuario, 
+		"idLivro": idLivro, 
+		"Data_Inicio_Leitura": dataIni
+	};
+
+	axios.post(url , json)
+	.then(res => {
+
+		alert(res.data);
+		location.reload();
+
+	})
+	.catch(error  =>  {
+		alert(error)
+	})
+
+	event.preventDefault()
+
 }
 
 function postLista3(idLivro) {
-	alert("3 e idLivro " + idLivro);
+	
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/lidos/${usuario}`;
+
+	let dataIni = document.getElementById("dataIniL3").value;
+	let dataFim = document.getElementById("dataFimL3").value;
+	let avaliacao = document.getElementById("addAvaliacaoL3").value;
+
+	if (!dataIni) return;
+	if (!dataFim) return;
+	if (avaliacao < 0 || avaliacao > 10) return;
+
+	let json;
+
+	if (!avaliacao){
+		json = {
+			"idUsuario": usuario, 
+			"idLivro": idLivro, 
+			"Data_Inicio_Leitura": dataIni,
+			"Data_Termino_Leitura": dataFim
+		};
+	}
+	else {
+			json = {
+			"idUsuario": usuario, 
+			"idLivro": idLivro, 
+			"Data_Inicio_Leitura": dataIni,
+			"Data_Termino_Leitura": dataFim,
+			"Avaliacao": avaliacao
+		};
+	}	
+
+	axios.post(url , json)
+	.then(res => {
+
+		alert(res.data);
+		location.reload();
+
+	})
+	.catch(error  =>  {
+		alert(error)
+	})
+
+	event.preventDefault()
 }
 
+function deleteLivroLista(idLivro) {
+
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/remover/${idLivro}/${usuario}`;
+
+	let json = {"idUsuario": usuario, "idLivro": idLivro};
+
+	axios.delete(url , {data: json})
+	.then(res => {
+
+		alert(res.data);
+		location.reload();
+
+	})
+	.catch(error  =>  {
+		
+	})
+
+	event.preventDefault()
+
+}

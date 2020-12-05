@@ -98,7 +98,7 @@
 					<div class="modal-content">
 						<!-- título -->
 						<div class="modal-header">
-							<h4 class="modal-title"></h4>
+							<h4 class="modal-title">Adicionar Livro Para Ler</h4>
 							<button class="close" data-dismiss="modal" arial-label="Fechar">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -113,17 +113,10 @@
 									<input type="text" id="nomeLivro" class="form-control" readonly>
 								</div>							
                             </div>
-                            <br>
-                            <div class="container">
-                                <div class="row justify-content-center">
-									<button class="btn btn-primary" data-dismiss="modal">Confirmar</button>	
-								</div>
-                            </div>
                         </div>
-
 						<!-- rodapé -->
 						<div class="modal-footer">
-							<button class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+							<button id="btnConfirmar" class="btn btn-primary" data-dismiss="modal">Confirmar</button>	
 						</div>
 					</div>
 				</div>
@@ -146,10 +139,14 @@
             
             var idLivro = button.data('id');
 
+            var acao = "postLista1("+idLivro+")";
+
+            var nomeLivro = button.data('nome');
+
             var modal = $(this);
-            
-            modal.find('.modal-title').text("Adicionar Livro '"+idLivro+"'");
-            modal.find('.modal-body #nomeLivro').val(idLivro);
+
+            modal.find('.modal-body #nomeLivro').val(nomeLivro);
+            modal.find('.modal-footer #btnConfirmar').attr("onclick", acao);
         });
     </script>
 

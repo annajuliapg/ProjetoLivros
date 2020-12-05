@@ -176,7 +176,7 @@ async function insereListaStatus1 (req, res)
                 "idLivro": req.body.idLivro
             });
 
-            return res.status(200).json("Livro inserido como status 1");    
+            return res.status(200).json("Livro inserido na lista 'Para Ler'");  
         }
         else{
             return res.status(500).send("Código de usuário inválido");
@@ -208,7 +208,7 @@ async function insereListaStatus2 (req, res)
                 "Data_Inicio_Leitura": req.body.Data_Inicio_Leitura
             });
 
-            return res.status(200).json("Livro inserido como status 2");  
+            return res.status(200).json("Livro inserido na lista 'Lendo Agora'");
         }
         else{
             return res.status(500).send("Código de usuário inválido");
@@ -242,7 +242,7 @@ async function insereListaStatus3 (req, res)
                 "Avaliacao": req.body.Avaliacao
             });
 
-            return res.status(200).json("Livro inserido como status 3");  
+            return res.status(200).json("Livro inserido na lista 'Lidos'");
         }
         else{
             return res.status(500).send("Código de usuário inválido");
@@ -367,7 +367,7 @@ async function removeLivroUsuario (req, res)
                 "idLivro": idLivro
             });
 
-            return res.status(200).json("Livro deletado da lista do usuário");
+            return res.status(200).json("Livro deletado da lista");
         }
         else{
             return res.status(500).send("Código de usuário e/ou livro inválido");
@@ -418,13 +418,13 @@ async function ativacaoDoServidor ()
 
     app.post   ('/para-ler/:usuario', insereListaStatus1);
     app.post   ('/lendo-agora/:usuario', insereListaStatus2);
-    app.post   ('/lido/:usuario', insereListaStatus3);
+    app.post   ('/lidos/:usuario', insereListaStatus3);
 
     app.patch  ('/para-ler/:usuario', atulizaListaParaLer_Lendo);  //TESTAR
     app.patch  ('/lendo-agora/:usuario', atulizaLendo_Lido);       //TESTAR
     app.patch  ('/perfil/avaliacoes/:usuario', atulizaAvaliacao);
 
-    app.delete ('remover/:livro/:usuario', removeLivroUsuario);    //TESTAR
+    app.delete ('/remover/:livro/:usuario', removeLivroUsuario);
 
     console.log ('Servidor ativo na porta 3000...');
     app.listen(3000);
