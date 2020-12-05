@@ -1,3 +1,4 @@
+// para testar - npm test
 
 require('mysql2/node_modules/iconv-lite').encodingExists('foo');
 
@@ -8,7 +9,7 @@ afterAll(() => {
 });
 
 test('usuário que não existe', async () => {
-    const selectUsuario = await db.selectUsuario(5);
+    const selectUsuario = await db.selectUsuario(10);
     expect(selectUsuario).toBe(-1);
 });
 
