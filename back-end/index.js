@@ -339,7 +339,7 @@ async function atulizaAvaliacao (req, res)
                 "Avaliacao": req.body.Avaliacao
             });
 
-            return res.status(200).json({"Avaliação do livro atualizada para": req.body.Avaliacao});
+            return res.status(200).send("Avaliação do livro atualizada para: " + req.body.Avaliacao);
         }
         else{
             return res.status(500).send("Código de usuário inválido");
@@ -420,8 +420,8 @@ async function ativacaoDoServidor ()
     app.post   ('/lendo-agora/:usuario', insereListaStatus2);
     app.post   ('/lidos/:usuario', insereListaStatus3);
 
-    app.patch  ('/para-ler/:usuario', atulizaListaParaLer_Lendo);  //TESTAR
-    app.patch  ('/lendo-agora/:usuario', atulizaLendo_Lido);       //TESTAR
+    app.patch  ('/para-ler/:usuario', atulizaListaParaLer_Lendo);
+    app.patch  ('/lendo-agora/:usuario', atulizaLendo_Lido);
     app.patch  ('/perfil/avaliacoes/:usuario', atulizaAvaliacao);
 
     app.delete ('/remover/:livro/:usuario', removeLivroUsuario);

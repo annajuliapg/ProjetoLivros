@@ -94,25 +94,81 @@
             </div>
         </section>
 
+        <section>
+            <!-- Modal -->
+			<div id="modalAtuliza1Para2" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- título -->
+						<div class="modal-header">
+							<h4 class="modal-title">Atualizar Livro Para Lendo Agora</h4>
+							<button class="close" data-dismiss="modal" arial-label="Fechar">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                        </div>
+                        <form>
+                            <!-- conteúdo -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span>Nome do Livro:</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" id="nomeLivro" class="form-control" readonly>
+                                    </div>							
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span>Data Inicio Leitura:</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <input id="dataIniL1P2" type="date" required>
+                                    </div>							
+                                </div>
+                            </div>
+                            <!-- rodapé -->
+                            <div class="modal-footer">
+                                <button id="btnConfirmar" class="btn btn-primary" type="submit">Confirmar</button>
+                            </div>
+                        </form>
+					</div>
+				</div>
+			</div>
+        </section>
+
         <footer class="footer">
             <span>© Copyright 2020 Shell na Terra. Todos direitos reservados.</span>
         </footer>
 
     </main>
-
-    <!-- <footer class="footer">
-
-        <div class="container">
-          <span>© Copyright 2020 Shell na Terra. Todos direitos reservados.</span>
-        </div>
-
-    </footer> -->
   
     <!-- JS -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="../assets/script/jquery.js"></script>
     <script src="../assets/script/bootstrap.bundle.min.js"></script>
     <script src="../assets/script/script.js"></script>
+    <script type="text/javascript">
+        $('#modalAtuliza1Para2').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            
+            var idLivro = button.data('id');
+
+            var acao = "patchLista1Para2("+idLivro+")";
+
+            var nomeLivro = button.data('nome');
+
+            var hoje = new Date().toISOString().split('T')[0];
+            $('#dataIniL1P2').val(hoje);
+            $('#dataIniL1P2').prop('max', hoje);
+
+            var modal = $(this);
+            
+            modal.find('.modal-body #nomeLivro').val(nomeLivro);
+            modal.find('.modal-footer #btnConfirmar').attr("onclick", acao);           
+
+        });
+    </script>
 
 </body>
 

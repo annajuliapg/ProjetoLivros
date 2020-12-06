@@ -115,7 +115,7 @@ async function selectStatus3(idUsuario) {
 async function selectAvaliacoes(idUsuario) {
     const conn = await connect();
 
-    const [rows] = await conn.query("SELECT l.Nome_Livro, ul.Avaliacao FROM usuario_livro ul inner join livro l on l.idLivro = ul.idLivro WHERE ul.idUsuario = ? AND ul.Status_Lista = 3;", idUsuario);
+    const [rows] = await conn.query("SELECT l.idLivro, l.Nome_Livro, ul.Avaliacao FROM usuario_livro ul inner join livro l on l.idLivro = ul.idLivro WHERE ul.idUsuario = ? AND ul.Status_Lista = 3;", idUsuario);
 
     if (!rows.length) return -1
     else return rows;

@@ -96,6 +96,49 @@
             </div>
         </section>
 
+        <section>
+            <!-- Modal -->
+			<div id="modalAtulizaAvalicao" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- título -->
+						<div class="modal-header">
+							<h4 class="modal-title">Atualizar Livro Para Lido</h4>
+							<button class="close" data-dismiss="modal" arial-label="Fechar">
+								<span aria-hidden="true">&times;</span>
+							</button>
+                        </div>
+                        <form>
+                            <!-- conteúdo -->
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span>Nome do Livro:</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <input type="text" id="nomeLivro" class="form-control" readonly>
+                                    </div>							
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span>Avaliação:</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <input id="atualizaAvaliacao" type="number" min="0" max="10" required>
+                                    </div>							
+                                </div>
+                            </div>
+                            <!-- rodapé -->
+                            <div class="modal-footer">
+                                <button id="btnConfirmar" class="btn btn-primary" type="submit">Confirmar</button>
+                            </div>
+                        </form>
+					</div>
+				</div>
+			</div>
+        </section>
+
         <footer class="footer">
             <span>© Copyright 2020 Shell na Terra. Todos direitos reservados.</span>
         </footer>
@@ -107,6 +150,24 @@
     <script src="../assets/script/jquery.js"></script>
     <script src="../assets/script/bootstrap.bundle.min.js"></script>
     <script src="../assets/script/script.js"></script>
+    <script type="text/javascript">
+        $('#modalAtulizaAvalicao').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            
+            var idLivro = button.data('id');
+
+            var acao = "patchAvaliacao("+idLivro+")";
+
+            var nomeLivro = button.data('nome');
+
+            $('#atualizaAvaliacao').val(null);
+
+            var modal = $(this);
+            
+            modal.find('.modal-body #nomeLivro').val(nomeLivro);
+            modal.find('.modal-footer #btnConfirmar').attr("onclick", acao);
+        });
+    </script>
 
 </body>
 

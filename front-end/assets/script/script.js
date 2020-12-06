@@ -10,8 +10,6 @@ function enterLogin(e) {
   }
 }
 
-//axios.defaults.headers.common['header1'] = {"Access-Control-Allow-Origin": "*"};
-
 /* ------ GET ------ */
 
 //LOGIN
@@ -20,8 +18,8 @@ function login () {
   let emailForm = document.getElementById('inputEmail').value;
   let senhaForm = document.getElementById('inputSenha').value;
 
-  if (!emailForm || !senhaForm) return alert("Preencha todos os campos");
-
+  if (!emailForm || !senhaForm) return;
+  
   let url = `http://localhost:3000/usuarios`
 
   axios.get(url)
@@ -122,422 +120,421 @@ function getPerfil () {
     event.preventDefault();
 
 }
-
+/* AVALIACOES */
 function getAvaliacoes() {
-  let usuario = localStorage.getItem("idUsuario");
-  let url = `http://localhost:3000/perfil/avaliacoes/${usuario}`;
 
-  axios.get(url)
-  .then(res => {
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/perfil/avaliacoes/${usuario}`;
 
-    let tabela = document.getElementById('conteudo-avaliacoes');
+	axios.get(url)
+	.then(res => {
 
-    if (res.data == -1){
+		let tabela = document.getElementById('conteudo-avaliacoes');
 
-      var linha = document.createElement('tr');
+		if (res.data == -1){
 
-      var tagConteudo = document.createElement('td');
-      tagConteudo.setAttribute("colspan", 4);
+			var linha = document.createElement('tr');
 
-      var conteudo = document.createTextNode("Sem Avaliações. Termine de ler um livro para avaliá-lo.");
+			var tagConteudo = document.createElement('td');
+			tagConteudo.setAttribute("colspan", 4);
 
-      tagConteudo.appendChild(conteudo);
-      linha.appendChild(tagConteudo);
-      tabela.appendChild(linha);
+			var conteudo = document.createTextNode("Sem Avaliações. Termine de ler um livro para avaliá-lo.");
 
-    }
-    else {
-      
-      var lista = res.data;
+			tagConteudo.appendChild(conteudo);
+			linha.appendChild(tagConteudo);
+			tabela.appendChild(linha);
 
-      var countIndex  = 1;
-        
-      for (var item of lista){
-
-        var novaLinha = document.createElement('tr');
-        
-        var tagH = document.createElement('th');
-        tagH.setAttribute("scope","row");
-        var tagHConteudo = document.createTextNode(countIndex);
-        
-        tagH.appendChild(tagHConteudo);
-
-        var tagDImagem = document.createElement('td');
-        var imagem = document.createElement('img');
-        imagem.setAttribute("src", "../assets/images/capa-livro.png");
-        imagem.setAttribute("alt", "logo");
-        imagem.setAttribute("height", "25%");
-
-        tagDImagem.appendChild(imagem);
-
-        var tagDNomeLivro = document.createElement('td');
-        var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
-
-        tagDNomeLivro.appendChild(nomeLivro);
-
-        var tagDAvaliacao = document.createElement('td');
-        var avaliacao;
-        if (`${item.Avaliacao}` == "null"){
-          avaliacao = document.createTextNode("Sem Avaliação");
-        }
-        else {
-          avaliacao = document.createTextNode(`${item.Avaliacao}`);
-        }
+		}
+		else {
 		
-		var br = document.createElement('br');
-        var tagEditar = document.createElement('button');
-        tagEditar.setAttribute("class", "btn btn-link");
-		var editar = document.createTextNode("Editar");
+			var lista = res.data;
 
-        // var acao = "deleteLivroLista("+`${item.idLivro}`+")"
-		// tagEditar.setAttribute("onclick", acao);
+			var countIndex  = 1;
+			
+			for (var item of lista){
 
-        tagEditar.appendChild(editar);
-        tagDAvaliacao.appendChild(avaliacao);
-        tagDAvaliacao.appendChild(br);
-        tagDAvaliacao.appendChild(tagEditar);
+				var novaLinha = document.createElement('tr');
+				
+				var tagH = document.createElement('th');
+				tagH.setAttribute("scope","row");
+				var tagHConteudo = document.createTextNode(countIndex);
+				
+				tagH.appendChild(tagHConteudo);
 
-        novaLinha.appendChild(tagH);
-        novaLinha.appendChild(tagDImagem);
-        novaLinha.appendChild(tagDNomeLivro);
-        novaLinha.appendChild(tagDAvaliacao);
+				var tagDImagem = document.createElement('td');
+				var imagem = document.createElement('img');
+				imagem.setAttribute("src", "../assets/images/capa-livro.png");
+				imagem.setAttribute("alt", "logo");
+				imagem.setAttribute("height", "25%");
 
-        tabela.appendChild(novaLinha);
+				tagDImagem.appendChild(imagem);
 
-        countIndex++;
-      }
-    }
-  
+				var tagDNomeLivro = document.createElement('td');
+				var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
 
-  })
-    .catch(error  =>  {
-      alert(error)
-    })
+				tagDNomeLivro.appendChild(nomeLivro);
 
-  event.preventDefault();
+				var tagDAvaliacao = document.createElement('td');
+				var avaliacao;
+				if (`${item.Avaliacao}` == "null"){
+					avaliacao = document.createTextNode("Sem Avaliação");
+				}
+				else {
+					avaliacao = document.createTextNode(`${item.Avaliacao}`);
+				}
+				var br = document.createElement('br');
+				var tagEditar = document.createElement('button');
+				tagEditar.setAttribute("class", "btn btn-link");
+				tagEditar.setAttribute("data-id", `${item.idLivro}`);
+				tagEditar.setAttribute("data-nome", `${item.Nome_Livro}`);
+				tagEditar.setAttribute("data-toggle", "modal");
+				tagEditar.setAttribute("data-target", "#modalAtulizaAvalicao");
+				var editar = document.createTextNode("Editar");
+
+				tagEditar.appendChild(editar);
+				tagDAvaliacao.appendChild(avaliacao);
+				tagDAvaliacao.appendChild(br);
+				tagDAvaliacao.appendChild(tagEditar);
+
+				novaLinha.appendChild(tagH);
+				novaLinha.appendChild(tagDImagem);
+				novaLinha.appendChild(tagDNomeLivro);
+				novaLinha.appendChild(tagDAvaliacao);
+
+				tabela.appendChild(novaLinha);
+
+				countIndex++;
+			}
+		}
+  	})
+	.catch((error)  =>  {
+		alert(error);
+	})
+
+  	event.preventDefault();
 }
+
 /* LISTA 1 */
 function getListaParaLer() {
-  let usuario = localStorage.getItem("idUsuario");
-  let url = `http://localhost:3000/para-ler/${usuario}`;
 
-  axios.get(url)
-  .then(res => {
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/para-ler/${usuario}`;
 
-    let tabela = document.getElementById('lista-para-ler-conteudo');
+	axios.get(url)
+	.then(res => {
 
-    if (res.data == -1){
+		let tabela = document.getElementById('lista-para-ler-conteudo');
 
-      var linha = document.createElement('tr');
+		if (res.data == -1){
 
-      var tagConteudo = document.createElement('td');
-      tagConteudo.setAttribute("colspan", 5);
+			var linha = document.createElement('tr');
 
-      var conteudo = document.createTextNode("Lista Vazia. Adicione livros.");
+			var tagConteudo = document.createElement('td');
+			tagConteudo.setAttribute("colspan", 5);
 
-      tagConteudo.appendChild(conteudo);
-      linha.appendChild(tagConteudo);
-      tabela.appendChild(linha);
+			var conteudo = document.createTextNode("Lista Vazia. Adicione livros.");
 
-    }
-    else {
-      
-      var lista = res.data;
+			tagConteudo.appendChild(conteudo);
+			linha.appendChild(tagConteudo);
+			tabela.appendChild(linha);
 
-      var countIndex  = 1;
-        
-      for (var item of lista){
+		}
+		else {
+			
+			var lista = res.data;
 
-        var novaLinha = document.createElement('tr');
-        
-        var tagH = document.createElement('th');
-        tagH.setAttribute("scope","row");
-        var tagHConteudo = document.createTextNode(countIndex);
+			var countIndex  = 1;
+			
+			for (var item of lista){
 
-        tagH.appendChild(tagHConteudo);
+				var novaLinha = document.createElement('tr');
+				
+				var tagH = document.createElement('th');
+				tagH.setAttribute("scope","row");
+				var tagHConteudo = document.createTextNode(countIndex);
 
-        var tagDImagem = document.createElement('td');
-        var imagem = document.createElement('img');
-        imagem.setAttribute("src", "../assets/images/capa-livro.png");
-        imagem.setAttribute("alt", "logo");
-        imagem.setAttribute("height", "25%");
+				tagH.appendChild(tagHConteudo);
 
-        tagDImagem.appendChild(imagem);
+				var tagDImagem = document.createElement('td');
+				var imagem = document.createElement('img');
+				imagem.setAttribute("src", "../assets/images/capa-livro.png");
+				imagem.setAttribute("alt", "logo");
+				imagem.setAttribute("height", "25%");
 
-        var tagDNomeLivro = document.createElement('td');
-        var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
+				tagDImagem.appendChild(imagem);
 
-        tagDNomeLivro.appendChild(nomeLivro);
+				var tagDNomeLivro = document.createElement('td');
+				var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
 
-        var tagDPaginasLivro = document.createElement('td');
-        var paginasLivro = document.createTextNode(`${item.Total_Paginas}`);
+				tagDNomeLivro.appendChild(nomeLivro);
 
-        tagDPaginasLivro.appendChild(paginasLivro);
+				var tagDPaginasLivro = document.createElement('td');
+				var paginasLivro = document.createTextNode(`${item.Total_Paginas}`);
 
-        var tagDAtualizarStatus = document.createElement('td');		
-		var tagButtonA = document.createElement('button');
-        tagButtonA.setAttribute("class", "btn btn-info");
-        tagButtonA.setAttribute("onclick", "javascript:void(0)");
+				tagDPaginasLivro.appendChild(paginasLivro);
 
-        var atualizarStatus = document.createTextNode("Atualizar Status");
+				var tagDAtualizarStatus = document.createElement('td');		
+				var tagButtonA = document.createElement('button');
+				tagButtonA.setAttribute("class", "btn btn-info");
+				tagButtonA.setAttribute("data-id", `${item.idLivro}`);
+				tagButtonA.setAttribute("data-nome", `${item.Nome_Livro}`);
+				tagButtonA.setAttribute("data-toggle", "modal");
+				tagButtonA.setAttribute("data-target", "#modalAtuliza1Para2");
+				var atualizarStatus = document.createTextNode("Atualizar Status");
 
-        tagButtonA.appendChild(atualizarStatus);
-        tagDAtualizarStatus.appendChild(tagButtonA);
+				tagButtonA.appendChild(atualizarStatus);
+				tagDAtualizarStatus.appendChild(tagButtonA);
 
-        var tagDDeleteLivro = document.createElement('td');
-        var tagButtonE = document.createElement('button');
-        tagButtonE.setAttribute("class", "btn btn-danger");
+				var tagDDeleteLivro = document.createElement('td');
+				var tagButtonE = document.createElement('button');
+				tagButtonE.setAttribute("class", "btn btn-danger");
+				var acaoE = "deleteLivroLista("+`${item.idLivro}`+")";
+				tagButtonE.setAttribute("onclick", acaoE);
+				var deleteLivro = document.createTextNode("Excluir");
 
-        var acao = "deleteLivroLista("+`${item.idLivro}`+")"
-        tagButtonE.setAttribute("onclick", acao);
+				tagButtonE.appendChild(deleteLivro);
+				tagDDeleteLivro.appendChild(tagButtonE);
 
-        var deleteLivro = document.createTextNode("Excluir");
+				novaLinha.appendChild(tagH);
+				novaLinha.appendChild(tagDImagem);
+				novaLinha.appendChild(tagDNomeLivro);
+				novaLinha.appendChild(tagDPaginasLivro);
+				novaLinha.appendChild(tagDAtualizarStatus);
+				novaLinha.appendChild(tagDDeleteLivro);
 
-        tagButtonE.appendChild(deleteLivro);
-        tagDDeleteLivro.appendChild(tagButtonE);
+				tabela.appendChild(novaLinha);        
 
-        novaLinha.appendChild(tagH);
-        novaLinha.appendChild(tagDImagem);
-        novaLinha.appendChild(tagDNomeLivro);
-        novaLinha.appendChild(tagDPaginasLivro);
-        novaLinha.appendChild(tagDAtualizarStatus);
-        novaLinha.appendChild(tagDDeleteLivro);
+				countIndex++;
+			}
+		}
+	})
+	.catch(error  =>  {
+		alert(error)
+	})
 
-        tabela.appendChild(novaLinha);        
-
-        countIndex++;
-      }
-    }
-  
-
-  })
-    .catch(error  =>  {
-      alert(error)
-    })
-
-  event.preventDefault();
+	event.preventDefault();
 }
+
 /* LISTA 2 */
 function getListaLendoAgora() {
-  let usuario = localStorage.getItem("idUsuario");
-  let url = `http://localhost:3000/lendo-agora/${usuario}`;
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/lendo-agora/${usuario}`;
 
-  axios.get(url)
-  .then(res => {
+	axios.get(url)
+	.then(res => {
 
-    let tabela = document.getElementById('lista-lendo-agora-conteudo');
+		let tabela = document.getElementById('lista-lendo-agora-conteudo');
 
-    if (res.data == -1){
+		if (res.data == -1){
 
-      var linha = document.createElement('tr');
+			var linha = document.createElement('tr');
 
-      var tagConteudo = document.createElement('td');
-      tagConteudo.setAttribute("colspan", 5);
+			var tagConteudo = document.createElement('td');
+			tagConteudo.setAttribute("colspan", 5);
 
-      var conteudo = document.createTextNode("Lista Vazia. Adicione livros.");
+			var conteudo = document.createTextNode("Lista Vazia. Adicione livros.");
 
-      tagConteudo.appendChild(conteudo);
-      linha.appendChild(tagConteudo);
-      tabela.appendChild(linha);
+			tagConteudo.appendChild(conteudo);
+			linha.appendChild(tagConteudo);
+			tabela.appendChild(linha);
 
-    }
-    else {
-      
-      var lista = res.data;
+		}
+		else {
+			
+			var lista = res.data;
 
-      var countIndex  = 1;
-        
-      for (var item of lista){
+			var countIndex  = 1;
+			
+			for (var item of lista){
 
-        var novaLinha = document.createElement('tr');
-        
-        var tagH = document.createElement('th');
-        tagH.setAttribute("scope","row");
-        var tagHConteudo = document.createTextNode(countIndex);
+				var novaLinha = document.createElement('tr');
+				
+				var tagH = document.createElement('th');
+				tagH.setAttribute("scope","row");
+				var tagHConteudo = document.createTextNode(countIndex);
 
-        tagH.appendChild(tagHConteudo);
+				tagH.appendChild(tagHConteudo);
 
-        var tagDImagem = document.createElement('td');
-        var imagem = document.createElement('img');
-        imagem.setAttribute("src", "../assets/images/capa-livro.png");
-        imagem.setAttribute("alt", "logo");
-        imagem.setAttribute("height", "25%");
+				var tagDImagem = document.createElement('td');
+				var imagem = document.createElement('img');
+				imagem.setAttribute("src", "../assets/images/capa-livro.png");
+				imagem.setAttribute("alt", "logo");
+				imagem.setAttribute("height", "25%");
 
-        tagDImagem.appendChild(imagem);
+				tagDImagem.appendChild(imagem);
 
-        var tagDNomeLivro = document.createElement('td');
-        var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
+				var tagDNomeLivro = document.createElement('td');
+				var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
 
-        tagDNomeLivro.appendChild(nomeLivro);
+				tagDNomeLivro.appendChild(nomeLivro);
 
-        var tagDTempoLendo = document.createElement('td');
-        var tempoLendo = document.createTextNode(`${item.Tempo_Lendo}`);
+				var tagDTempoLendo = document.createElement('td');
+				var tempoLendo = document.createTextNode(`${item.Tempo_Lendo}`);
 
-        tagDTempoLendo.appendChild(tempoLendo);
-        tagDTempoLendo.appendChild(document.createTextNode(" dias"));
+				tagDTempoLendo.appendChild(tempoLendo);
+				tagDTempoLendo.appendChild(document.createTextNode(" dias"));
 
-        var tagDAtualizarStatus = document.createElement('td');		
-		var tagButtonA = document.createElement('button');
-        tagButtonA.setAttribute("class", "btn btn-info");
-        tagButtonA.setAttribute("onclick", "javascript:void(0)");
+				var tagDAtualizarStatus = document.createElement('td');		
+				var tagButtonA = document.createElement('button');
+				tagButtonA.setAttribute("class", "btn btn-info");
 
-        var atualizarStatus = document.createTextNode("Atualizar Status");
+				tagButtonA.setAttribute("data-id", `${item.idLivro}`);
+				tagButtonA.setAttribute("data-nome", `${item.Nome_Livro}`);
+				tagButtonA.setAttribute("data-toggle", "modal");
+				tagButtonA.setAttribute("data-target", "#modalAtuliza2Para3");
 
-        tagButtonA.appendChild(atualizarStatus);
-        tagDAtualizarStatus.appendChild(tagButtonA);
+				var atualizarStatus = document.createTextNode("Atualizar Status");
 
-        var tagDDeleteLivro = document.createElement('td');
-        var tagButtonE = document.createElement('button');
-        tagButtonE.setAttribute("class", "btn btn-danger");
+				tagButtonA.appendChild(atualizarStatus);
+				tagDAtualizarStatus.appendChild(tagButtonA);
 
-        var acao = "deleteLivroLista("+`${item.idLivro}`+")"
-        tagButtonE.setAttribute("onclick", acao);
+				var tagDDeleteLivro = document.createElement('td');
+				var tagButtonE = document.createElement('button');
+				tagButtonE.setAttribute("class", "btn btn-danger");
+				var acaoE = "deleteLivroLista("+`${item.idLivro}`+")";
+				tagButtonE.setAttribute("onclick", acaoE);
+				var deleteLivro = document.createTextNode("Excluir");
 
-        var deleteLivro = document.createTextNode("Excluir");
+				tagButtonE.appendChild(deleteLivro);
+				tagDDeleteLivro.appendChild(tagButtonE);
 
-        tagButtonE.appendChild(deleteLivro);
-        tagDDeleteLivro.appendChild(tagButtonE);
+				novaLinha.appendChild(tagH);
+				novaLinha.appendChild(tagDImagem);
+				novaLinha.appendChild(tagDNomeLivro);
+				novaLinha.appendChild(tagDTempoLendo);
+				novaLinha.appendChild(tagDAtualizarStatus);
+				novaLinha.appendChild(tagDDeleteLivro);
+				
+				tabela.appendChild(novaLinha);        
 
-        novaLinha.appendChild(tagH);
-        novaLinha.appendChild(tagDImagem);
-        novaLinha.appendChild(tagDNomeLivro);
-        novaLinha.appendChild(tagDTempoLendo);
-        novaLinha.appendChild(tagDAtualizarStatus);
-        novaLinha.appendChild(tagDDeleteLivro);
-		
-		tabela.appendChild(novaLinha);        
+				countIndex++;
+			}
+		}
+	})
+	.catch(error  =>  {
+		alert(error)
+	})
 
-        countIndex++;
-      }
-    }
-  
-
-  })
-    .catch(error  =>  {
-      alert(error)
-    })
-
-  event.preventDefault();
+	event.preventDefault();
 }
+
 /* LISTA 3 */
 function getListaLidos() {
-  let usuario = localStorage.getItem("idUsuario");
-  let url = `http://localhost:3000/lidos/${usuario}`;
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/lidos/${usuario}`;
 
-  axios.get(url)
-  .then(res => {
+	axios.get(url)
+	.then(res => {
 
-    let tabela = document.getElementById('lista-lidos-conteudo');
+		let tabela = document.getElementById('lista-lidos-conteudo');
 
-    if (res.data == -1){
+		if (res.data == -1){
 
-      var linha = document.createElement('tr');
+			var linha = document.createElement('tr');
 
-      var tagConteudo = document.createElement('td');
-      tagConteudo.setAttribute("colspan", 6);
+			var tagConteudo = document.createElement('td');
+			tagConteudo.setAttribute("colspan", 6);
 
-      var conteudo = document.createTextNode("Lista Vazia. Adicione livros.");
+			var conteudo = document.createTextNode("Lista Vazia. Adicione livros.");
 
-      tagConteudo.appendChild(conteudo);
-      linha.appendChild(tagConteudo);
-      tabela.appendChild(linha);
+			tagConteudo.appendChild(conteudo);
+			linha.appendChild(tagConteudo);
+			tabela.appendChild(linha);
 
-    }
-    else {
-      
-      var lista = res.data;
+		}
+		else {
+			
+			var lista = res.data;
 
-      var countIndex  = 1;
-        
-      for (var item of lista){
+			var countIndex  = 1;
+			
+			for (var item of lista){
 
-        var novaLinha = document.createElement('tr');
-        
-        var tagH = document.createElement('th');
-        tagH.setAttribute("scope","row");
-        var tagHConteudo = document.createTextNode(countIndex);
+				var novaLinha = document.createElement('tr');
+				
+				var tagH = document.createElement('th');
+				tagH.setAttribute("scope","row");
+				var tagHConteudo = document.createTextNode(countIndex);
 
-        tagH.appendChild(tagHConteudo);
+				tagH.appendChild(tagHConteudo);
 
-        var tagDImagem = document.createElement('td');
-        var imagem = document.createElement('img');
-        imagem.setAttribute("src", "../assets/images/capa-livro.png");
-        imagem.setAttribute("alt", "logo");
-        imagem.setAttribute("height", "25%");
+				var tagDImagem = document.createElement('td');
+				var imagem = document.createElement('img');
+				imagem.setAttribute("src", "../assets/images/capa-livro.png");
+				imagem.setAttribute("alt", "logo");
+				imagem.setAttribute("height", "25%");
 
-        tagDImagem.appendChild(imagem);
+				tagDImagem.appendChild(imagem);
 
-        var tagDNomeLivro = document.createElement('td');
-        var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
+				var tagDNomeLivro = document.createElement('td');
+				var nomeLivro = document.createTextNode(`${item.Nome_Livro}`);
 
-        tagDNomeLivro.appendChild(nomeLivro);
+				tagDNomeLivro.appendChild(nomeLivro);
 
-        var tagDTempoLeitura = document.createElement('td');
-        var tempoLeitura = document.createTextNode(`${item.Tempo_Leitura}`);
+				var tagDTempoLeitura = document.createElement('td');
+				var tempoLeitura = document.createTextNode(`${item.Tempo_Leitura}`);
 
-        tagDTempoLeitura.appendChild(tempoLeitura);
+				tagDTempoLeitura.appendChild(tempoLeitura);
+				tagDTempoLeitura.appendChild(document.createTextNode(" dias"));
 
-        var tagDPaginas = document.createElement('td');
-        var paginas = document.createTextNode(`${item.Total_Paginas}`);
+				var tagDPaginas = document.createElement('td');
+				var paginas = document.createTextNode(`${item.Total_Paginas}`);
 
-        tagDPaginas.appendChild(paginas);
+				tagDPaginas.appendChild(paginas);
 
-        console.log(item);
+				var tagDAvaliacao = document.createElement('td');
+				var avaliacao;
+				if (`${item.Avaliacao}` == "null"){
+					avaliacao = document.createTextNode("Sem Avaliação");
+				}
+				else {
+					avaliacao = document.createTextNode(`${item.Avaliacao}`);
+				}
+				var br = document.createElement('br');
+				var tagEditar = document.createElement('button');
+				tagEditar.setAttribute("class", "btn btn-link");
+				tagEditar.setAttribute("data-id", `${item.idLivro}`);
+				tagEditar.setAttribute("data-nome", `${item.Nome_Livro}`);
+				tagEditar.setAttribute("data-toggle", "modal");
+				tagEditar.setAttribute("data-target", "#modalAtulizaAvalicao");
+				var editar = document.createTextNode("Editar");
 
-        var tagDAvaliacao = document.createElement('td');
-        var avaliacao;
-        if (`${item.Avaliacao}` == "null"){
-          avaliacao = document.createTextNode("Sem Avaliação");
-        }
-        else {
-          avaliacao = document.createTextNode(`${item.Avaliacao}`);
-        }
+				tagEditar.appendChild(editar);
+				tagDAvaliacao.appendChild(avaliacao);
+				tagDAvaliacao.appendChild(br);
+				tagDAvaliacao.appendChild(tagEditar); 
+				
+				var tagDDeleteLivro = document.createElement('td');
+				var tagButtonE = document.createElement('button');
+				tagButtonE.setAttribute("class", "btn btn-danger");
+				var acao = "deleteLivroLista("+`${item.idLivro}`+")"
+				tagButtonE.setAttribute("onclick", acao);
+				var deleteLivro = document.createTextNode("Excluir");
+				
+				tagButtonE.appendChild(deleteLivro);
+				tagDDeleteLivro.appendChild(tagButtonE);     
 
-        var br = document.createElement('br');
-        var tagEditar = document.createElement('button');
-        tagEditar.setAttribute("class", "btn btn-link");
-		var editar = document.createTextNode("Editar");
+				novaLinha.appendChild(tagH);
+				novaLinha.appendChild(tagDImagem);
+				novaLinha.appendChild(tagDNomeLivro);
+				novaLinha.appendChild(tagDTempoLeitura);
+				novaLinha.appendChild(tagDPaginas);
+				novaLinha.appendChild(tagDAvaliacao);
+				novaLinha.appendChild(tagDDeleteLivro);
 
-        // var acao = "deleteLivroLista("+`${item.idLivro}`+")"
-		// tagEditar.setAttribute("onclick", acao);
+				tabela.appendChild(novaLinha);
 
-		tagEditar.appendChild(editar);
-        tagDAvaliacao.appendChild(avaliacao);
-        tagDAvaliacao.appendChild(br);
-        tagDAvaliacao.appendChild(tagEditar); 
-		
-		var tagDDeleteLivro = document.createElement('td');
-        var tagButtonE = document.createElement('button');
-        tagButtonE.setAttribute("class", "btn btn-danger");
-        var acao = "deleteLivroLista("+`${item.idLivro}`+")"
-        tagButtonE.setAttribute("onclick", acao);
-		var deleteLivro = document.createTextNode("Excluir");
-		
-		tagButtonE.appendChild(deleteLivro);
-        tagDDeleteLivro.appendChild(tagButtonE);     
+				countIndex++;
+			}
+		}
+	})
+	.catch(error  =>  {
+		alert(error);
+	})
 
-        novaLinha.appendChild(tagH);
-        novaLinha.appendChild(tagDImagem);
-        novaLinha.appendChild(tagDNomeLivro);
-        novaLinha.appendChild(tagDTempoLeitura);
-        novaLinha.appendChild(tagDPaginas);
-		novaLinha.appendChild(tagDAvaliacao);
-		novaLinha.appendChild(tagDDeleteLivro);
-
-        tabela.appendChild(novaLinha);
-
-        countIndex++;
-      }
-    }
-  
-
-  })
-    .catch(error  =>  {
-      alert(error);
-    })
-
-  event.preventDefault();
+	event.preventDefault();
 }
+
 /* LISTA LIVROS NOVOS */
 function getLivrosNovos(tipoLista) {
   let usuario = localStorage.getItem("idUsuario");
@@ -612,10 +609,8 @@ function getLivrosNovos(tipoLista) {
         tagDGenero.appendChild(genero);
 
         var tagDAdicionarLivro = document.createElement('td');
-		
         var tagButton = document.createElement('button');
         tagButton.setAttribute("class", "btn btn-dark");
-
 		tagButton.setAttribute("data-id", `${item.idLivro}`);
 		tagButton.setAttribute("data-nome", `${item.Nome_Livro}`);
         tagButton.setAttribute("data-toggle", "modal");
@@ -650,6 +645,7 @@ function getLivrosNovos(tipoLista) {
 
   event.preventDefault();
 }
+
 
 /* ------ POST ------ */
 
@@ -755,6 +751,115 @@ function postLista3(idLivro) {
 	event.preventDefault()
 }
 
+/* ------  PATCH ------ */
+function patchLista1Para2(idLivro) {
+
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/para-ler/${usuario}`;
+
+	let dataIni = document.getElementById("dataIniL1P2").value;
+
+	if (!dataIni) return;
+
+	let json = {
+		"idUsuario": usuario, 
+		"idLivro": idLivro,
+		"Data_Inicio_Leitura": dataIni
+	};
+
+	axios.patch(url , json)
+	.then(res => {
+
+		alert(res.data);
+		location.reload();
+
+	})
+	.catch(error  =>  {
+		alert(error)
+	})
+
+	event.preventDefault()
+
+}
+
+function patchLista2Para3(idLivro) {
+
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/lendo-agora/${usuario}`;
+
+	let dataFim = document.getElementById("dataFimL2P3").value;
+	let avaliacao = document.getElementById("addAvaliacaoL2P3").value;
+
+	if (!dataFim) return;
+	if (avaliacao < 0 || avaliacao > 10) return;
+
+	let json;
+
+	if (!avaliacao){
+		json = {
+			"idUsuario": usuario, 
+			"idLivro": idLivro,
+			"Data_Termino_Leitura": dataFim
+		};
+	}
+	else {
+			json = {
+			"idUsuario": usuario, 
+			"idLivro": idLivro,
+			"Data_Termino_Leitura": dataFim,
+			"Avaliacao": avaliacao
+		};
+	}
+
+	axios.patch(url , json)
+	.then(res => {
+
+		alert(res.data);
+		location.reload();
+
+	})
+	.catch(error  =>  {
+		alert(error)
+	})
+
+	event.preventDefault()
+
+}
+
+function patchAvaliacao(idLivro) {
+
+	let usuario = localStorage.getItem("idUsuario");
+	let url = `http://localhost:3000/perfil/avaliacoes/${usuario}`;
+
+	let avaliacao = document.getElementById("atualizaAvaliacao").value;
+
+	console.log("avalicao: "+ avaliacao);
+
+	if (!avaliacao) return;
+	if (avaliacao < 0 || avaliacao > 10) return;
+
+	let json = {
+		"idUsuario": usuario, 
+		"idLivro": idLivro,
+		"Avaliacao": avaliacao
+	};
+
+	axios.patch(url , json)
+	.then(res => {
+		
+		alert(res.data);
+		location.reload();
+
+	})
+	.catch(error  =>  {
+		alert(error)
+	})
+
+	event.preventDefault()
+
+}
+
+/* ------  DELETE ------ */
 function deleteLivroLista(idLivro) {
 
 	let usuario = localStorage.getItem("idUsuario");
