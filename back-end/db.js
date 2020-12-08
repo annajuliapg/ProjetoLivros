@@ -40,7 +40,7 @@ async function selectTodosUsuarios(idUsuario) {
 
     const [rows] = await conn.query("SELECT idUsuario, Email_Usuario, Senha_Usuario FROM usuario", idUsuario);
 
-    if (!rows.length) return 1
+    if (!rows.length) return -1
     else return rows;
 }
 

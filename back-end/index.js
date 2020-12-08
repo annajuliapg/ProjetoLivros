@@ -64,7 +64,7 @@ async function recuperaUmUsuario (req, res)
             return res.status(200).json(usuario);
         }
         else{
-            return res.status(400).send("Código de usuário inválido")
+            return res.status(400).send("Código de usuário inválido");
         }
     }
     catch (erro) {
@@ -398,14 +398,13 @@ async function ativacaoDoServidor ()
 
     const express = require('express');
     const app     = express();
+    global.app = app;
     
-    app.use(express.json());   // faz com que o express consiga processar JSON
-    app.use(middleWareGlobal); // app.use cria o middleware global
+    app.use(express.json());
+    app.use(middleWareGlobal);
 
-    //instalar cors - $ npm install cors
     var cors = require('cors');
     app.use(cors());
-    
 
     app.get    ('/usuarios', recuperaTodosUsuarios);
     app.get    ('/livros', recuperaLivros);
@@ -428,5 +427,8 @@ async function ativacaoDoServidor ()
 
     console.log ('Servidor ativo na porta 3000...');
     app.listen(3000);
+
 }
 ativacaoDoServidor();
+
+module.exports = global.app;
