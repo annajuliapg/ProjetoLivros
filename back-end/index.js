@@ -46,6 +46,7 @@ async function recuperaLivrosNovos (req, res)
         }
     }
     catch (erro) {
+        console.log('ESTOU AQUI PORRA');
         console.log(erro);
     }
 }
