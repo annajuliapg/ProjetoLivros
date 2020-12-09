@@ -48,6 +48,7 @@ async function recuperaLivrosNovos (req, res)
     catch (erro) {
         console.log('ESTOU AQUI PORRA');
         console.log(erro);
+        return res.status(500);
     }
 }
 
@@ -87,7 +88,7 @@ async function recuperaAvaliacoes (req, res)
             return res.status(200).json(usuario);
         }
         else{
-            return res.status(400).send("Código de usuário inválido")
+            return res.status(400).send("Código de usuário inválido");
         }
     }
     catch (erro) {
@@ -108,7 +109,7 @@ async function recuperaListaStatus1(req, res) {
             return res.status(200).json(lista1);    
         }
         else{
-            return res.status(500).send("Código de usuário inválido")
+            return res.status(400).send("Código de usuário inválido");
         } 
     }
     catch (erro) {
@@ -129,11 +130,12 @@ async function recuperaListaStatus2(req, res) {
             return res.status(200).json(lista2);    
         }
         else{
-            return res.status(500).send("Código de usuário inválido")
+            return res.status(400).send("Código de usuário inválido");
         }    
     }
     catch (erro) {
         console.log(erro);
+        return res.status(500);
     }
 }
 
@@ -150,7 +152,7 @@ async function recuperaListaStatus3(req, res) {
             return res.status(200).json(lista3);    
         }
         else{
-            return res.status(500).send("Código de usuário inválido")
+            return res.status(400).send("Código de usuário inválido")
         }    
     }
     catch (erro) {
@@ -180,7 +182,7 @@ async function insereListaStatus1 (req, res)
             return res.status(200).json("Livro inserido na lista 'Para Ler'");  
         }
         else{
-            return res.status(500).send("Código de usuário inválido");
+            return res.status(400).send("Código de usuário inválido");
         }  
 	}
 	catch (erro)
@@ -212,7 +214,7 @@ async function insereListaStatus2 (req, res)
             return res.status(200).json("Livro inserido na lista 'Lendo Agora'");
         }
         else{
-            return res.status(500).send("Código de usuário inválido");
+            return res.status(400).send("Código de usuário inválido");
         }  
 	}
 	catch (erro)
@@ -246,7 +248,7 @@ async function insereListaStatus3 (req, res)
             return res.status(200).json("Livro inserido na lista 'Lidos'");
         }
         else{
-            return res.status(500).send("Código de usuário inválido");
+            return res.status(400).send("Código de usuário inválido");
         }  
 	}
 	catch (erro)
@@ -278,7 +280,7 @@ async function atulizaListaParaLer_Lendo (req, res)
             return res.status(200).json("Livro atualizado de status 'Para Ler' para 'Lendo Agora'");  
         }
         else{
-            return res.status(500).send("Código de usuário inválido");
+            return res.status(400).send("Código de usuário inválido");
         }  
 	}
 	catch (erro)
@@ -311,7 +313,7 @@ async function atulizaLendo_Lido (req, res)
             return res.status(200).json("Livro atualizado de status 'Lendo Agora' para 'Lido'");  
         }
         else{
-            return res.status(500).send("Código de usuário inválido");
+            return res.status(400).send("Código de usuário inválido");
         }  
 	}
 	catch (erro)
@@ -343,7 +345,7 @@ async function atulizaAvaliacao (req, res)
             return res.status(200).send("Avaliação do livro atualizada para: " + req.body.Avaliacao);
         }
         else{
-            return res.status(500).send("Código de usuário inválido");
+            return res.status(400).send("Código de usuário inválido");
         }  
 	}
 	catch (erro)
@@ -371,7 +373,7 @@ async function removeLivroUsuario (req, res)
             return res.status(200).json("Livro deletado da lista");
         }
         else{
-            return res.status(500).send("Código de usuário e/ou livro inválido");
+            return res.status(400).send("Código de usuário e/ou livro inválido");
         }  
 	}
 	catch (erro)
