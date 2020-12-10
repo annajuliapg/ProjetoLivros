@@ -199,24 +199,3 @@ async function deleteLivroLista(lista) {
 }
 
 module.exports = {close, selectTodosUsuarios, selectUsuario, selectLivros, selectLivrosNaoTem, selectStatus1, selectStatus2, selectStatus3, selectAvaliacoes, insertLivroS1, insertLivroS2, insertLivroS3, updateLivroS1S2, updateLivroS2S3, updateLivroS3Avaliacao, deleteLivroLista};
-
-/*
-
-usuario - select
-
-livro - select
-autor - join
-genero - join
-livro_autor - join
-
-usuario_livro -
-
-insert - lista 1, 2 e 3
-
-update - lista 1 para 2, lista 2 para 3
-
-select - lista 1, lista 2, lista 3, avaliacoes
-
-delete - off
-
-*/
