@@ -30,8 +30,6 @@ afterAll(()=> {
     db.close();
 });
 
-
-
 describe('Caso de Teste 1', () => {
     
     test('URL de usuários que não existe', async () => {
@@ -68,7 +66,6 @@ describe('Caso de Teste 3', () => {
         const res = await request(app).get('/novos-livros/abc');
     
         expect(res.statusCode).toEqual(400);
-        expect(res.text).toContain('Código de usuário inválido');
     });
     
     test('URL com id de usuário válido', async () => {
@@ -174,7 +171,7 @@ describe('Caso de Teste 9', () => {
 
     test('URL com id de usuário inválido - NOT A NUMBER', async () => {
         let json = {
-            idLivro: 5
+            idLivro: 9
         };
         const res = await request(app).post('/para-ler/abc').send(json);
         expect(res.statusCode).toEqual(400);
@@ -229,7 +226,7 @@ describe('Caso de Teste 10', () => {
 
     test('URL com id de usuário inválido - NOT A NUMBER', async () => {
         let json = {
-            idLivro: 6,
+            idLivro: 9,
             Data_Inicio_Leitura: "2020-10-10"
         };
         const res = await request(app).post('/lendo-agora/abc').send(json);
@@ -330,7 +327,7 @@ describe('Caso de Teste 11', () => {
 
     test('URL com id de usuário inválido - NOT A NUMBER', async () => {
         let json = {
-            idLivro: 7,
+            idLivro: 9,
             Data_Inicio_Leitura : "2020-10-10",
             Data_Termino_Leitura : "2020-10-20"
         };
@@ -389,7 +386,7 @@ describe('Caso de Teste 12', () => {
 
     test('URL com id de usuário inválido - NOT A NUMBER', async () => {
         let json = {
-            idLivro: 5,
+            idLivro: 9,
             Data_Inicio_Leitura: "2020-10-10"
         };
         const res = await request(app).patch("/para-ler/abc").send(json);
