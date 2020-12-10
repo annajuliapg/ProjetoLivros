@@ -433,7 +433,7 @@ function getListaLidos() {
 			var linha = document.createElement('tr');
 
 			var tagConteudo = document.createElement('td');
-			tagConteudo.setAttribute("colspan", 6);
+			tagConteudo.setAttribute("colspan", 7);
 
 			var conteudo = document.createTextNode("Lista Vazia. Adicione livros.");
 
