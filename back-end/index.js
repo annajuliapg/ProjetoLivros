@@ -362,7 +362,7 @@ async function removeLivroUsuario (req, res)
         const idUsuario = req.params.usuario;
         const idLivro = req.params.livro;
         
-        if (!isNaN(idUsuario) || !isNaN(idLivro)){
+        if (!isNaN(idUsuario) && !isNaN(idLivro)){
             
             await db.deleteLivroLista(
             {
