@@ -5,28 +5,28 @@ const app = require('../index');
 
 const db = require("../db");
 
-beforeAll(async ()=> {
-    await db.deleteLivroLista(
-        {
-            "idUsuario": 6,
-            "idLivro": 5
-        }
-    );
-    await db.deleteLivroLista(
-        {
-            "idUsuario": 6,
-            "idLivro": 6
-        }
-    );
-    await db.deleteLivroLista(
-        {
-            "idUsuario": 6,
-            "idLivro": 7
-        }
-    );
-});
+// beforeAll(async ()=> {
+//     await db.deleteLivroLista(
+//         {
+//             "idUsuario": 6,
+//             "idLivro": 5
+//         }
+//     );
+//     await db.deleteLivroLista(
+//         {
+//             "idUsuario": 6,
+//             "idLivro": 6
+//         }
+//     );
+//     await db.deleteLivroLista(
+//         {
+//             "idUsuario": 6,
+//             "idLivro": 7
+//         }
+//     );
+// });
 
-afterAll(()=> {
+afterAll(async ()=> {
     db.close();
 });
 
