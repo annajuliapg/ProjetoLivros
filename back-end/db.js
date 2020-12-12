@@ -7,7 +7,7 @@ async function connect() {
     try {
         const mysql = require("mysql2/promise");
 
-        const connection = await mysql.createConnection("mysql://root:Syst3mSyst3m@localhost:3306/shelf");
+        const connection = await mysql.createConnection("mysql://shellnaterra:shell@localhost:3306/shelf");
 
         global.connection = connection;
 
