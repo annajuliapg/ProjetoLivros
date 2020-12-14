@@ -25,20 +25,20 @@ async function close() {
     try{
        global.connection.end();
     
-        console.log("Desconectou do MySQL"); 
+        console.log("Desconectou do MySQL");
     }
     catch (error) {
         console.log(error);
-    }  
+    }
 }
 
 /* USUARIO */
 
 //SELECT TODOS USUARIOS
-async function selectTodosUsuarios(idUsuario) {
+async function selectTodosUsuarios() {
     const conn = await connect();
 
-    const [rows] = await conn.query("SELECT idUsuario, Email_Usuario, Senha_Usuario FROM usuario", idUsuario);
+    const [rows] = await conn.query("SELECT idUsuario, Email_Usuario, Senha_Usuario FROM usuario");
 
     if (!rows.length) return -1
     else return rows;

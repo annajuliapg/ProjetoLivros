@@ -46,9 +46,7 @@ async function recuperaLivrosNovos (req, res)
         }
     }
     catch (erro) {
-        console.log('ESTOU AQUI PORRA');
         console.log(erro);
-        return res.status(500);
     }
 }
 
@@ -228,7 +226,7 @@ async function insereListaStatus3 (req, res)
 {
     if (!req.body.idLivro || !req.body.Data_Inicio_Leitura || !req.body.Data_Termino_Leitura)
     {
-        return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro, Data_Inicio_Leitura, Data_Termino_Leitura, Avaliacao"});
+        return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro, Data_Inicio_Leitura, Data_Termino_Leitura"});
     }
 
     try
@@ -277,11 +275,11 @@ async function atulizaListaParaLer_Lendo (req, res)
                 "Data_Inicio_Leitura": req.body.Data_Inicio_Leitura
             });
 
-            return res.status(200).json("Livro atualizado de status 'Para Ler' para 'Lendo Agora'");  
+            return res.status(200).json("Livro atualizado de status 'Para Ler' para 'Lendo Agora'"); 
         }
         else{
             return res.status(400).send("Código de usuário inválido");
-        }  
+        }
 	}
 	catch (erro)
 	{
@@ -294,7 +292,7 @@ async function atulizaLendo_Lido (req, res)
 {
     if (!req.body.idLivro || !req.body.Data_Termino_Leitura)
     {
-        return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro, Data_Inicio_Leitura"});
+        return res.status(422).json({"Mensagem": "Dados incompletos", "É preciso conter": "idLivro, Data_Termino_Leitura"});
     }
 
     try
@@ -342,7 +340,7 @@ async function atulizaAvaliacao (req, res)
                 "Avaliacao": req.body.Avaliacao
             });
 
-            return res.status(200).send("Avaliação do livro atualizada para: " + req.body.Avaliacao);
+            return res.status(200).json({"Avaliação do livro atualizada para": req.body.Avaliacao});
         }
         else{
             return res.status(400).send("Código de usuário inválido");
