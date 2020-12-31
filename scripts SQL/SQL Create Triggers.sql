@@ -45,7 +45,7 @@ ON usuario_livro
 FOR EACH ROW
 BEGIN
 DECLARE paginasNovasLidas INT;
-IF NEW.Status_Lista = 3 THEN
+IF NEW.Status_Lista = 3 AND NEW.Avaliacao = OLD.Avaliacao THEN
     
     SET paginasNovasLidas = (
 		SELECT Total_Paginas
