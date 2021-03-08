@@ -165,7 +165,7 @@ function getAvaliacoes() {
 				var imagem = document.createElement('img');
 				imagem.setAttribute("src", "../assets/images/capa-livro.png");
 				imagem.setAttribute("alt", "logo");
-				imagem.setAttribute("height", "25%");
+				imagem.setAttribute("height", "200em");
 
 				tagDImagem.appendChild(imagem);
 
@@ -259,7 +259,7 @@ function getListaParaLer() {
 				var imagem = document.createElement('img');
 				imagem.setAttribute("src", "../assets/images/capa-livro.png");
 				imagem.setAttribute("alt", "logo");
-				imagem.setAttribute("height", "25%");
+				imagem.setAttribute("height", "200em");
 
 				tagDImagem.appendChild(imagem);
 
@@ -359,7 +359,7 @@ function getListaLendoAgora() {
 				var imagem = document.createElement('img');
 				imagem.setAttribute("src", "../assets/images/capa-livro.png");
 				imagem.setAttribute("alt", "logo");
-				imagem.setAttribute("height", "25%");
+				imagem.setAttribute("height", "200em");
 
 				tagDImagem.appendChild(imagem);
 
@@ -462,7 +462,7 @@ function getListaLidos() {
 				var imagem = document.createElement('img');
 				imagem.setAttribute("src", "../assets/images/capa-livro.png");
 				imagem.setAttribute("alt", "logo");
-				imagem.setAttribute("height", "25%");
+				imagem.setAttribute("height", "200em");
 
 				tagDImagem.appendChild(imagem);
 
@@ -579,7 +579,7 @@ function getLivrosNovos(tipoLista) {
         var imagem = document.createElement('img');
         imagem.setAttribute("src", "../assets/images/capa-livro.png");
         imagem.setAttribute("alt", "logo");
-        imagem.setAttribute("height", "25%");
+        imagem.setAttribute("height", "200em");
 
         tagDImagem.appendChild(imagem);
 
