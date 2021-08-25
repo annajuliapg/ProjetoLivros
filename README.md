@@ -9,10 +9,7 @@ Projeto da Matéria de Desenvolvimento Web
 - Lendo
 - Lidos
 
-<br>
-
 ## Principais Funcionalidades
-<hr>
 
 - ### Adicionar livros
    O usuário seleciona algum livro específico de uma lista de livros predefinidos, esse livro é adicionado em uma de suas listas.
@@ -28,18 +25,12 @@ Projeto da Matéria de Desenvolvimento Web
 - ### Estatísticas de Leitura
    A partir dos dados das listas de leitura, o sistema fornece um resumo de, por exemplo, média de leitura e dias de leitura.
 
-<br>
-
 ## Pré-Resquisitos
-<hr>
 
 - Node.js
 - MySQL
 
-<br>
-
 ## Baixando
-<hr>
 
 Clone o repositório e vá para a pasta criada
 ```
